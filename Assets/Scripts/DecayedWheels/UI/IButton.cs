@@ -1,0 +1,4 @@
+﻿interface IButton
+{
+    void OnClick();
+}
