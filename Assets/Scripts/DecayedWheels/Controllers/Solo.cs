@@ -15,12 +15,7 @@ public class Solo : MonoBehaviour
 {
     DesktopInputManager manager;
 
-    bool check = false;
-
     Controlador cnt;
-
-    float time = 0f;
-    int ind = 0;
 
     private void Start()
     {
@@ -63,40 +58,5 @@ public class Solo : MonoBehaviour
                 }
             }
         }      
-    }
-
-    /// <summary>
-    /// DEPRECADO. Nesta pista especifica ele fazia umas açoes
-    /// </summary>
-    private void FixedUpdate()
-    {
-        //complexfield, tem que ser diferente
-        if (SceneManager.GetActiveScene().buildIndex == 4 && !check)
-        {
-            time += Time.fixedDeltaTime;
-
-            if (ind==0||time>=4f)
-            {
-                time = 0f;
-                try
-                {
-                    FindObjectsOfType<AIControllerV3>()[ind].Launch();
-                }
-                catch
-                {
-                    foreach (VehicleController x in FindObjectsOfType<VehicleController>())
-                    {
-                        if (x.CompareTag("Vehicle"))
-                        {
-                            GetComponent<VehicleChanger>().vehicles[0] = x;
-                            manager.vehicleController = x;
-                        }
-                    }
-                        check = true;
-                }
-                ind++;
-            }
-            return;
-        }
     }
 }

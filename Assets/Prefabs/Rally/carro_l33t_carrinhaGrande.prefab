@@ -104,7 +104,7 @@ MonoBehaviour:
     dragForce: 50
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 175.75002, y: 21.160822, z: 127.88294}
+    worldPosition: {x: 211.09047, y: 20.990822, z: 123.0404}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -840,12 +840,6 @@ GameObject:
   - component: {fileID: 116015210830377673}
   - component: {fileID: 116015210830377675}
   - component: {fileID: 116015210830377672}
-  - component: {fileID: 1847945022027412709}
-  - component: {fileID: 1743779498087262095}
-  - component: {fileID: 1746639557725947677}
-  - component: {fileID: 1743847496672941241}
-  - component: {fileID: 7441101421780079646}
-  - component: {fileID: 141231797}
   m_Layer: 23
   m_Name: carro_l33t_carrinhaGrande
   m_TagString: Vehicle
@@ -1306,102 +1300,6 @@ MonoBehaviour:
   freezeWhenInactive: 1
   switchToSingleRayWhenInactive: 1
   vehicleRigidbody: {fileID: 116015210830377673}
---- !u!114 &1847945022027412709
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 116015210830377679}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d735ad05e47579a449dd04266085e502, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 0}
-  amount: {x: 0, y: 0.95, z: -1.18}
---- !u!114 &1743779498087262095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 116015210830377679}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adfc555437481ea459be08bb254bcea6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  voltas: 0
---- !u!114 &1746639557725947677
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 116015210830377679}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67b78678fa48cf84da41e5c368d3e66b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agulhaRPM: {fileID: 0}
-  veloKMH: {fileID: 0}
-  posicao: {fileID: 0}
-  volta: {fileID: 0}
-  gear: {fileID: 0}
-  numVoltas: 0
-  pos: 0
---- !u!114 &1743847496672941241
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 116015210830377679}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba53a7c606fd5954db04fbe1a1457822, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  marca: 6
-  modelo: A Furgonete
-  ano: 1956
-  peso: 1670
-  dificuldadeAI: 0
-  tracao: 2
-  raridade: 0
-  preco: 7650
-  metodoAquisicao: 0
-  quilometros: 0
-  zeroAos100: 26.1
-  velocidadeMaxima: 135
-  potencia: 60
-  carroSprite: {fileID: 0}
---- !u!114 &7441101421780079646
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 116015210830377679}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: faa4876d5f359254591bf7627525dcb8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &141231797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 116015210830377679}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb16b54101983f443ac6b60eec5bdc5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &116015211528857929
 GameObject:
   m_ObjectHideFlags: 0
@@ -1453,7 +1351,7 @@ MonoBehaviour:
     dragForce: 50
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 178.43085, y: 21.160822, z: 126.90878}
+    worldPosition: {x: 213.7713, y: 20.990822, z: 122.06624}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -2228,7 +2126,7 @@ MonoBehaviour:
     dragForce: 50
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 179.06313, y: 21.160822, z: 128.64879}
+    worldPosition: {x: 214.40358, y: 20.990822, z: 123.806244}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -3003,7 +2901,7 @@ MonoBehaviour:
     dragForce: 50
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 176.3823, y: 21.160822, z: 129.62294}
+    worldPosition: {x: 211.72275, y: 20.990822, z: 124.780396}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:

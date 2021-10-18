@@ -3165,14 +3165,12 @@ GameObject:
   - component: {fileID: 972458353703605331}
   - component: {fileID: 972458353703605329}
   - component: {fileID: 972458353703605330}
-  - component: {fileID: 1533421473705644671}
-  - component: {fileID: 1500209634002256149}
-  - component: {fileID: 1504125224527716743}
-  - component: {fileID: 1500141294992650787}
-  - component: {fileID: 7757147794268254852}
-  - component: {fileID: 928575504373212828}
-  - component: {fileID: 949777419}
-  - component: {fileID: 949777420}
+  - component: {fileID: 6284021089747286418}
+  - component: {fileID: 9173904700045707184}
+  - component: {fileID: 6689290377980817289}
+  - component: {fileID: 3989339276508927219}
+  - component: {fileID: 8459346297630907361}
+  - component: {fileID: 1050844241733265384}
   m_Layer: 23
   m_Name: AI_carro_l33t_carrinha
   m_TagString: Untagged
@@ -3633,7 +3631,7 @@ MonoBehaviour:
   freezeWhenInactive: 1
   switchToSingleRayWhenInactive: 1
   vehicleRigidbody: {fileID: 972458353703605331}
---- !u!114 &1533421473705644671
+--- !u!114 &6284021089747286418
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3642,12 +3640,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 972458353703605333}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d735ad05e47579a449dd04266085e502, type: 3}
+  m_Script: {fileID: 11500000, guid: 4809254ebc28ed741b9804a05d086164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
-  amount: {x: 0, y: 0.95, z: -1.18}
---- !u!114 &1500209634002256149
+  marca: 6
+  modelo: A Furgonete
+  ano: 0
+  peso: 0
+  dificuldadeAI: 0
+  tracao: 0
+  raridade: 0
+  preco: 0
+  metodoAquisicao: 0
+  quilometros: 0
+  zeroAos100: 0
+  velocidadeMaxima: 0
+  potencia: 100
+  carroSprite: {fileID: 0}
+--- !u!114 &9173904700045707184
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3656,11 +3666,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 972458353703605333}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adfc555437481ea459be08bb254bcea6, type: 3}
+  m_Script: {fileID: 11500000, guid: cabc0f0bef3f2cb4d9b373d9dabcbedb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   voltas: 0
---- !u!114 &1504125224527716743
+--- !u!114 &6689290377980817289
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3669,7 +3679,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 972458353703605333}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67b78678fa48cf84da41e5c368d3e66b, type: 3}
+  m_Script: {fileID: 11500000, guid: 08f446f23977a4843932cd7b12b63cfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   agulhaRPM: {fileID: 0}
@@ -3678,8 +3688,8 @@ MonoBehaviour:
   volta: {fileID: 0}
   gear: {fileID: 0}
   numVoltas: 0
-  pos: 0
---- !u!114 &1500141294992650787
+  pos: -1
+--- !u!114 &3989339276508927219
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3688,52 +3698,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 972458353703605333}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba53a7c606fd5954db04fbe1a1457822, type: 3}
+  m_Script: {fileID: 11500000, guid: 08189782b40999042a212f0f2d0ddbc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  marca: 6
-  modelo: A Furgonete
-  ano: 1956
-  peso: 1670
-  dificuldadeAI: 0
-  tracao: 2
-  raridade: 0
-  preco: 7650
-  metodoAquisicao: 0
-  quilometros: 0
-  zeroAos100: 26.1
-  velocidadeMaxima: 135
-  potencia: 128
-  carroSprite: {fileID: 0}
---- !u!114 &7757147794268254852
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 972458353703605333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: faa4876d5f359254591bf7627525dcb8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &928575504373212828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 972458353703605333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7cd798ba26cdcc4db48075e56014b40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  brakeDeceleration: -6
+  brakeDeceleration: 0
   debugObj: {fileID: 0}
   debugObj2: {fileID: 0}
   debugObj3: {fileID: 0}
-  brakeAgressive: 0.61
+  brakeAgressive: -1
   useNewCalc: 1
   dificuldade: 2
   AlookUp:
@@ -3785,7 +3757,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   step: 0.06
---- !u!114 &949777419
+--- !u!114 &8459346297630907361
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3794,28 +3766,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 972458353703605333}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc6ea42363e90e643a1a7535a7af9253, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  meshes:
-  - {fileID: 303120947136310771}
-  materiais:
-  - {fileID: 2100000, guid: 0bea48344b9e8644ea0323b101938600, type: 2}
-  - {fileID: 2100000, guid: c358617f248f4204ba659702078dd7f1, type: 2}
-  - {fileID: 2100000, guid: d89590be937f8994db06494b2f4037a2, type: 2}
---- !u!114 &949777420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 972458353703605333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d495c2508624124ba49296d2ac63599, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f884f32613550c419424383d46dedc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   initialValue: -1
+--- !u!114 &1050844241733265384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972458353703605333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c14b4aeea09042459ede4a44ae7e8a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshes: []
+  materiais: []
 --- !u!1001 &303120947138344339
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3996,12 +3964,6 @@ PrefabInstance:
 --- !u!4 &303120947138735891 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: c6f7a5d102492bb448462d8cef32bf73,
-    type: 3}
-  m_PrefabInstance: {fileID: 303120947138344339}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &303120947136310771 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2300000, guid: c6f7a5d102492bb448462d8cef32bf73,
     type: 3}
   m_PrefabInstance: {fileID: 303120947138344339}
   m_PrefabAsset: {fileID: 0}
