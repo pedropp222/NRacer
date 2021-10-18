@@ -38,21 +38,8 @@ public class Controlador : MonoBehaviour
     public string nomePlayerAtual="";
     public GameSaveData saveDataPlayerAtual = null;
 
-    /// <summary>
-    /// TODO
-    /// 
-    /// FAZER JA O SISTEMA DE SAVE/LOAD GAME (esta feito)
-    /// 
-    /// FAZER O CONCESSIONARIO O QUANTO ANTES , IRA APENAS TER CARROS COMUNS/INCOMUNS A VENDA (esta feito)
-    /// 
-    /// CRIAR UM ODOMETER PARA OS NOSSOS CARROS
-    /// 
-    /// FAZER O SISTEMA DE COUNTDOWN PARA AS CORRIDAS (esta feito)
-    /// 
-    /// MELHORAR O COMPORTAMENTO DO NOSSO INPUT NO INICIO DA CORRIDA (DAR PA ACELERAR E TUDO MAIS E MANTER O CARRO
-    /// BLOQUEADO COMO OS CARROS DO AI CLARO) (esta feito)
-    /// </summary>
-
+   
+    
     void Awake()
     {
         //singleton e tudo mais
@@ -69,8 +56,10 @@ public class Controlador : MonoBehaviour
             }
 
             //encontrar todos os campeonatos do jogo e ordenalos por ID nesta variavel estatica
-            campeonatos = new CampeonatosController();
-            campeonatos.campeonatos = new List<CampSave>();
+            campeonatos = new CampeonatosController
+            {
+                campeonatos = new List<CampSave>()
+            };
 
             int campNum = 0;int corrNum = 0;
 
@@ -119,11 +108,14 @@ public class Controlador : MonoBehaviour
 
                 int g = 0;
 
-                for(int i = 0; i < saveDataPlayerAtual.corridas.campeonatos.Count; i++)
+                var cmp = saveDataPlayerAtual.corridas.campeonatos;
+
+                for(int i = 0; i < cmp.Count; i++)
                 {
-                    for(int k = 0; k < saveDataPlayerAtual.corridas.campeonatos[i].ganhos.Count; k++)
+                    var ganhos = cmp[i].ganhos;
+                    for(int k = 0; k < ganhos.Count; k++)
                     {
-                        if (saveDataPlayerAtual.corridas.campeonatos[i].ganhos[k]) g++;
+                        if (ganhos[k]) g++;
                     }
                 }
 
@@ -164,7 +156,7 @@ public class Controlador : MonoBehaviour
                     if (corridaAtual.resultado.posicaoFinal == 0)
                     {
                         //adicionar novo e guardar tudo
-                        Debug.Log("Registar corrida " + corridaAtual.corridaID + " campeonato " + corridaAtual.campeonatoID + " como ganha e guardar no jogador " + saveDataPlayerAtual.PlayerName);
+                        Debug.Log($"Registar corrida {corridaAtual.corridaID} campeonato {corridaAtual.campeonatoID} como ganha e guardar no jogador {saveDataPlayerAtual.PlayerName}");
                         campeonatos.campeonatos[corridaAtual.campeonatoID].ganhos[corridaAtual.corridaID]=true;
                         saveDataPlayerAtual.corridas = campeonatos;
                         saveDataPlayerAtual.dinheiro = dinheiro;
@@ -189,7 +181,12 @@ public class Controlador : MonoBehaviour
     /// </summary>
     public void MenuUI()
     {
-        FindObjectOfType<MenuUI>()?.RefreshUI(this);
+        MenuUI x = FindObjectOfType<MenuUI>();
+        if (x==null)
+        {
+            x.RefreshUI(this);
+        }
+        
         CheckProgressoJogo();
     }
 

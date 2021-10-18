@@ -14,8 +14,7 @@ public class AI_Learner : MonoBehaviour
     VehicleController vehicle;
 
     Vector3 startLocation, startRotation;
-
-    float maxTime = 2f;
+    readonly float maxTime = 2f;
     float curTime = 0f;
     int numberWheels = 0;
 

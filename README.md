@@ -4,8 +4,8 @@ Simple racing game
 
 # Features
 
-1. cool tracks,
-2. cool cars,
-3. cool physics,
-4. fun and **HARD** ai!,
-5. cool skins!
+- cool tracks,
+- cool cars,
+- cool physics,
+- fun and **HARD** ai!,
+- cool skins!

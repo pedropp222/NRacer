@@ -1,0 +1,19 @@
+root=true
+
+[*.cs]
+dotnet_diagnostic.IDE0051.severity = none
+dotnet_diagnostic.IDE0090.severity = none
+dotnet_diagnostic.IDE0066.severity = none
+dotnet_diagnostic.IDE0039.severity = none
+dotnet_diagnostic.IDE0044.severity = none
+dotnet_diagnostic.RCS1169.severity = none
+dotnet_diagnostic.IDE0054.severity = none
+dotnet_diagnostic.S2933.severity = none
+dotnet_diagnostic.RCS1018.severity = none
+dotnet_diagnostic.RCS1213.severity = none
+dotnet_diagnostic.S125.severity = none
+dotnet_diagnostic.RCS1123.severity = none
+dotnet_diagnostic.S1104.severity = none
+dotnet_diagnostic.RCS1036.severity = none
+dotnet_diagnostic.RCS1037.severity = none
+dotnet_diagnostic.RCS1003.severity = none

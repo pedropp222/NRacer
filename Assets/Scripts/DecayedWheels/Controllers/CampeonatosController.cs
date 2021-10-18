@@ -14,7 +14,7 @@ using UnityEngine;
 public class CampeonatosController
 {
     [SerializeField]
-    public List<CampSave> campeonatos;
+    public List<CampSave> campeonatos = new List<CampSave>();
 }
 
 /// <summary>

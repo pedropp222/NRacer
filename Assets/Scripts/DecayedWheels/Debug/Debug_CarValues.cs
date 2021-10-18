@@ -27,7 +27,15 @@ public class Debug_CarValues : MonoBehaviour
     {
         float total = 0f;
 
-        foreach(WheelController x in rodas)
+        CorridaRules cr = new CorridaRules
+        {
+            voltas = 999,
+            baseDificuldade = 5,
+            maxOponentes = 5,
+            nivel = 1
+        };
+
+        foreach (WheelController x in rodas)
         {
             total += x.sideFriction.force;
         }

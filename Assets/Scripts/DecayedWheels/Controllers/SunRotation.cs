@@ -13,4 +13,5 @@ public class SunRotation : MonoBehaviour
     {
         transform.rotation = Quaternion.Euler(new Vector3(Random.Range(minX,maxX),transform.eulerAngles.y,transform.eulerAngles.z));
     }
+    
 }
