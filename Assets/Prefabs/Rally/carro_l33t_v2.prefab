@@ -2390,12 +2390,13 @@ GameObject:
   - component: {fileID: 7635761198625682959}
   - component: {fileID: 7635761198625682958}
   - component: {fileID: 7635761198625682957}
-  - component: {fileID: 7635761198625682964}
-  - component: {fileID: 7635761198625682963}
-  - component: {fileID: 7635761198625682962}
-  - component: {fileID: 7635761198625682961}
-  - component: {fileID: 7635761198625682965}
-  - component: {fileID: 114824857929435940}
+  - component: {fileID: 114481327690210836}
+  - component: {fileID: 114040780679561266}
+  - component: {fileID: 114854811698717298}
+  - component: {fileID: 114350872310921140}
+  - component: {fileID: 114099626973180906}
+  - component: {fileID: 114087285340623580}
+  - component: {fileID: 114431465454980674}
   m_Layer: 23
   m_Name: carro_l33t_v2
   m_TagString: Vehicle
@@ -2875,7 +2876,7 @@ MonoBehaviour:
   freezeWhenInactive: 1
   switchToSingleRayWhenInactive: 1
   vehicleRigidbody: {fileID: 0}
---- !u!114 &7635761198625682964
+--- !u!114 &114481327690210836
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2884,7 +2885,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 7635761198625682956}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67b78678fa48cf84da41e5c368d3e66b, type: 3}
+  m_Script: {fileID: 11500000, guid: 4809254ebc28ed741b9804a05d086164, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  marca: 0
+  modelo: A Folha
+  ano: 0
+  peso: 0
+  dificuldadeAI: 0
+  tracao: 0
+  raridade: 0
+  preco: 0
+  metodoAquisicao: 0
+  quilometros: 0
+  zeroAos100: 0
+  velocidadeMaxima: 0
+  potencia: 0
+  carroSprite: {fileID: 0}
+--- !u!114 &114040780679561266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7635761198625682956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08f446f23977a4843932cd7b12b63cfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   agulhaRPM: {fileID: 0}
@@ -2893,8 +2920,8 @@ MonoBehaviour:
   volta: {fileID: 0}
   gear: {fileID: 0}
   numVoltas: 0
-  pos: 0
---- !u!114 &7635761198625682963
+  pos: -1
+--- !u!114 &114854811698717298
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2903,11 +2930,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7635761198625682956}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adfc555437481ea459be08bb254bcea6, type: 3}
+  m_Script: {fileID: 11500000, guid: cabc0f0bef3f2cb4d9b373d9dabcbedb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   voltas: 0
---- !u!114 &7635761198625682962
+--- !u!114 &114350872310921140
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2916,24 +2943,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7635761198625682956}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba53a7c606fd5954db04fbe1a1457822, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c14b4aeea09042459ede4a44ae7e8a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  marca: 9
-  modelo: A Folha
-  ano: 0
-  peso: 0
-  dificuldadeAI: 0
-  tracao: 1
-  raridade: 2
-  preco: 0
-  metodoAquisicao: 0
-  quilometros: 0
-  zeroAos100: 0
-  velocidadeMaxima: 0
-  potencia: 0
-  carroSprite: {fileID: 0}
---- !u!114 &7635761198625682961
+  meshes: []
+  materiais: []
+--- !u!114 &114099626973180906
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2942,12 +2957,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7635761198625682956}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d735ad05e47579a449dd04266085e502, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a2d0d847c44ef24487ce081a1d9403c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
-  amount: {x: 0, y: 0.19, z: -0.4}
---- !u!114 &7635761198625682965
+  amount: {x: 0, y: 0, z: 0.31}
+--- !u!114 &114087285340623580
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2956,10 +2971,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7635761198625682956}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: faa4876d5f359254591bf7627525dcb8, type: 3}
+  m_Script: {fileID: 11500000, guid: d5786628d080963499b2325659353471, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114824857929435940
+--- !u!114 &114431465454980674
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2968,7 +2983,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7635761198625682956}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb16b54101983f443ac6b60eec5bdc5c, type: 3}
+  m_Script: {fileID: 11500000, guid: b03f79f50c84f4546a7b9141db78feae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7635761198718954789

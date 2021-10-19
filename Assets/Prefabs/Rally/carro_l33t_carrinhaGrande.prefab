@@ -104,7 +104,7 @@ MonoBehaviour:
     dragForce: 50
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 211.09047, y: 20.990822, z: 123.0404}
+    worldPosition: {x: 48.304558, y: 22.664398, z: -1092.5151}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -840,6 +840,13 @@ GameObject:
   - component: {fileID: 116015210830377673}
   - component: {fileID: 116015210830377675}
   - component: {fileID: 116015210830377672}
+  - component: {fileID: 114074559012817870}
+  - component: {fileID: 114431970075504828}
+  - component: {fileID: 114232494901949300}
+  - component: {fileID: 114620989085666364}
+  - component: {fileID: 114575937692710942}
+  - component: {fileID: 114860949761633876}
+  - component: {fileID: 114076194568351844}
   m_Layer: 23
   m_Name: carro_l33t_carrinhaGrande
   m_TagString: Vehicle
@@ -1300,6 +1307,120 @@ MonoBehaviour:
   freezeWhenInactive: 1
   switchToSingleRayWhenInactive: 1
   vehicleRigidbody: {fileID: 116015210830377673}
+--- !u!114 &114074559012817870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116015210830377679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4809254ebc28ed741b9804a05d086164, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  marca: 0
+  modelo: A Furgonete
+  ano: 0
+  peso: 0
+  dificuldadeAI: 0
+  tracao: 0
+  raridade: 0
+  preco: 0
+  metodoAquisicao: 0
+  quilometros: 0
+  zeroAos100: 0
+  velocidadeMaxima: 0
+  potencia: 0
+  carroSprite: {fileID: 0}
+--- !u!114 &114431970075504828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116015210830377679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08f446f23977a4843932cd7b12b63cfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agulhaRPM: {fileID: 0}
+  veloKMH: {fileID: 0}
+  posicao: {fileID: 0}
+  volta: {fileID: 0}
+  gear: {fileID: 0}
+  numVoltas: 0
+  pos: -1
+--- !u!114 &114232494901949300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116015210830377679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cabc0f0bef3f2cb4d9b373d9dabcbedb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  voltas: 0
+--- !u!114 &114620989085666364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116015210830377679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c14b4aeea09042459ede4a44ae7e8a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshes:
+  - {fileID: 636714425029577577}
+  materiais:
+  - {fileID: 2100000, guid: 0bea48344b9e8644ea0323b101938600, type: 2}
+  - {fileID: 2100000, guid: c358617f248f4204ba659702078dd7f1, type: 2}
+  - {fileID: 2100000, guid: d89590be937f8994db06494b2f4037a2, type: 2}
+--- !u!114 &114575937692710942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116015210830377679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a2d0d847c44ef24487ce081a1d9403c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 0}
+  amount: {x: 0, y: 0.63, z: -0.63}
+--- !u!114 &114860949761633876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116015210830377679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5786628d080963499b2325659353471, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114076194568351844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116015210830377679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b03f79f50c84f4546a7b9141db78feae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &116015211528857929
 GameObject:
   m_ObjectHideFlags: 0
@@ -1351,7 +1472,7 @@ MonoBehaviour:
     dragForce: 50
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 213.7713, y: 20.990822, z: 122.06624}
+    worldPosition: {x: 50.98539, y: 22.664398, z: -1093.4893}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -2126,7 +2247,7 @@ MonoBehaviour:
     dragForce: 50
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 214.40358, y: 20.990822, z: 123.806244}
+    worldPosition: {x: 51.61767, y: 22.664398, z: -1091.7493}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -2901,7 +3022,7 @@ MonoBehaviour:
     dragForce: 50
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 211.72275, y: 20.990822, z: 124.780396}
+    worldPosition: {x: 48.936836, y: 22.664398, z: -1090.7751}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -3805,6 +3926,12 @@ PrefabInstance:
 --- !u!4 &636714425031870857 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: c6f7a5d102492bb448462d8cef32bf73,
+    type: 3}
+  m_PrefabInstance: {fileID: 636714425031742217}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &636714425029577577 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2300000, guid: c6f7a5d102492bb448462d8cef32bf73,
     type: 3}
   m_PrefabInstance: {fileID: 636714425031742217}
   m_PrefabAsset: {fileID: 0}

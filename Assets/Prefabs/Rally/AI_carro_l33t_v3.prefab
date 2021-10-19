@@ -210,12 +210,13 @@ GameObject:
   - component: {fileID: 1779489655441606155}
   - component: {fileID: 3034701615780220182}
   - component: {fileID: 8645679623484980005}
-  - component: {fileID: 5662118636747525343}
-  - component: {fileID: 601928298738910756}
-  - component: {fileID: 7729258065783340161}
-  - component: {fileID: 4000196065728563794}
-  - component: {fileID: 9109999027217069870}
-  - component: {fileID: 3571743167321953659}
+  - component: {fileID: 6679264799231135929}
+  - component: {fileID: 2855320180012421351}
+  - component: {fileID: 710344101353184040}
+  - component: {fileID: 8314031594510895884}
+  - component: {fileID: 6236508353513204908}
+  - component: {fileID: 6957098363518372143}
+  - component: {fileID: 4824083662031969846}
   m_Layer: 23
   m_Name: AI_carro_l33t_v3
   m_TagString: Untagged
@@ -676,7 +677,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   centerOfMassOffset: {x: 0, y: -0.47, z: 0.29}
   showCOM: 1
---- !u!114 &5662118636747525343
+--- !u!114 &6679264799231135929
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -685,11 +686,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 2277227865689730385}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adfc555437481ea459be08bb254bcea6, type: 3}
+  m_Script: {fileID: 11500000, guid: 4809254ebc28ed741b9804a05d086164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  voltas: 0
---- !u!114 &601928298738910756
+  marca: 0
+  modelo: A Caixa
+  ano: 0
+  peso: 0
+  dificuldadeAI: 0
+  tracao: 0
+  raridade: 0
+  preco: 0
+  metodoAquisicao: 0
+  quilometros: 0
+  zeroAos100: 0
+  velocidadeMaxima: 0
+  potencia: 0
+  carroSprite: {fileID: 0}
+--- !u!114 &2855320180012421351
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -698,7 +712,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2277227865689730385}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67b78678fa48cf84da41e5c368d3e66b, type: 3}
+  m_Script: {fileID: 11500000, guid: 08f446f23977a4843932cd7b12b63cfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   agulhaRPM: {fileID: 0}
@@ -707,8 +721,8 @@ MonoBehaviour:
   volta: {fileID: 0}
   gear: {fileID: 0}
   numVoltas: 0
-  pos: 0
---- !u!114 &7729258065783340161
+  pos: -1
+--- !u!114 &710344101353184040
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -717,24 +731,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2277227865689730385}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba53a7c606fd5954db04fbe1a1457822, type: 3}
+  m_Script: {fileID: 11500000, guid: cabc0f0bef3f2cb4d9b373d9dabcbedb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  marca: 16
-  modelo: O Caixote
-  ano: 1974
-  peso: 820
-  dificuldadeAI: 0
-  tracao: 0
-  raridade: 0
-  preco: 6500
-  metodoAquisicao: 0
-  quilometros: 0
-  zeroAos100: 19.5
-  velocidadeMaxima: 140
-  potencia: 74
-  carroSprite: {fileID: 0}
---- !u!114 &4000196065728563794
+  voltas: 0
+--- !u!114 &8314031594510895884
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -743,16 +744,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 2277227865689730385}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7cd798ba26cdcc4db48075e56014b40, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c14b4aeea09042459ede4a44ae7e8a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brakeDeceleration: -6
-  debugObj: {fileID: 0}
-  debugObj2: {fileID: 0}
-  debugObj3: {fileID: 0}
-  brakeAgressive: 0.61
+  meshes: []
+  materiais: []
+--- !u!114 &6236508353513204908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277227865689730385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a2d0d847c44ef24487ce081a1d9403c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 0}
+  amount: {x: 0, y: 0, z: 0}
+--- !u!114 &6957098363518372143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277227865689730385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08189782b40999042a212f0f2d0ddbc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  brakeDeceleration: 0
+  brakeAgressive: -1
   useNewCalc: 1
-  dificuldade: 2
+  dificuldade: 1
   AlookUp:
     serializedVersion: 2
     m_Curve:
@@ -802,7 +828,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   step: 0.06
---- !u!114 &9109999027217069870
+--- !u!114 &4824083662031969846
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -811,28 +837,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2277227865689730385}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d495c2508624124ba49296d2ac63599, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f884f32613550c419424383d46dedc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   initialValue: -1
---- !u!114 &3571743167321953659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2277227865689730385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc6ea42363e90e643a1a7535a7af9253, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  meshes:
-  - {fileID: 6841154050459154912}
-  materiais:
-  - {fileID: 2100000, guid: 2d85e05b13121a64dae140bf72ea4b6e, type: 2}
-  - {fileID: 2100000, guid: ad77ffab4aef327489b20aae4e5231d5, type: 2}
-  - {fileID: 2100000, guid: 91cbca9122d562c44929585af9971f85, type: 2}
 --- !u!1 &3051660353517527760
 GameObject:
   m_ObjectHideFlags: 0
@@ -961,7 +969,7 @@ MonoBehaviour:
     dragForce: 50
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 194.73318, y: 20.76578, z: 126.961784}
+    worldPosition: {x: 210.6087, y: 20.580381, z: 123.38047}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -1736,7 +1744,7 @@ MonoBehaviour:
     dragForce: 50
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 197.1495, y: 20.76578, z: 126.816956}
+    worldPosition: {x: 213.02502, y: 20.580381, z: 123.23564}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -2623,7 +2631,7 @@ MonoBehaviour:
     dragForce: 50
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 197.06155, y: 20.76578, z: 125.34933}
+    worldPosition: {x: 212.93707, y: 20.580381, z: 121.76801}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -3475,7 +3483,7 @@ MonoBehaviour:
     dragForce: 50
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 194.64522, y: 20.76578, z: 125.49415}
+    worldPosition: {x: 210.52074, y: 20.580381, z: 121.912834}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:

@@ -3156,10 +3156,13 @@ GameObject:
   - component: {fileID: 8436481641859500653}
   - component: {fileID: 8436481641859500654}
   - component: {fileID: 8436481641859500655}
-  - component: {fileID: 523686016966318823}
-  - component: {fileID: 523622446576203903}
-  - component: {fileID: 524528646889282201}
-  - component: {fileID: 114612444221653402}
+  - component: {fileID: 114672656096768058}
+  - component: {fileID: 114261165121600960}
+  - component: {fileID: 114015662081262264}
+  - component: {fileID: 114823979521961128}
+  - component: {fileID: 114026987038820110}
+  - component: {fileID: 114693184219217738}
+  - component: {fileID: 114479101716658956}
   m_Layer: 23
   m_Name: carro_l33t_v3
   m_TagString: Vehicle
@@ -3620,7 +3623,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   centerOfMassOffset: {x: 0, y: -0.47, z: 0.29}
   showCOM: 1
---- !u!114 &523686016966318823
+--- !u!114 &114672656096768058
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3629,11 +3632,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 8436481641859500648}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adfc555437481ea459be08bb254bcea6, type: 3}
+  m_Script: {fileID: 11500000, guid: 4809254ebc28ed741b9804a05d086164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  voltas: 0
---- !u!114 &523622446576203903
+  marca: 0
+  modelo: A Caixa
+  ano: 0
+  peso: 0
+  dificuldadeAI: 0
+  tracao: 0
+  raridade: 0
+  preco: 0
+  metodoAquisicao: 0
+  quilometros: 0
+  zeroAos100: 0
+  velocidadeMaxima: 0
+  potencia: 0
+  carroSprite: {fileID: 0}
+--- !u!114 &114261165121600960
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3642,7 +3658,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8436481641859500648}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67b78678fa48cf84da41e5c368d3e66b, type: 3}
+  m_Script: {fileID: 11500000, guid: 08f446f23977a4843932cd7b12b63cfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   agulhaRPM: {fileID: 0}
@@ -3651,8 +3667,8 @@ MonoBehaviour:
   volta: {fileID: 0}
   gear: {fileID: 0}
   numVoltas: 0
-  pos: 0
---- !u!114 &524528646889282201
+  pos: -1
+--- !u!114 &114015662081262264
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3661,24 +3677,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8436481641859500648}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba53a7c606fd5954db04fbe1a1457822, type: 3}
+  m_Script: {fileID: 11500000, guid: cabc0f0bef3f2cb4d9b373d9dabcbedb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  marca: 16
-  modelo: O Caixote
-  ano: 1974
-  peso: 820
-  dificuldadeAI: 0
-  tracao: 0
-  raridade: 0
-  preco: 6500
-  metodoAquisicao: 0
-  quilometros: 0
-  zeroAos100: 19.5
-  velocidadeMaxima: 140
-  potencia: 50
-  carroSprite: {fileID: 0}
---- !u!114 &114612444221653402
+  voltas: 0
+--- !u!114 &114823979521961128
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3687,7 +3690,47 @@ MonoBehaviour:
   m_GameObject: {fileID: 8436481641859500648}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb16b54101983f443ac6b60eec5bdc5c, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c14b4aeea09042459ede4a44ae7e8a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshes: []
+  materiais: []
+--- !u!114 &114026987038820110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8436481641859500648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a2d0d847c44ef24487ce081a1d9403c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 0}
+  amount: {x: 0, y: 0.19, z: 0.18}
+--- !u!114 &114693184219217738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8436481641859500648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5786628d080963499b2325659353471, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114479101716658956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8436481641859500648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b03f79f50c84f4546a7b9141db78feae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &7176339840814780042
@@ -3785,9 +3828,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7176339840814780042}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &7176339840814680110 stripped
+--- !u!1 &7176339840814680098 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 100004, guid: bf5fc101991ff3248a5b60108cba443c,
+  m_CorrespondingSourceObject: {fileID: 100008, guid: bf5fc101991ff3248a5b60108cba443c,
     type: 3}
   m_PrefabInstance: {fileID: 7176339840814780042}
   m_PrefabAsset: {fileID: 0}
@@ -3797,9 +3840,9 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7176339840814780042}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &7176339840814680098 stripped
+--- !u!1 &7176339840814680110 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 100008, guid: bf5fc101991ff3248a5b60108cba443c,
+  m_CorrespondingSourceObject: {fileID: 100004, guid: bf5fc101991ff3248a5b60108cba443c,
     type: 3}
   m_PrefabInstance: {fileID: 7176339840814780042}
   m_PrefabAsset: {fileID: 0}

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using NWH.VehiclePhysics;
 
 /// <summary>
 /// Classe que contem as stats básicas dos carros, num local facil de acessar
@@ -95,6 +96,15 @@ public class CarroStats : MonoBehaviour
                 GetComponent<CameraOffset>().enabled = false;
             }
             return;
+        }
+    }
+
+    void Start() 
+    {
+        if (SceneManager.GetActiveScene().buildIndex > 0)
+        {
+            peso = (int)GetComponent<Rigidbody>().mass;
+            potencia = Mathf.RoundToInt(GetComponent<VehicleController>().engine.Power*1.3f);
         }
     }
 

@@ -17,10 +17,6 @@ public class VehicleAI : MonoBehaviour
 
     public float brakeDeceleration;
 
-    public GameObject debugObj;
-    public GameObject debugObj2;
-    public GameObject debugObj3;
-
     Vector3 currentPosWaypoints;
     Vector3 targetPos;
 
@@ -94,13 +90,6 @@ public class VehicleAI : MonoBehaviour
         targetPos = OffsetPosicao(currentPosWaypoints, 15f + (vehicle.SpeedKPH / 20f));
 
         Vector3 brakeLocation = OffsetPosicao(targetPos, BrakingDistance(0f));
-
-        if (debugObj != null)
-        {
-            debugObj.transform.position = targetPos;
-            debugObj2.transform.position = currentPosWaypoints;
-            debugObj3.transform.position = brakeLocation;
-        }
 
         //aceleraçao base
         vehicle.input.Vertical = 1f;

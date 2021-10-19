@@ -51,7 +51,7 @@ public class VehicleAIDifficulty : MonoBehaviour
             st.dificuldadeAI = CarroStats.Dificuldade.Medio;
         }
 
-        Debug.Log(gameObject.name + "-" + st.dificuldadeAI);
+        //Debug.Log(gameObject.name + "-" + st.dificuldadeAI);
 
         float initialBrake = -5.5f;
         float initialAgressive = 0.40f;

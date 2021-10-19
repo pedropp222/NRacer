@@ -37,8 +37,6 @@ public class Controlador : MonoBehaviour
 
     public string nomePlayerAtual="";
     public GameSaveData saveDataPlayerAtual = null;
-
-   
     
     void Awake()
     {
@@ -79,12 +77,13 @@ public class Controlador : MonoBehaviour
 
             Debug.Log("Registou " + campNum + " campeonatos. Registou " + corrNum + " corridas.");
 
-            DontDestroyOnLoad(gameObject);
             SceneManager.sceneLoaded += SceneManager_sceneLoaded;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
             DestroyImmediate(gameObject);
+            return;
         }
 
         Debug.Log("Encontrar e carregar um jogador qualquer");
@@ -96,14 +95,15 @@ public class Controlador : MonoBehaviour
         if (saveDataPlayerAtual==null||nomePlayerAtual.Length==0)
         {           
             saveDataPlayerAtual = GetPlayer(0);
-            campeonatos = saveDataPlayerAtual.corridas;
-            nomePlayerAtual = saveDataPlayerAtual.PlayerName;
             if(saveDataPlayerAtual==null)
             {
                 Debug.LogWarning("Nao ha players ainda");
+                MenuUI();
             }
             else
             {
+                campeonatos = saveDataPlayerAtual.corridas;
+                nomePlayerAtual = saveDataPlayerAtual.PlayerName;
                 Debug.Log("Carregou o player " + saveDataPlayerAtual.PlayerName);
 
                 int g = 0;
@@ -156,7 +156,6 @@ public class Controlador : MonoBehaviour
                     if (corridaAtual.resultado.posicaoFinal == 0)
                     {
                         //adicionar novo e guardar tudo
-                        Debug.Log($"Registar corrida {corridaAtual.corridaID} campeonato {corridaAtual.campeonatoID} como ganha e guardar no jogador {saveDataPlayerAtual.PlayerName}");
                         campeonatos.campeonatos[corridaAtual.campeonatoID].ganhos[corridaAtual.corridaID]=true;
                         saveDataPlayerAtual.corridas = campeonatos;
                         saveDataPlayerAtual.dinheiro = dinheiro;
@@ -182,7 +181,7 @@ public class Controlador : MonoBehaviour
     public void MenuUI()
     {
         MenuUI x = FindObjectOfType<MenuUI>();
-        if (x==null)
+        if (x!=null)
         {
             x.RefreshUI(this);
         }
@@ -213,6 +212,8 @@ public class Controlador : MonoBehaviour
     /// </summary>
     public void SetupSpawn()
     {
+        Debug.LogWarning("SETUP SPAWN");
+
         GameObject spawn = GameObject.Find("SPAWNS");
 
         int ind = 0;
@@ -236,6 +237,7 @@ public class Controlador : MonoBehaviour
                 o.GetComponent<VehicleAIDifficulty>().SetupDificuldade(Random.Range(min,filtroAtual.baseDificuldade));
                 currentCarros.Add(o);
             }
+            Debug.Log("Colocar um carro novo "+currentCarros.Count());
         }
 
         PopulateGrelhaPartidaUI();
@@ -484,7 +486,7 @@ public class Controlador : MonoBehaviour
     {
         GameSaveData sd = new GameSaveData();
 
-        if (NumeroJogadores() < id)
+        if (NumeroJogadores() < id || NumeroJogadores()==0)
         {
             Debug.LogError("Erro. Tentou encontrar um jogador que nao existe?");
             return null;

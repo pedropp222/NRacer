@@ -51,7 +51,7 @@ MonoBehaviour:
     dragForce: 50
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 196.17365, y: 20.850822, z: 128.12201}
+    worldPosition: {x: 46.71071, y: 22.705341, z: -1094.8247}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -826,7 +826,7 @@ MonoBehaviour:
     dragForce: 50
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 193.95197, y: 20.850822, z: 130.69637}
+    worldPosition: {x: 44.489025, y: 22.705341, z: -1092.2504}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -1601,7 +1601,7 @@ MonoBehaviour:
     dragForce: 50
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 196.69077, y: 20.850822, z: 129.89963}
+    worldPosition: {x: 47.22783, y: 22.705341, z: -1093.0471}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -2376,7 +2376,7 @@ MonoBehaviour:
     dragForce: 50
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 193.43484, y: 20.850822, z: 128.91875}
+    worldPosition: {x: 43.9719, y: 22.705341, z: -1094.028}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -3171,6 +3171,7 @@ GameObject:
   - component: {fileID: 3989339276508927219}
   - component: {fileID: 8459346297630907361}
   - component: {fileID: 1050844241733265384}
+  - component: {fileID: 114007779077508164}
   m_Layer: 23
   m_Name: AI_carro_l33t_carrinha
   m_TagString: Untagged
@@ -3702,12 +3703,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brakeDeceleration: 0
-  debugObj: {fileID: 0}
-  debugObj2: {fileID: 0}
-  debugObj3: {fileID: 0}
   brakeAgressive: -1
   useNewCalc: 1
-  dificuldade: 2
+  dificuldade: 1
   AlookUp:
     serializedVersion: 2
     m_Curve:
@@ -3782,8 +3780,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c14b4aeea09042459ede4a44ae7e8a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meshes: []
-  materiais: []
+  meshes:
+  - {fileID: 303120947136310771}
+  materiais:
+  - {fileID: 2100000, guid: 0bea48344b9e8644ea0323b101938600, type: 2}
+  - {fileID: 2100000, guid: c358617f248f4204ba659702078dd7f1, type: 2}
+  - {fileID: 2100000, guid: d89590be937f8994db06494b2f4037a2, type: 2}
+--- !u!114 &114007779077508164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972458353703605333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a2d0d847c44ef24487ce081a1d9403c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 0}
+  amount: {x: 0, y: 0.45, z: -0.63}
 --- !u!1001 &303120947138344339
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3964,6 +3980,12 @@ PrefabInstance:
 --- !u!4 &303120947138735891 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: c6f7a5d102492bb448462d8cef32bf73,
+    type: 3}
+  m_PrefabInstance: {fileID: 303120947138344339}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &303120947136310771 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2300000, guid: c6f7a5d102492bb448462d8cef32bf73,
     type: 3}
   m_PrefabInstance: {fileID: 303120947138344339}
   m_PrefabAsset: {fileID: 0}

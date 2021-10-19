@@ -3203,11 +3203,13 @@ GameObject:
   - component: {fileID: 5702736629174081233}
   - component: {fileID: 5702736629174081246}
   - component: {fileID: 5702736629174081247}
-  - component: {fileID: 5702736629174081236}
-  - component: {fileID: 5702736629174081237}
-  - component: {fileID: 5702736629174081234}
-  - component: {fileID: 5702736629174081235}
-  - component: {fileID: 114140845366726798}
+  - component: {fileID: 114455125262615996}
+  - component: {fileID: 114456927346607908}
+  - component: {fileID: 114845976230359114}
+  - component: {fileID: 114023659969283648}
+  - component: {fileID: 114703891177479558}
+  - component: {fileID: 114415460398504808}
+  - component: {fileID: 114357607508607346}
   m_Layer: 23
   m_Name: carro_leet_v5
   m_TagString: Vehicle
@@ -3687,7 +3689,7 @@ MonoBehaviour:
   freezeWhenInactive: 1
   switchToSingleRayWhenInactive: 1
   vehicleRigidbody: {fileID: 0}
---- !u!114 &5702736629174081236
+--- !u!114 &114455125262615996
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3696,43 +3698,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5702736629174081244}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67b78678fa48cf84da41e5c368d3e66b, type: 3}
+  m_Script: {fileID: 11500000, guid: 4809254ebc28ed741b9804a05d086164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agulhaRPM: {fileID: 0}
-  veloKMH: {fileID: 0}
-  posicao: {fileID: 0}
-  volta: {fileID: 0}
-  gear: {fileID: 0}
-  numVoltas: 0
-  pos: 0
---- !u!114 &5702736629174081237
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5702736629174081244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adfc555437481ea459be08bb254bcea6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  voltas: 0
---- !u!114 &5702736629174081234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5702736629174081244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba53a7c606fd5954db04fbe1a1457822, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  marca: 4
-  modelo: 1000 B20
+  marca: 0
+  modelo: CarrinhaX
   ano: 0
   peso: 0
   dificuldadeAI: 0
@@ -3745,7 +3715,7 @@ MonoBehaviour:
   velocidadeMaxima: 0
   potencia: 0
   carroSprite: {fileID: 0}
---- !u!114 &5702736629174081235
+--- !u!114 &114456927346607908
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3754,10 +3724,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 5702736629174081244}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: faa4876d5f359254591bf7627525dcb8, type: 3}
+  m_Script: {fileID: 11500000, guid: 08f446f23977a4843932cd7b12b63cfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114140845366726798
+  agulhaRPM: {fileID: 0}
+  veloKMH: {fileID: 0}
+  posicao: {fileID: 0}
+  volta: {fileID: 0}
+  gear: {fileID: 0}
+  numVoltas: 0
+  pos: -1
+--- !u!114 &114845976230359114
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3766,7 +3743,60 @@ MonoBehaviour:
   m_GameObject: {fileID: 5702736629174081244}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb16b54101983f443ac6b60eec5bdc5c, type: 3}
+  m_Script: {fileID: 11500000, guid: cabc0f0bef3f2cb4d9b373d9dabcbedb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  voltas: 0
+--- !u!114 &114023659969283648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5702736629174081244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c14b4aeea09042459ede4a44ae7e8a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshes: []
+  materiais: []
+--- !u!114 &114703891177479558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5702736629174081244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a2d0d847c44ef24487ce081a1d9403c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 0}
+  amount: {x: 0, y: 0.19, z: 0.36}
+--- !u!114 &114415460398504808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5702736629174081244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5786628d080963499b2325659353471, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114357607508607346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5702736629174081244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b03f79f50c84f4546a7b9141db78feae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &5702736628098824945
@@ -3894,6 +3924,12 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 8a7f16e4af062744d8f1a6d7ec0e0838, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70c30cb68f81c7c48aa0fcc388056c00, type: 3}
+--- !u!1 &5702736628098923615 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100014, guid: 70c30cb68f81c7c48aa0fcc388056c00,
+    type: 3}
+  m_PrefabInstance: {fileID: 5702736628098824945}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5702736628098923613 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100012, guid: 70c30cb68f81c7c48aa0fcc388056c00,
@@ -3915,12 +3951,6 @@ GameObject:
 --- !u!4 &5702736628099211377 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 70c30cb68f81c7c48aa0fcc388056c00,
-    type: 3}
-  m_PrefabInstance: {fileID: 5702736628098824945}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5702736628098923615 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100014, guid: 70c30cb68f81c7c48aa0fcc388056c00,
     type: 3}
   m_PrefabInstance: {fileID: 5702736628098824945}
   m_PrefabAsset: {fileID: 0}

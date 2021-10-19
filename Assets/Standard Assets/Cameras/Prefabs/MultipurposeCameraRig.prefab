@@ -44,8 +44,8 @@ GameObject:
   - component: {fileID: 9200000}
   - component: {fileID: 12400000}
   - component: {fileID: 8100000}
-  - component: {fileID: 692916524}
-  - component: {fileID: 692916525}
+  - component: {fileID: 5785544418026139259}
+  - component: {fileID: 3447905757804721440}
   m_Layer: 24
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -133,7 +133,7 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100002}
   m_Enabled: 1
---- !u!114 &692916524
+--- !u!114 &5785544418026139259
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,7 +150,7 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   priority: 0
---- !u!114 &692916525
+--- !u!114 &3447905757804721440
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 5400000}
   - component: {fileID: 11400002}
   - component: {fileID: 11400000}
-  - component: {fileID: 983067243}
+  - component: {fileID: 503519846}
   m_Layer: 0
   m_Name: MultipurposeCameraRig
   m_TagString: Untagged
@@ -302,7 +302,8 @@ MonoBehaviour:
   m_SpinTurnLimit: 90
   m_TargetVelocityLowerLimit: 4
   m_SmoothTurnTime: 0.2
---- !u!114 &983067243
+  offsetDone: 0
+--- !u!114 &503519846
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -311,7 +312,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 100004}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e66da5e2d6e11b44da7e75fa4357cfa9, type: 3}
+  m_Script: {fileID: 11500000, guid: 667f0f41c1894294697200534607d6d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 11400000}

@@ -30,7 +30,15 @@ public class RandomCarTargetAI : MonoBehaviour
 
         if (cam.Target == null && GameObject.FindGameObjectWithTag("Vehicle")==null)
         {
-            cam.DarTarget(RandomCar());
+            if (carros.Count>0)
+            {
+                cam.DarTarget(RandomCar());
+            }
+            else
+            {
+                Debug.LogWarning("Nao existem carros");
+                player=true;
+            }
         }
         else
         {
