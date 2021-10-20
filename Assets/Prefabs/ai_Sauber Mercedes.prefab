@@ -51,7 +51,7 @@ MonoBehaviour:
     dragForce: 100
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 284.32925, y: 0.37662232, z: 20.84691}
+    worldPosition: {x: 149.30867, y: 21.376623, z: 127.672905}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -91,8 +91,8 @@ MonoBehaviour:
     rimCollider: {fileID: 0}
     up: {x: 0, y: 1, z: 0}
     inside: {x: 0, y: 0, z: 0}
-    forward: {x: 0, y: 0, z: -1}
-    right: {x: -1, y: 0, z: 0}
+    forward: {x: -0.999309, y: 0, z: -0.037166834}
+    right: {x: -0.037166834, y: 0, z: 0.999309}
     velocity: {x: 0, y: 0, z: 0}
     prevVelocity: {x: 0, y: 0, z: 0}
     acceleration: {x: 0, y: 0, z: 0}
@@ -169,15 +169,15 @@ MonoBehaviour:
     force: 0
     maxForce: 0
   fFriction:
-    forceCoefficient: 1.2
-    slipCoefficient: 1.1
+    forceCoefficient: 1.3
+    slipCoefficient: 1.2
     maxForce: 0
     slip: 0
     speed: 0
     force: 0
   sFriction:
-    forceCoefficient: 1
-    slipCoefficient: 1
+    forceCoefficient: 1.1
+    slipCoefficient: 1.05
     maxForce: 0
     slip: 0
     speed: 0
@@ -879,7 +879,7 @@ MonoBehaviour:
     dragForce: 100
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 282.4807, y: 0.37662232, z: 20.84691}
+    worldPosition: {x: 149.23997, y: 21.376623, z: 129.52019}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -919,8 +919,8 @@ MonoBehaviour:
     rimCollider: {fileID: 0}
     up: {x: 0, y: 1, z: 0}
     inside: {x: 0, y: 0, z: 0}
-    forward: {x: 0, y: 0, z: -1}
-    right: {x: -1, y: 0, z: 0}
+    forward: {x: -0.999309, y: 0, z: -0.037166834}
+    right: {x: -0.037166834, y: 0, z: 0.999309}
     velocity: {x: 0, y: 0, z: 0}
     prevVelocity: {x: 0, y: 0, z: 0}
     acceleration: {x: 0, y: 0, z: 0}
@@ -997,15 +997,15 @@ MonoBehaviour:
     force: 0
     maxForce: 0
   fFriction:
-    forceCoefficient: 1.2
-    slipCoefficient: 1.1
+    forceCoefficient: 1.3
+    slipCoefficient: 1.2
     maxForce: 0
     slip: 0
     speed: 0
     force: 0
   sFriction:
-    forceCoefficient: 1
-    slipCoefficient: 1
+    forceCoefficient: 1.1
+    slipCoefficient: 1.05
     maxForce: 0
     slip: 0
     speed: 0
@@ -1615,10 +1615,13 @@ GameObject:
   - component: {fileID: 6033564348777486618}
   - component: {fileID: 6033564348777486619}
   - component: {fileID: 6033564348777486617}
-  - component: {fileID: 6033564348777486623}
-  - component: {fileID: 6033564348777486616}
-  - component: {fileID: 6193694420419388701}
   - component: {fileID: 114573728950004550}
+  - component: {fileID: 1858342590}
+  - component: {fileID: 1858342591}
+  - component: {fileID: 1858342592}
+  - component: {fileID: 1858342593}
+  - component: {fileID: 1858342599}
+  - component: {fileID: 1858342594}
   m_Layer: 23
   m_Name: ai_Sauber Mercedes
   m_TagString: Untagged
@@ -1691,6 +1694,7 @@ MonoBehaviour:
   active: 1
   input:
     settable: 1
+    blocked: 0
     leftBlinker: 0
     rightBlinker: 0
     lowBeamLights: 0
@@ -1703,14 +1707,16 @@ MonoBehaviour:
     spatialBlend: 1
     masterVolume: 1
     engineIdleComponent:
-      volume: 0.3
+      volume: 0.05
       pitch: 0.9
       clips:
       - {fileID: 8300000, guid: 26adbcc2441ad9a4e91218333996150e, type: 3}
-      volumeRange: 0.5
-      pitchRange: 1.5
+      volumeRange: 0.1
+      pitchRange: 2
       smoothing: 0.1
       maxDistortion: 0.4
+      minDistance: 3
+      maxDistance: 50
     engineStartStopComponent:
       volume: 0.4
       pitch: 1
@@ -2045,7 +2051,7 @@ MonoBehaviour:
     abs:
       enabled: 1
       active: 0
-      intensity: 0.312
+      intensity: 0.3
     tcs:
       enabled: 1
       active: 0
@@ -2055,7 +2061,7 @@ MonoBehaviour:
     stability:
       enabled: 1
       active: 0
-      intensity: 0.05
+      intensity: 0.3
     driftAssist:
       enabled: 0
       active: 0
@@ -2122,7 +2128,7 @@ MonoBehaviour:
   freezeWhenInactive: 1
   switchToSingleRayWhenInactive: 1
   vehicleRigidbody: {fileID: 0}
---- !u!114 &6033564348777486623
+--- !u!114 &114573728950004550
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2131,11 +2137,43 @@ MonoBehaviour:
   m_GameObject: {fileID: 6033564348777486597}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adfc555437481ea459be08bb254bcea6, type: 3}
+  m_Script: {fileID: 11500000, guid: 793cf41444120ac40a68392803c2477b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  downforcePoints:
+  - position: {x: 0, y: 0.4, z: 1.64}
+    maxForce: 10895.5
+  - position: {x: 0, y: 0.4, z: -1.44}
+    maxForce: 10895.5
+  maxDownforceSpeed: 88.888885
+--- !u!114 &1858342590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6033564348777486597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a2d0d847c44ef24487ce081a1d9403c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 0}
+  amount: {x: 0, y: 0.27, z: -1}
+--- !u!114 &1858342591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6033564348777486597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cabc0f0bef3f2cb4d9b373d9dabcbedb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   voltas: 0
---- !u!114 &6033564348777486616
+--- !u!114 &1858342592
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2144,7 +2182,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6033564348777486597}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67b78678fa48cf84da41e5c368d3e66b, type: 3}
+  m_Script: {fileID: 11500000, guid: 08f446f23977a4843932cd7b12b63cfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   agulhaRPM: {fileID: 0}
@@ -2153,8 +2191,8 @@ MonoBehaviour:
   volta: {fileID: 0}
   gear: {fileID: 0}
   numVoltas: 0
-  pos: 0
---- !u!114 &6193694420419388701
+  pos: -1
+--- !u!114 &1858342593
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2163,16 +2201,39 @@ MonoBehaviour:
   m_GameObject: {fileID: 6033564348777486597}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7cd798ba26cdcc4db48075e56014b40, type: 3}
+  m_Script: {fileID: 11500000, guid: 4809254ebc28ed741b9804a05d086164, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  marca: 0
+  modelo: 
+  ano: 0
+  peso: 0
+  dificuldadeAI: 0
+  tracao: 0
+  raridade: 0
+  preco: 0
+  metodoAquisicao: 0
+  quilometros: 0
+  zeroAos100: 0
+  velocidadeMaxima: 0
+  potencia: 0
+  carroSprite: {fileID: 0}
+--- !u!114 &1858342599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6033564348777486597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08189782b40999042a212f0f2d0ddbc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   brakeDeceleration: -10
-  debugObj: {fileID: 0}
-  debugObj2: {fileID: 0}
-  debugObj3: {fileID: 0}
-  brakeAgressive: 0.85
+  brakeAgressive: 0.75
   useNewCalc: 1
-  dificuldade: 1
+  dificuldade: 2
   AlookUp:
     serializedVersion: 2
     m_Curve:
@@ -2222,7 +2283,10 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   step: 0.06
---- !u!114 &114573728950004550
+  useRubberbanding: 1
+  limitInputSpeed: 1
+  maxInput: 0.4
+--- !u!114 &1858342594
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2231,15 +2295,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 6033564348777486597}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 793cf41444120ac40a68392803c2477b, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c14b4aeea09042459ede4a44ae7e8a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  downforcePoints:
-  - position: {x: 0, y: 0.4, z: 1.64}
-    maxForce: 10895.5
-  - position: {x: 0, y: 0.4, z: -1.44}
-    maxForce: 10895.5
-  maxDownforceSpeed: 88.888885
+  meshes:
+  - {fileID: 6033564349159567189}
+  materiais:
+  - {fileID: 2100000, guid: 9b273a3dc17357249977a760cd9ec771, type: 2}
+  - {fileID: 2100000, guid: 8163c6bee51d9c243842a055c96b069f, type: 2}
+  - {fileID: 2100000, guid: f2ba4ba1174a71e4da4e1bc3c088c62e, type: 2}
 --- !u!1 &6033564348923903715
 GameObject:
   m_ObjectHideFlags: 0
@@ -2291,7 +2355,7 @@ MonoBehaviour:
     dragForce: 80
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 284.31946, y: 0.35915878, z: 18.21443}
+    worldPosition: {x: 146.67764, y: 21.35916, z: 127.58485}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -2331,8 +2395,8 @@ MonoBehaviour:
     rimCollider: {fileID: 0}
     up: {x: 0, y: 1, z: 0}
     inside: {x: 0, y: 0, z: 0}
-    forward: {x: 0, y: 0, z: -1}
-    right: {x: -1, y: 0, z: 0}
+    forward: {x: -0.999309, y: 0, z: -0.037166834}
+    right: {x: -0.037166834, y: 0, z: 0.999309}
     velocity: {x: 0, y: 0, z: 0}
     prevVelocity: {x: 0, y: 0, z: 0}
     acceleration: {x: 0, y: 0, z: 0}
@@ -2409,15 +2473,15 @@ MonoBehaviour:
     force: 0
     maxForce: 0
   fFriction:
-    forceCoefficient: 1.2
-    slipCoefficient: 1.1
+    forceCoefficient: 1.3
+    slipCoefficient: 1.2
     maxForce: 0
     slip: 0
     speed: 0
     force: 0
   sFriction:
-    forceCoefficient: 1
-    slipCoefficient: 1
+    forceCoefficient: 1.1
+    slipCoefficient: 1.05
     maxForce: 0
     slip: 0
     speed: 0
@@ -3066,7 +3130,7 @@ MonoBehaviour:
     dragForce: 80
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 282.4869, y: 0.35915878, z: 18.21443}
+    worldPosition: {x: 146.60954, y: 21.35916, z: 129.41614}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -3106,8 +3170,8 @@ MonoBehaviour:
     rimCollider: {fileID: 0}
     up: {x: 0, y: 1, z: 0}
     inside: {x: 0, y: 0, z: 0}
-    forward: {x: 0, y: 0, z: -1}
-    right: {x: -1, y: 0, z: 0}
+    forward: {x: -0.999309, y: 0, z: -0.037166834}
+    right: {x: -0.037166834, y: 0, z: 0.999309}
     velocity: {x: 0, y: 0, z: 0}
     prevVelocity: {x: 0, y: 0, z: 0}
     acceleration: {x: 0, y: 0, z: 0}
@@ -3184,15 +3248,15 @@ MonoBehaviour:
     force: 0
     maxForce: 0
   fFriction:
-    forceCoefficient: 1.2
-    slipCoefficient: 1.1
+    forceCoefficient: 1.3
+    slipCoefficient: 1.2
     maxForce: 0
     slip: 0
     speed: 0
     force: 0
   sFriction:
-    forceCoefficient: 1
-    slipCoefficient: 1
+    forceCoefficient: 1.1
+    slipCoefficient: 1.05
     maxForce: 0
     slip: 0
     speed: 0
@@ -4103,15 +4167,9 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: ec2f1ea740e038647ba0d3bded820dee, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c9eccfe8d85249439c4fbcbf45a6743, type: 3}
---- !u!4 &6033564349161336193 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400036, guid: 1c9eccfe8d85249439c4fbcbf45a6743,
-    type: 3}
-  m_PrefabInstance: {fileID: 6033564349161731877}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6033564349161763205 stripped
+--- !u!1 &6033564349161763201 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 100000, guid: 1c9eccfe8d85249439c4fbcbf45a6743,
+  m_CorrespondingSourceObject: {fileID: 100004, guid: 1c9eccfe8d85249439c4fbcbf45a6743,
     type: 3}
   m_PrefabInstance: {fileID: 6033564349161731877}
   m_PrefabAsset: {fileID: 0}
@@ -4121,15 +4179,27 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 6033564349161731877}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &6033564349161763201 stripped
+--- !u!1 &6033564349161763205 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 100004, guid: 1c9eccfe8d85249439c4fbcbf45a6743,
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 1c9eccfe8d85249439c4fbcbf45a6743,
+    type: 3}
+  m_PrefabInstance: {fileID: 6033564349161731877}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6033564349161336193 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400036, guid: 1c9eccfe8d85249439c4fbcbf45a6743,
     type: 3}
   m_PrefabInstance: {fileID: 6033564349161731877}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &6033564349161763203 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100006, guid: 1c9eccfe8d85249439c4fbcbf45a6743,
+    type: 3}
+  m_PrefabInstance: {fileID: 6033564349161731877}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &6033564349159567189 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2300016, guid: 1c9eccfe8d85249439c4fbcbf45a6743,
     type: 3}
   m_PrefabInstance: {fileID: 6033564349161731877}
   m_PrefabAsset: {fileID: 0}

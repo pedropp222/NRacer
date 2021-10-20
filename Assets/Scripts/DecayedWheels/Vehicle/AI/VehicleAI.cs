@@ -42,6 +42,11 @@ public class VehicleAI : MonoBehaviour
 
     float currentQuant = 0f;
 
+    public bool useRubberbanding = true;
+
+    public bool limitInputSpeed;
+    public float maxInput;
+
     private void Start()
     {
         //Provisorio: vai buscar a lista de waypoints do layout 1 por defeito
@@ -153,7 +158,21 @@ public class VehicleAI : MonoBehaviour
         if (vehicle.SpeedKPH > 20f)
         {
             //final input
-            vehicle.input.Vertical = (A - B)*Rubberbanding();
+            if (vehicle.SpeedKPH < 100f && limitInputSpeed)
+            {
+                vehicle.input.Vertical = (A-B)*maxInput;
+            }
+            else
+            {
+                if(useRubberbanding)
+                {
+                    vehicle.input.Vertical = (A - B)*Rubberbanding();
+                }
+                else
+                {
+                    vehicle.input.Vertical = (A-B);
+                }
+            }
         }
     }
 

@@ -5,8 +5,7 @@ using NWH.VehiclePhysics;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// TODO
-/// mudar depois o nome disto
+/// TODO - mudar depois o nome disto
 /// Classe que controla o jogo se faltar elementos, como controlador, spawns, voltas, veiculo jogador, etc.
 /// apos isso ele toma varias decisoes para evitar problemas por falta de algum desses
 /// elementos

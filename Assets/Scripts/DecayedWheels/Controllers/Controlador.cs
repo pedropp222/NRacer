@@ -139,7 +139,7 @@ public class Controlador : MonoBehaviour
             if (corridaAtual!=null)
             {
                 //posicaofinal deve ser 0 no build
-                if (corridaAtual.resultado.posicaoFinal > 999)
+                if (corridaAtual.resultado.posicaoFinal == 0)
                 {
                     Debug.Log("Corrida foi cancelada...");
                 }
@@ -153,7 +153,7 @@ public class Controlador : MonoBehaviour
                     }            
 
                     //se ficamos em 1º lugar!
-                    if (corridaAtual.resultado.posicaoFinal == 0)
+                    if (corridaAtual.resultado.posicaoFinal == 1)
                     {
                         //adicionar novo e guardar tudo
                         campeonatos.campeonatos[corridaAtual.campeonatoID].ganhos[corridaAtual.corridaID]=true;
@@ -212,7 +212,7 @@ public class Controlador : MonoBehaviour
     /// </summary>
     public void SetupSpawn()
     {
-        Debug.LogWarning("SETUP SPAWN");
+        Debug.LogWarning("SETUP SPAWN - "+corridaAtual.startingGrid.Count+" carros");
 
         GameObject spawn = GameObject.Find("SPAWNS");
 
@@ -234,7 +234,10 @@ public class Controlador : MonoBehaviour
                 o.transform.eulerAngles = spawn.transform.GetChild(ind).localEulerAngles;
                 int min = filtroAtual.baseDificuldade - 3;
                 if (min < 0) min = 0;
-                o.GetComponent<VehicleAIDifficulty>().SetupDificuldade(Random.Range(min,filtroAtual.baseDificuldade));
+                if (filtroAtual.baseDificuldade!=-1)
+                {
+                    o.GetComponent<VehicleAIDifficulty>().SetupDificuldade(Random.Range(min,filtroAtual.baseDificuldade));
+                }
                 currentCarros.Add(o);
             }
             Debug.Log("Colocar um carro novo "+currentCarros.Count());
@@ -305,22 +308,19 @@ public class Controlador : MonoBehaviour
 
         int numCarros = filtros.maxOponentes+1;
 
-        if (numCarros == -1)
+        if (numCarros > 0)
         {
-            numCarros = Random.Range(6, 7);
+            corridaAtual.startingGrid.AddRange(FiltrarPorRaridade2(gridPossivel, numCarros));
+
+            if (corridaAtual.startingGrid.Count == 0)
+            {
+                Debug.LogError("Nao consegue iniciar a corrida");
+                return;
+            }
+
+            //Jogador começa em ultimo e tem o ID -1
+            corridaAtual.startingGrid[corridaAtual.startingGrid.Count - 1] = -1;
         }
-
-        corridaAtual.startingGrid.AddRange(FiltrarPorRaridade2(gridPossivel, numCarros));
-
-        if (corridaAtual.startingGrid.Count == 0)
-        {
-            Debug.LogError("Nao consegue iniciar a corrida");
-            return;
-        }
-
-        //Jogador começa em ultimo e tem o ID -1
-        corridaAtual.startingGrid[corridaAtual.startingGrid.Count - 1] = -1;
-
         SceneManager.LoadScene(filtros.nivel);
     }
 
@@ -567,6 +567,8 @@ public class Controlador : MonoBehaviour
         game.corridas = campeonatos;
 
         game.SaveGame(name);
+
+        CarregarJogo();
 
         Debug.Log("player criado!");
     }

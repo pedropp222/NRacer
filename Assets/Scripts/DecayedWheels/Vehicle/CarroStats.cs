@@ -124,8 +124,7 @@ public class CarroStats : MonoBehaviour
 
     public int GetPontos()
     {
-        ///TODO
-        ///CRIAR UM ALGORITMO PARA DEFINIR PONTUAÇAO GERAL DA CAPACIDADE DOS CARROS
+        ///TODO - CRIAR UM ALGORITMO PARA DEFINIR PONTUAÇAO GERAL DA CAPACIDADE DOS CARROS
         return Mathf.RoundToInt(zeroAos100 + velocidadeMaxima - (peso / 70));
     }
 

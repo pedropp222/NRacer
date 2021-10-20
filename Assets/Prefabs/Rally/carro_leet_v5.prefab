@@ -3295,14 +3295,16 @@ MonoBehaviour:
     spatialBlend: 1
     masterVolume: 1
     engineIdleComponent:
-      volume: 0.3
+      volume: 0.2
       pitch: 0.6
       clips:
       - {fileID: 8300000, guid: f2b9725571a0ef74f9b38496c0d9936f, type: 3}
-      volumeRange: 0.5
+      volumeRange: 0.1
       pitchRange: 1.2
       smoothing: 0.1
       maxDistortion: 0.3
+      minDistance: 5
+      maxDistance: 100
     engineStartStopComponent:
       volume: 0.4
       pitch: 1

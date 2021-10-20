@@ -17,8 +17,8 @@ public class Debug_SetupRace : MonoBehaviour, IButton
     {
         Campeonato camp = GetCampeonatoByID(campeonatoID);
         if (camp == null) { Debug.LogError("Erro: nao encontrou campeonato com id " + campeonatoID); return; }
-        camp.corridasLista[corridaID].baseDificuldade = (int)dificuldade.value;
-        camp.corridasLista[corridaID].maxOponentes = 5;
+        //camp.corridasLista[corridaID].baseDificuldade = (int)dificuldade.value;
+        //camp.corridasLista[corridaID].maxOponentes = 5;
         FindObjectOfType<Controlador>().GerarCorrida(camp.corridasLista[corridaID],new CorridaInfo(camp.corridasLista[corridaID].premioDinheiro,camp.corridasLista[corridaID].voltas,camp.id,corridaID));
     }
 

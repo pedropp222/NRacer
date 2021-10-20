@@ -3257,14 +3257,16 @@ MonoBehaviour:
     spatialBlend: 1
     masterVolume: 1
     engineIdleComponent:
-      volume: 0.3
+      volume: 0.05
       pitch: 0.9
       clips:
       - {fileID: 8300000, guid: 20dfa443179c20a4595c480c82a84739, type: 3}
-      volumeRange: 0.5
+      volumeRange: 0.1
       pitchRange: 1.5
       smoothing: 0.1
       maxDistortion: 0.4
+      minDistance: 3
+      maxDistance: 50
     engineStartStopComponent:
       volume: 0.4
       pitch: 1
@@ -3755,6 +3757,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   step: 0.06
+  useRubberbanding: 1
+  limitInputSpeed: 0
+  maxInput: 0
 --- !u!114 &8459346297630907361
 MonoBehaviour:
   m_ObjectHideFlags: 0

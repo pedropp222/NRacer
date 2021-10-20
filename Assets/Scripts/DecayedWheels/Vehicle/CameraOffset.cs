@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 /// <summary>
 /// Classe para mudar a posiçao relativa da camara em relaçao a um carro
@@ -13,6 +14,7 @@ public class CameraOffset : MonoBehaviour
     private void Start()
     {
         cam = FindObjectOfType<UnityStandardAssets.Cameras.AutoCam>();
+        if (cam==null)return;
         if (!cam.offsetDone)
         {
             //prioritar o nosso carro apenas
@@ -21,6 +23,8 @@ public class CameraOffset : MonoBehaviour
                 cam.transform.GetChild(0).transform.Translate(amount, Space.Self);
                 cam.offsetDone = true;
             }
+
+            
         }
     }
 }
