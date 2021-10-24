@@ -24,6 +24,8 @@ public class CorridaRules
 
     public int baseDificuldade = 5;
 
+    public int forceAICar = -1;
+
     public bool filtrarTracao;
     public CarroStats.Tracao tracao;
 }

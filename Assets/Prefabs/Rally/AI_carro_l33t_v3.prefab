@@ -703,7 +703,7 @@ MonoBehaviour:
   quilometros: 0
   zeroAos100: 0
   velocidadeMaxima: 0
-  potencia: 0
+  potencia: 57
   carroSprite: {fileID: 0}
 --- !u!114 &2855320180012421351
 MonoBehaviour:

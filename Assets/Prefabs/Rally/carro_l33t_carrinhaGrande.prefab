@@ -104,7 +104,7 @@ MonoBehaviour:
     dragForce: 50
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 48.304558, y: 22.664398, z: -1092.5151}
+    worldPosition: {x: 48.220966, y: 22.268387, z: 126.12812}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -871,6 +871,7 @@ Transform:
   - {fileID: 116015211800507887}
   - {fileID: 116015211705673156}
   - {fileID: 636714425031870857}
+  - {fileID: 4988595766922163898}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -70.03, z: 0}
@@ -1474,7 +1475,7 @@ MonoBehaviour:
     dragForce: 50
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 50.98539, y: 22.664398, z: -1093.4893}
+    worldPosition: {x: 50.9018, y: 22.268387, z: 125.15396}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -2249,7 +2250,7 @@ MonoBehaviour:
     dragForce: 50
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 51.61767, y: 22.664398, z: -1091.7493}
+    worldPosition: {x: 51.534077, y: 22.268387, z: 126.89397}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -3024,7 +3025,7 @@ MonoBehaviour:
     dragForce: 50
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 48.936836, y: 22.664398, z: -1090.7751}
+    worldPosition: {x: 48.853245, y: 22.268387, z: 127.86812}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -3748,6 +3749,81 @@ MonoBehaviour:
   trackedOffset: 0
   applyForceToOthers: 0
   maxPutDownForce: 0
+--- !u!1001 &1467723113
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 116015210830377678}
+    m_Modifications:
+    - target: {fileID: 1263124051637892430, guid: 6008a8c8535de1c4a9c676bf3ee465db,
+        type: 3}
+      propertyPath: m_Name
+      value: CarCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 4988595765456804819, guid: 6008a8c8535de1c4a9c676bf3ee465db,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4988595765456804819, guid: 6008a8c8535de1c4a9c676bf3ee465db,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.159
+      objectReference: {fileID: 0}
+    - target: {fileID: 4988595765456804819, guid: 6008a8c8535de1c4a9c676bf3ee465db,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.509
+      objectReference: {fileID: 0}
+    - target: {fileID: 4988595765456804819, guid: 6008a8c8535de1c4a9c676bf3ee465db,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.10834636
+      objectReference: {fileID: 0}
+    - target: {fileID: 4988595765456804819, guid: 6008a8c8535de1c4a9c676bf3ee465db,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4988595765456804819, guid: 6008a8c8535de1c4a9c676bf3ee465db,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4988595765456804819, guid: 6008a8c8535de1c4a9c676bf3ee465db,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99411327
+      objectReference: {fileID: 0}
+    - target: {fileID: 4988595765456804819, guid: 6008a8c8535de1c4a9c676bf3ee465db,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4988595765456804819, guid: 6008a8c8535de1c4a9c676bf3ee465db,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 12.440001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4988595765456804819, guid: 6008a8c8535de1c4a9c676bf3ee465db,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4988595765456804819, guid: 6008a8c8535de1c4a9c676bf3ee465db,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6008a8c8535de1c4a9c676bf3ee465db, type: 3}
+--- !u!4 &4988595766922163898 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4988595765456804819, guid: 6008a8c8535de1c4a9c676bf3ee465db,
+    type: 3}
+  m_PrefabInstance: {fileID: 1467723113}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &636714425031742217
 PrefabInstance:
   m_ObjectHideFlags: 0

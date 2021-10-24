@@ -81,20 +81,23 @@ public class CarroStats : MonoBehaviour
 
     private void Awake()
     {
-        //se for o menu, desativar tudo, para ainda assim instanciar o veiculo e ele nao começar a andar
+        //se for o menu, ou cenario de desbloquear carro, 
+        //desativar tudo, para ainda assim instanciar o veiculo e ele nao começar a andar
         //nem ter fisica nem nada disso.
 
-        if (SceneManager.GetActiveScene().buildIndex == 0)
+        if (SceneManager.GetActiveScene().buildIndex == 0 || SceneManager.GetActiveScene().buildIndex == 1)
         {
             NWH.VehiclePhysics.VehicleController car = GetComponent<NWH.VehiclePhysics.VehicleController>();
             car.Active = false;
             car.enabled = false;
+            GetComponent<VehicleAI>().enabled = false;
             GetComponent<Carro_HUD>().enabled = false;
             GetComponent<CarroVolta>().enabled = false;
             if (GetComponent<CameraOffset>() != null)
             {
                 GetComponent<CameraOffset>().enabled = false;
             }
+            GetComponent<Rigidbody>().isKinematic = true;
             return;
         }
     }
@@ -104,8 +107,26 @@ public class CarroStats : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex > 0)
         {
             peso = (int)GetComponent<Rigidbody>().mass;
-            potencia = Mathf.RoundToInt(GetComponent<VehicleController>().engine.Power*1.3f);
+            potencia = Mathf.RoundToInt(GetComponent<VehicleController>().engine.Power);
         }
+    }
+
+    public int GetPeso()
+    {
+        if (peso == 0) 
+        {
+            peso = (int)GetComponent<Rigidbody>().mass;
+        }
+        return peso;
+    }
+
+    public int GetPotencia()
+    {
+        if(potencia == 0) 
+        {
+            potencia = Mathf.RoundToInt(GetComponent<VehicleController>().engine.maxPower);
+        }
+        return potencia;
     }
 
     public string NomeCompleto()

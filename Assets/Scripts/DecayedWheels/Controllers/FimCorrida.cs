@@ -25,7 +25,16 @@ public class FimCorrida : MonoBehaviour
         painel.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(delegate
         {
             controlador.corridaAtual.resultado.posicaoFinal = posicao;
-            SceneManager.LoadScene(0);
+            if (posicao == 1 && controlador.filtroAtual.premioCarro != -1 && controlador.saveDataPlayerAtual.corridas.campeonatos[controlador.corridaAtual.campeonatoID].ganhos[controlador.corridaAtual.corridaID]==false)
+            {
+                //carregar win carro!!!
+                SceneManager.LoadScene(1);
+            }
+            else
+            {
+                //voltar ao menu logo
+                SceneManager.LoadScene(0);
+            }
         });
     }
 }

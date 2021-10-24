@@ -16,18 +16,19 @@ public class Controlador : MonoBehaviour
 
     public int dinheiro = 10000;
 
-    public CorridaInfo corridaAtual = null;
-    public CorridaRules filtroAtual = null;
+    [SerializeField]
+    public CorridaInfo corridaAtual;
+    public CorridaRules filtroAtual;
     public List<GameObject> currentCarros;
 
     public GameObject[] carros;
     public GameObject[] aiCarros;
 
-    public List<int> teusCarros = new List<int>();
+    public List<int> teusCarros;
 
     public GameObject carNameBox;
 
-    int carroSelecionado = -1;
+    public int carroSelecionado = -1;
 
     public int percentagemJogoGanho = 0;
 
@@ -46,6 +47,9 @@ public class Controlador : MonoBehaviour
             iniciar = false;
 
             currentCarros = new List<GameObject>();
+            teusCarros = new List<int>();
+
+            corridaAtual = new CorridaInfo(-1,-1,-1,-1);
 
             //abriu o jogo pela primeira vez!
             if (!Directory.Exists("savedata")|| NumeroJogadores() == 0)
@@ -104,6 +108,7 @@ public class Controlador : MonoBehaviour
             {
                 campeonatos = saveDataPlayerAtual.corridas;
                 nomePlayerAtual = saveDataPlayerAtual.PlayerName;
+                teusCarros = saveDataPlayerAtual.carros;
                 Debug.Log("Carregou o player " + saveDataPlayerAtual.PlayerName);
 
                 int g = 0;
@@ -119,6 +124,18 @@ public class Controlador : MonoBehaviour
                     }
                 }
 
+                //primeira vez que vai jogar, dar um carro!
+                if (teusCarros == null || teusCarros.Count == 0)
+                {
+                    teusCarros = new List<int>();
+                    DarCarro(0,CarroStats.MetodoAquisicao.Arcade);
+                    saveDataPlayerAtual.carros = teusCarros;
+                    saveDataPlayerAtual.SaveGame(nomePlayerAtual);
+                }
+
+                SetCarroSelected(0);
+
+                Debug.Log("Jogador tem "+saveDataPlayerAtual.carros.Count+" carros.");
                 Debug.Log("Jogador tem " + g + " corridas ganhas");
                 MenuUI();
             }
@@ -136,7 +153,7 @@ public class Controlador : MonoBehaviour
             //ao carregar o menu
 
             //se acabamos de participar numa corrida...
-            if (corridaAtual!=null)
+            if (corridaAtual.campeonatoID != -1)
             {
                 //posicaofinal deve ser 0 no build
                 if (corridaAtual.resultado.posicaoFinal == 0)
@@ -156,7 +173,13 @@ public class Controlador : MonoBehaviour
                     if (corridaAtual.resultado.posicaoFinal == 1)
                     {
                         //adicionar novo e guardar tudo
+                        if (filtroAtual.premioCarro != -1)
+                        {
+                            //ganhar um carro novo
+                            DarCarro(filtroAtual.premioCarro,CarroStats.MetodoAquisicao.Arcade);
+                        }
                         campeonatos.campeonatos[corridaAtual.campeonatoID].ganhos[corridaAtual.corridaID]=true;
+                        saveDataPlayerAtual.carros = teusCarros;
                         saveDataPlayerAtual.corridas = campeonatos;
                         saveDataPlayerAtual.dinheiro = dinheiro;
                         saveDataPlayerAtual.SaveGame(saveDataPlayerAtual.PlayerName);
@@ -168,7 +191,7 @@ public class Controlador : MonoBehaviour
 
             MenuUI();
         }
-        else
+        else if (arg0.buildIndex != 1)
         {
             //se carregou uma pista
             SetupSpawn();
@@ -220,9 +243,10 @@ public class Controlador : MonoBehaviour
 
         for (ind = 0; ind < corridaAtual.startingGrid.Count; ind++)
         {
+            //teu carro
             if (corridaAtual.startingGrid[ind] == -1)
             {
-                GameObject o = Instantiate(carros[Random.Range(0, carros.Length)]);
+                GameObject o = Instantiate(carros[carroSelecionado]);
                 o.transform.position = spawn.transform.GetChild(ind).position;
                 o.transform.eulerAngles = spawn.transform.GetChild(ind).localEulerAngles;
                 currentCarros.Add(o);
@@ -267,7 +291,7 @@ public class Controlador : MonoBehaviour
             go.transform.GetChild(0).GetComponent<Text>().text = (i + 1).ToString();
             if (corridaAtual.startingGrid[i] != -1)
             {
-                go.transform.GetChild(1).GetComponent<Text>().text = currentCarros[corridaAtual.startingGrid[i]].GetComponent<CarroStats>().NomeResumido(true);
+                go.transform.GetChild(1).GetComponent<Text>().text = currentCarros[i].GetComponent<CarroStats>().NomeResumido(true);
             }
             else
             {
@@ -337,19 +361,29 @@ public class Controlador : MonoBehaviour
         {
             CarroStats stats = aiCarros[i].GetComponent<CarroStats>();
 
-            if(rules.maxPeso!=-1&&stats.peso >= rules.maxPeso)
+            if (rules.forceAICar != -1)
             {
-                continue;
+                if (i==rules.forceAICar)
+                {
+                    carrosLista.Add(i);
+                }
             }
-            if (rules.maxHP!=-1&&stats.potencia >= rules.maxHP)
+            else
             {
-                continue;
+                if(rules.maxPeso!=-1&&stats.GetPeso() > rules.maxPeso)
+                {
+                    continue;
+                }
+                if (rules.maxHP!=-1&&stats.GetPotencia() > rules.maxHP)
+                {
+                    continue;
+                }
+                if(rules.filtrarTracao&&stats.tracao!=rules.tracao)
+                {
+                    continue;
+                }
+                carrosLista.Add(i);
             }
-            if(rules.filtrarTracao&&stats.tracao!=rules.tracao)
-            {
-                continue;
-            }
-            carrosLista.Add(i);
         }
 
         return carrosLista.ToArray();
@@ -455,6 +489,11 @@ public class Controlador : MonoBehaviour
         }
     }
 
+    public void SetCarroSelected(int id)
+    {
+        carroSelecionado = teusCarros[id]; 
+        Debug.Log("Selecionou veiculo "+carroSelecionado);
+    }
 
     /// <summary>
     /// Obter o numero de savegames

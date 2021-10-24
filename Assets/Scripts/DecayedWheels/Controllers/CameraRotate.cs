@@ -10,4 +10,11 @@ public class CameraRotate : MonoBehaviour
     {
         transform.RotateAround(aroundObject.position,Vector3.up,25f*Time.fixedDeltaTime);    
     }
+
+    void Start() {
+        if(aroundObject == null)
+        {
+            aroundObject = FindObjectOfType<Rigidbody>().transform;
+        }
+    }
 }

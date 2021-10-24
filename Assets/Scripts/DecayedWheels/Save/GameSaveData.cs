@@ -13,6 +13,8 @@ public class GameSaveData : SaveData, ISaveGame
     public CampeonatosController corridas;
     public int dinheiro = 0;   
 
+    public List<int> carros = new List<int>();
+
     public override void LoadGame(string name)
     {
         GameSaveData data = new GameSaveData();
@@ -32,6 +34,7 @@ public class GameSaveData : SaveData, ISaveGame
                 this.PlayerName = data.PlayerName;
                 this.dinheiro = data.dinheiro;
                 this.corridas = data.corridas;
+                this.carros = data.carros;
                 file.Close();
 
             }
@@ -60,7 +63,8 @@ public class GameSaveData : SaveData, ISaveGame
             PlayerName = name,
 
             dinheiro = dinheiro,
-            corridas = corridas
+            corridas = corridas,
+            carros = carros
         };
 
         bf.Serialize(file, data);

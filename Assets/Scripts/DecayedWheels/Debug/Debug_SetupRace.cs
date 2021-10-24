@@ -11,8 +11,6 @@ public class Debug_SetupRace : MonoBehaviour, IButton
     public int campeonatoID;
     public int corridaID;
 
-    public Slider dificuldade;
-
     public void Click()
     {
         Campeonato camp = GetCampeonatoByID(campeonatoID);

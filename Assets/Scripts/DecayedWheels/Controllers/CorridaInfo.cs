@@ -9,6 +9,7 @@ using UnityEngine;
 /// Classe que controla varias informaçoes sobre a corrida em que vamos participar como a lista de carros, o prémio,
 /// numero de voltas e claro o resultado final da prova.
 /// </summary>
+[System.Serializable]
 public class CorridaInfo
 {
     public List<int> startingGrid;

@@ -17,8 +17,12 @@ public class MenuUI : MonoBehaviour
 
     public GameObject mainPanel;
 
+    public Dropdown carrosLista;
+
+    public string gameVersion;
+
     private void Start() {
-        tituloText.text = Application.version;
+        tituloText.text = gameVersion;
     }
 
     public void RefreshUI(Controlador c)
@@ -34,6 +38,16 @@ public class MenuUI : MonoBehaviour
             mainPanel.SetActive(true);
         }
 
-        tituloText.DOText(Application.version+" - "+c.nomePlayerAtual,1f).SetDelay(1f);
+        tituloText.DOText(gameVersion +" - "+c.nomePlayerAtual,1f).SetDelay(1f);
+
+        carrosLista.options.Clear();
+
+        for(int i = 0; i < c.teusCarros.Count; i++)
+        {
+            carrosLista.options.Add(new Dropdown.OptionData(c.carros[c.teusCarros[i]].GetComponent<CarroStats>().modelo));
+        }
+
+        carrosLista.value = c.carroSelecionado;
+        carrosLista.RefreshShownValue();
     }
 }

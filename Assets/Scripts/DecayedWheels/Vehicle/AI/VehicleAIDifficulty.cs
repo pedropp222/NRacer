@@ -14,12 +14,21 @@ public class VehicleAIDifficulty : MonoBehaviour
 
     public int initialValue = -1;
 
+    Rigidbody rb;
+
     private void Awake()
     {
         rodas = new List<Wheel>();
 
         vehicle = GetComponent<VehicleController>();
         ai = GetComponent<VehicleAI>();
+
+        rb = GetComponent<Rigidbody>();
+
+        if (initialValue != -1)
+        {
+            SetupDificuldade(initialValue);
+        }
     }
 
     public void SetupDificuldade(int x)
@@ -72,23 +81,39 @@ public class VehicleAIDifficulty : MonoBehaviour
 
         if (x<4)
         {
-            vehicle.drivingAssists.abs.intensity = 0.1f;
-            vehicle.drivingAssists.tcs.intensity = 0.1f;
-            vehicle.drivingAssists.stability.intensity = 0.1f;
+            vehicle.drivingAssists.abs.intensity += 0.1f;
+            vehicle.drivingAssists.tcs.intensity += 0.1f;
+            vehicle.drivingAssists.stability.intensity += 0.1f;
             ai.dificuldade = 0.75f;
+            rb.mass *= 1.15f;
         }
         else
         {
-            vehicle.drivingAssists.abs.intensity = 0.2f;
-            vehicle.drivingAssists.tcs.intensity = 0.2f;
-            vehicle.drivingAssists.stability.intensity = 0.2f;
+            vehicle.drivingAssists.abs.intensity += 0.2f;
+            vehicle.drivingAssists.tcs.intensity += 0.2f;
+            vehicle.drivingAssists.stability.intensity += 0.2f;
             ai.dificuldade = 1f;
             if (x>6)
             {
-                vehicle.drivingAssists.abs.intensity = 0.3f;
-                vehicle.drivingAssists.tcs.intensity = 0.3f;
-                vehicle.drivingAssists.stability.intensity = 0.3f;
+                vehicle.drivingAssists.abs.intensity += 0.3f;
+                vehicle.drivingAssists.tcs.intensity += 0.3f;
+                vehicle.drivingAssists.stability.intensity += 0.3f;
                 ai.dificuldade = 2f;
+                rb.mass *= 0.95f;
+                if (x > 8)
+                {
+                    vehicle.drivingAssists.abs.intensity += 0.3f;
+                    vehicle.drivingAssists.tcs.intensity += 0.1f;
+                    vehicle.drivingAssists.stability.intensity += 0.2f;
+                    rb.mass *= 0.96f;
+                    if (x == 10)
+                    {
+                        vehicle.drivingAssists.abs.intensity += 0.1f;
+                        vehicle.drivingAssists.tcs.intensity += 0.1f;
+                        vehicle.drivingAssists.stability.intensity += 0.1f;
+                        rb.mass *= 0.96f;
+                    }
+                }
             }
         }
 
@@ -98,6 +123,7 @@ public class VehicleAIDifficulty : MonoBehaviour
         foreach(Wheel wh in vehicle.Wheels)
         {
             wh.WheelController.sideFriction.forceCoefficient = initialForce;
+            wh.wheelController.sideFriction.slipCoefficient = Mathf.Clamp( wh.wheelController.sideFriction.slipCoefficient,1.0f,initialForce-0.10f); 
         }
 
         //Debug.Log("Inicializou ai com dificuldade " + x);

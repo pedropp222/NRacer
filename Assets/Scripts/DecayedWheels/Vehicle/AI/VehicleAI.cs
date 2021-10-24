@@ -209,7 +209,7 @@ public class VehicleAI : MonoBehaviour
                     currentQuant -= 0.0006f;
                 }
 
-                currentQuant = Mathf.Clamp(currentQuant, -0.3f, 0.2f);
+                currentQuant = Mathf.Clamp(currentQuant, -0.15f, 0.2f);
                 quant *= 1 + currentQuant;
 
                 if (quant > 1f)
