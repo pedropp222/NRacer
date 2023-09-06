@@ -51,7 +51,7 @@ MonoBehaviour:
     dragForce: 50
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 46.71071, y: 22.705341, z: -1094.8247}
+    worldPosition: {x: 14.982194, y: 0.010823604, z: 0.44879985}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -91,8 +91,8 @@ MonoBehaviour:
     rimCollider: {fileID: 0}
     up: {x: 0, y: 1, z: 0}
     inside: {x: 0, y: 0, z: 0}
-    forward: {x: -0.9601962, y: 0, z: 0.27932644}
-    right: {x: 0.27932644, y: 0, z: 0.9601962}
+    forward: {x: -0.9990935, y: 0, z: 0.042572975}
+    right: {x: 0.042572975, y: 0, z: 0.9990935}
     velocity: {x: 0, y: 0, z: 0}
     prevVelocity: {x: 0, y: 0, z: 0}
     acceleration: {x: 0, y: 0, z: 0}
@@ -826,7 +826,7 @@ MonoBehaviour:
     dragForce: 50
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 44.489025, y: 22.705341, z: -1092.2504}
+    worldPosition: {x: 12.211257, y: 0.010823604, z: 2.4198718}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -866,8 +866,8 @@ MonoBehaviour:
     rimCollider: {fileID: 0}
     up: {x: 0, y: 1, z: 0}
     inside: {x: 0, y: 0, z: 0}
-    forward: {x: -0.9601962, y: 0, z: 0.27932644}
-    right: {x: 0.27932644, y: 0, z: 0.9601962}
+    forward: {x: -0.9990935, y: 0, z: 0.042572975}
+    right: {x: 0.042572975, y: 0, z: 0.9990935}
     velocity: {x: 0, y: 0, z: 0}
     prevVelocity: {x: 0, y: 0, z: 0}
     acceleration: {x: 0, y: 0, z: 0}
@@ -1601,7 +1601,7 @@ MonoBehaviour:
     dragForce: 50
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 47.22783, y: 22.705341, z: -1093.0471}
+    worldPosition: {x: 15.06101, y: 0.010823604, z: 2.2984393}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -1641,8 +1641,8 @@ MonoBehaviour:
     rimCollider: {fileID: 0}
     up: {x: 0, y: 1, z: 0}
     inside: {x: 0, y: 0, z: 0}
-    forward: {x: -0.9601962, y: 0, z: 0.27932644}
-    right: {x: 0.27932644, y: 0, z: 0.9601962}
+    forward: {x: -0.9990935, y: 0, z: 0.042572975}
+    right: {x: 0.042572975, y: 0, z: 0.9990935}
     velocity: {x: 0, y: 0, z: 0}
     prevVelocity: {x: 0, y: 0, z: 0}
     acceleration: {x: 0, y: 0, z: 0}
@@ -2376,7 +2376,7 @@ MonoBehaviour:
     dragForce: 50
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 43.9719, y: 22.705341, z: -1094.028}
+    worldPosition: {x: 12.1324415, y: 0.010823604, z: 0.5702324}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -2416,8 +2416,8 @@ MonoBehaviour:
     rimCollider: {fileID: 0}
     up: {x: 0, y: 1, z: 0}
     inside: {x: 0, y: 0, z: 0}
-    forward: {x: -0.9601962, y: 0, z: 0.27932644}
-    right: {x: 0.27932644, y: 0, z: 0.9601962}
+    forward: {x: -0.9990935, y: 0, z: 0.042572975}
+    right: {x: 0.042572975, y: 0, z: 0.9990935}
     velocity: {x: 0, y: 0, z: 0}
     prevVelocity: {x: 0, y: 0, z: 0}
     acceleration: {x: 0, y: 0, z: 0}
@@ -3227,7 +3227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fde3b0a987d9ab4ba8272b85857ae03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  centerOfMassOffset: {x: 0, y: -0.47, z: 0.39}
+  centerOfMassOffset: {x: 0, y: -0.8, z: 0.39}
   showCOM: 1
 --- !u!114 &972458353703605330
 MonoBehaviour:
@@ -3704,10 +3704,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08189782b40999042a212f0f2d0ddbc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brakeDeceleration: 0
-  brakeAgressive: -1
+  brakeDeceleration: -6
+  brakeAgressive: 0.75
   useNewCalc: 1
-  dificuldade: 1
+  dificuldade: 0.6
   AlookUp:
     serializedVersion: 2
     m_Curve:
@@ -3757,7 +3757,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   step: 0.06
-  useRubberbanding: 1
+  useRubberbanding: 0
   limitInputSpeed: 0
   maxInput: 0
 --- !u!114 &8459346297630907361
@@ -3772,7 +3772,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f884f32613550c419424383d46dedc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialValue: -1
+  initialValue: 5
 --- !u!114 &1050844241733265384
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1450049677}
   - component: {fileID: 1450049676}
   m_Layer: 24
-  m_Name: Camera
+  m_Name: CarCamera
   m_TagString: VehicleCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 11400000, guid: ad73616b71c322a488ce17f2672bb7dc, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 4d6eacdcbd8ef9140ab2fcee274910a0, type: 2}
   isGlobal: 1
   blendDistance: 0
   weight: 1
@@ -212,7 +212,7 @@ MonoBehaviour:
     dragForce: 100
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 161.2747, y: 21.776623, z: 123.87607}
+    worldPosition: {x: 361.24536, y: -4.779378, z: -147.17435}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -250,10 +250,10 @@ MonoBehaviour:
     nonRotating: {fileID: 0}
     rim: {fileID: 0}
     rimCollider: {fileID: 0}
-    up: {x: 0, y: 1, z: 0}
+    up: {x: 0, y: 1, z: -0}
     inside: {x: 0, y: 0, z: 0}
-    forward: {x: -0.9987545, y: 0, z: 0.049895704}
-    right: {x: 0.049895704, y: 0, z: 0.9987545}
+    forward: {x: 0.99539626, y: 0, z: -0.09584582}
+    right: {x: -0.09584582, y: 0, z: -0.99539626}
     velocity: {x: 0, y: 0, z: 0}
     prevVelocity: {x: 0, y: 0, z: 0}
     acceleration: {x: 0, y: 0, z: 0}
@@ -1040,7 +1040,7 @@ MonoBehaviour:
     dragForce: 100
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 161.36694, y: 21.776623, z: 125.72232}
+    worldPosition: {x: 361.06818, y: -4.779378, z: -149.01439}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -1078,10 +1078,10 @@ MonoBehaviour:
     nonRotating: {fileID: 0}
     rim: {fileID: 0}
     rimCollider: {fileID: 0}
-    up: {x: 0, y: 1, z: 0}
+    up: {x: 0, y: 1, z: -0}
     inside: {x: 0, y: 0, z: 0}
-    forward: {x: -0.9987545, y: 0, z: 0.049895704}
-    right: {x: 0.049895704, y: 0, z: 0.9987545}
+    forward: {x: 0.99539626, y: 0, z: -0.09584582}
+    right: {x: -0.09584582, y: 0, z: -0.99539626}
     velocity: {x: 0, y: 0, z: 0}
     prevVelocity: {x: 0, y: 0, z: 0}
     acceleration: {x: 0, y: 0, z: 0}
@@ -2008,9 +2008,9 @@ MonoBehaviour:
       particleSystems: []
   steering:
     lowSpeedAngle: 25
-    highSpeedAngle: 3
-    crossoverSpeed: 150
-    degreesPerSecondLimit: 50
+    highSpeedAngle: 2
+    crossoverSpeed: 110
+    degreesPerSecondLimit: 25
     steeringWheelTurnRatio: 1
     steeringWheel: {fileID: 0}
     trackedSteerIntensity: 1
@@ -2020,7 +2020,7 @@ MonoBehaviour:
     stopOnDisable: 1
     minRPM: 1100
     maxRPM: 7000
-    maxPower: 400
+    maxPower: 250
     maxRpmChange: 5500
     throttleSmoothing: 0.2
     powerCurve:
@@ -2036,47 +2036,47 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.30721527
-        value: 0.35753152
-        inSlope: 1.1637818
-        outSlope: 1.3863856
-        tangentMode: 69
+        time: 0.33585823
+        value: 0.24543655
+        inSlope: 1.0361814
+        outSlope: 1.0361814
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.4861248
-        value: 0.6055691
-        inSlope: 1.3863856
-        outSlope: 1.4945885
-        tangentMode: 69
+        time: 0.5197603
+        value: 0.5185926
+        inSlope: 1.3664296
+        outSlope: 1.3664296
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.64461
-        value: 0.84243923
-        inSlope: 1.4945885
-        outSlope: 1.1239773
+        time: 0.66142774
+        value: 0.7401139
+        inSlope: 1.5636715
+        outSlope: 1.5779675
         tangentMode: 69
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.17533617
       - serializedVersion: 3
-        time: 0.75498766
-        value: 0.96650124
-        inSlope: 1.1239773
-        outSlope: 0.26786265
-        tangentMode: 69
+        time: 0.79030496
+        value: 0.943478
+        inSlope: 1.1038971
+        outSlope: 1.1038971
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.62349516
       - serializedVersion: 3
         time: 0.88004714
         value: 1
-        inSlope: 0.26786265
-        outSlope: -0.8716322
-        tangentMode: 69
+        inSlope: -0.12090284
+        outSlope: -0.12090284
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.5495205
@@ -2093,9 +2093,9 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     forcedInduction:
-      useForcedInduction: 0
-      spoolUpTime: 1
-      maxPowerGainMultiplier: 0.4
+      useForcedInduction: 1
+      spoolUpTime: 1.5
+      maxPowerGainMultiplier: 0.6
       flutterSoundFlag: 0
   transmission:
     transmissionType: 2
@@ -2114,7 +2114,7 @@ MonoBehaviour:
     targetShiftDownRPM: 3600
     dynamicShiftPoint: 0
     shiftPointRandomness: 0
-    shiftDuration: 0.5231339
+    shiftDuration: 0.5
     shiftDurationRandomness: 0.2
     postShiftBan: 1.5
     automaticClutch: 1
@@ -2159,7 +2159,7 @@ MonoBehaviour:
       camberAtTop: 0
       camberAtBottom: 0
       isSolid: 0
-      antiRollBarForce: 12000
+      antiRollBarForce: 18000
     powerCoefficient: 0
     brakeCoefficient: 0.7
     handbrakeCoefficient: 0
@@ -2179,7 +2179,7 @@ MonoBehaviour:
       camberAtTop: 0
       camberAtBottom: 0
       isSolid: 0
-      antiRollBarForce: 9500
+      antiRollBarForce: 17000
     powerCoefficient: 1
     brakeCoefficient: 0.3
     handbrakeCoefficient: 1
@@ -2305,10 +2305,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   downforcePoints:
   - position: {x: 0, y: 0.4, z: 1.64}
-    maxForce: 10895.5
+    maxForce: 12000
   - position: {x: 0, y: 0.4, z: -1.44}
-    maxForce: 10895.5
-  maxDownforceSpeed: 88.888885
+    maxForce: 11000
+  maxDownforceSpeed: 80
 --- !u!114 &1788758076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2474,7 +2474,7 @@ MonoBehaviour:
     dragForce: 80
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 158.646, y: 21.75916, z: 124.0172}
+    worldPosition: {x: 363.86478, y: -4.7968416, z: -147.4364}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -2512,10 +2512,10 @@ MonoBehaviour:
     nonRotating: {fileID: 0}
     rim: {fileID: 0}
     rimCollider: {fileID: 0}
-    up: {x: 0, y: 1, z: 0}
+    up: {x: 0, y: 1, z: -0}
     inside: {x: 0, y: 0, z: 0}
-    forward: {x: -0.9987545, y: 0, z: 0.049895704}
-    right: {x: 0.049895704, y: 0, z: 0.9987545}
+    forward: {x: 0.99539626, y: 0, z: -0.09584582}
+    right: {x: -0.09584582, y: 0, z: -0.99539626}
     velocity: {x: 0, y: 0, z: 0}
     prevVelocity: {x: 0, y: 0, z: 0}
     acceleration: {x: 0, y: 0, z: 0}
@@ -3249,7 +3249,7 @@ MonoBehaviour:
     dragForce: 80
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 158.73743, y: 21.75916, z: 125.847466}
+    worldPosition: {x: 363.68912, y: -4.7968416, z: -149.26051}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -3287,10 +3287,10 @@ MonoBehaviour:
     nonRotating: {fileID: 0}
     rim: {fileID: 0}
     rimCollider: {fileID: 0}
-    up: {x: 0, y: 1, z: 0}
+    up: {x: 0, y: 1, z: -0}
     inside: {x: 0, y: 0, z: 0}
-    forward: {x: -0.9987545, y: 0, z: 0.049895704}
-    right: {x: 0.049895704, y: 0, z: 0.9987545}
+    forward: {x: 0.99539626, y: 0, z: -0.09584582}
+    right: {x: -0.09584582, y: 0, z: -0.99539626}
     velocity: {x: 0, y: 0, z: 0}
     prevVelocity: {x: 0, y: 0, z: 0}
     acceleration: {x: 0, y: 0, z: 0}

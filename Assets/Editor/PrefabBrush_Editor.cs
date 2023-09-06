@@ -15,6 +15,10 @@ public class PrefabBrush_Editor : Editor
 
     SerializedProperty prefabs;
 
+    float scaleMin = 1f;
+    float scaleMax = 1f;
+
+
     bool instantiate = true;
 
     private void OnEnable()
@@ -29,6 +33,9 @@ public class PrefabBrush_Editor : Editor
         brush.densidade = EditorGUILayout.IntSlider("Densidade: ", brush.densidade, 1, 50);
         EditorGUI.BeginChangeCheck();
         EditorGUILayout.PropertyField(prefabs, true);
+        scaleMin = EditorGUILayout.FloatField(scaleMin);
+        scaleMax = EditorGUILayout.FloatField(scaleMax);
+
         if (EditorGUI.EndChangeCheck())
         {
             serializedObject.ApplyModifiedProperties();
@@ -48,13 +55,13 @@ public class PrefabBrush_Editor : Editor
                 {
                     if (Physics.Raycast(DarRay(mousePos+new Vector2(Random.Range(-brush.diametro,brush.diametro), Random.Range(-brush.diametro, brush.diametro))), out hit))
                     {
-                        if (hit.collider.tag == "Terrain")
+                        if (hit.collider.CompareTag("Terrain"))
                         {
                             GameObject go = (GameObject)PrefabUtility.InstantiatePrefab(brush.listaObjetos[Random.Range(0, brush.listaObjetos.Length)]);
                             go.transform.position = hit.point;
                             go.transform.eulerAngles = new Vector3(go.transform.eulerAngles.x, Random.Range(0f, 359f), go.transform.eulerAngles.z);
-                            float scale = Random.Range(0.7f, 1.2f);
-                            go.transform.localScale = new Vector3(scale, scale, scale);
+                            float scale = Random.Range(scaleMin, scaleMax);
+                            go.transform.localScale = new Vector3(go.transform.localScale.x*scale,go.transform.localScale.y*scale, go.transform.localScale.z*scale);
                             if (brush.parent != null)
                             {
                                 go.transform.parent = brush.parent.transform;

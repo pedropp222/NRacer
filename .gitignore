@@ -25,6 +25,8 @@
 /Assets/VehiclePhysics/
 /Assets/Sounds/
 /Assets/Plugins/
+/Assets/Prefabs/
+/TextMesh Pro/
 /OLD/
 
 # MemoryCaptures can get excessive in size.
@@ -86,3 +88,5 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+/Assets/sky1.jpg
+/Assets/sky1.jpg.meta

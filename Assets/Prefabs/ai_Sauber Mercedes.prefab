@@ -24,12 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6033564347336212046}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.9216, y: -0.0744, z: -1.153}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6033564348777486596}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6033564347336212044
 MonoBehaviour:
@@ -51,7 +52,7 @@ MonoBehaviour:
     dragForce: 100
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 149.30867, y: 21.376623, z: 127.672905}
+    worldPosition: {x: -60.83711, y: 11.276623, z: 131.58134}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -91,8 +92,8 @@ MonoBehaviour:
     rimCollider: {fileID: 0}
     up: {x: 0, y: 1, z: 0}
     inside: {x: 0, y: 0, z: 0}
-    forward: {x: -0.999309, y: 0, z: -0.037166834}
-    right: {x: -0.037166834, y: 0, z: 0.999309}
+    forward: {x: 0.45476773, y: 0, z: 0.8906101}
+    right: {x: 0.8906101, y: 0, z: -0.45476773}
     velocity: {x: 0, y: 0, z: 0}
     prevVelocity: {x: 0, y: 0, z: 0}
     acceleration: {x: 0, y: 0, z: 0}
@@ -169,15 +170,15 @@ MonoBehaviour:
     force: 0
     maxForce: 0
   fFriction:
-    forceCoefficient: 1.3
-    slipCoefficient: 1.2
+    forceCoefficient: 1
+    slipCoefficient: 1
     maxForce: 0
     slip: 0
     speed: 0
     force: 0
   sFriction:
-    forceCoefficient: 1.1
-    slipCoefficient: 1.05
+    forceCoefficient: 1
+    slipCoefficient: 1
     maxForce: 0
     slip: 0
     speed: 0
@@ -800,12 +801,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6033564347699054644}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
   m_LocalPosition: {x: 0, y: 0.042, z: 0.14}
   m_LocalScale: {x: 1.98, y: 0.89, z: 4.25}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6033564348777486596}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6033564347699054665
 MeshFilter:
@@ -823,9 +825,17 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6033564347699054644}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6033564348299860345
@@ -852,12 +862,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6033564348299860345}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.9216, y: -0.0744, z: -1.153}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6033564348777486596}
-  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6033564348299860351
 MonoBehaviour:
@@ -879,7 +890,7 @@ MonoBehaviour:
     dragForce: 100
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 149.23997, y: 21.376623, z: 129.52019}
+    worldPosition: {x: -59.19076, y: 11.276623, z: 130.74068}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -919,8 +930,8 @@ MonoBehaviour:
     rimCollider: {fileID: 0}
     up: {x: 0, y: 1, z: 0}
     inside: {x: 0, y: 0, z: 0}
-    forward: {x: -0.999309, y: 0, z: -0.037166834}
-    right: {x: -0.037166834, y: 0, z: 0.999309}
+    forward: {x: 0.45476773, y: 0, z: 0.8906101}
+    right: {x: 0.8906101, y: 0, z: -0.45476773}
     velocity: {x: 0, y: 0, z: 0}
     prevVelocity: {x: 0, y: 0, z: 0}
     acceleration: {x: 0, y: 0, z: 0}
@@ -997,15 +1008,15 @@ MonoBehaviour:
     force: 0
     maxForce: 0
   fFriction:
-    forceCoefficient: 1.3
-    slipCoefficient: 1.2
+    forceCoefficient: 1
+    slipCoefficient: 1
     maxForce: 0
     slip: 0
     speed: 0
     force: 0
   sFriction:
-    forceCoefficient: 1.1
-    slipCoefficient: 1.05
+    forceCoefficient: 1
+    slipCoefficient: 1
     maxForce: 0
     slip: 0
     speed: 0
@@ -1637,9 +1648,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6033564348777486597}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 178.602, y: 34.384, z: 7.79}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6033564349161336193}
   - {fileID: 6033564347699054667}
@@ -1648,7 +1661,6 @@ Transform:
   - {fileID: 6033564349309757007}
   - {fileID: 6033564348299860344}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!54 &6033564348777486618
 Rigidbody:
@@ -1657,10 +1669,21 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6033564348777486597}
-  serializedVersion: 2
-  m_Mass: 970
+  serializedVersion: 4
+  m_Mass: 1000
   m_Drag: 0.01
-  m_AngularDrag: 1
+  m_AngularDrag: 1.3
+  m_CenterOfMass: {x: 0, y: -0.3, z: 0.1}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 0
+  m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -1846,9 +1869,9 @@ MonoBehaviour:
       particleSystems: []
   steering:
     lowSpeedAngle: 30
-    highSpeedAngle: 6
-    crossoverSpeed: 100
-    degreesPerSecondLimit: 50
+    highSpeedAngle: 3
+    crossoverSpeed: 60
+    degreesPerSecondLimit: 30
     steeringWheelTurnRatio: 1
     steeringWheel: {fileID: 0}
     trackedSteerIntensity: 1
@@ -1858,7 +1881,7 @@ MonoBehaviour:
     stopOnDisable: 1
     minRPM: 1100
     maxRPM: 7000
-    maxPower: 400
+    maxPower: 250
     maxRpmChange: 5500
     throttleSmoothing: 0.2
     powerCurve:
@@ -1874,47 +1897,47 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.30721527
-        value: 0.35753152
-        inSlope: 1.1637818
-        outSlope: 1.3863856
-        tangentMode: 69
+        time: 0.33585823
+        value: 0.24543655
+        inSlope: 1.0361814
+        outSlope: 1.0361814
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.4861248
-        value: 0.6055691
-        inSlope: 1.3863856
-        outSlope: 1.4945885
-        tangentMode: 69
+        time: 0.5197603
+        value: 0.5185926
+        inSlope: 1.3664296
+        outSlope: 1.3664296
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.64461
-        value: 0.84243923
-        inSlope: 1.4945885
-        outSlope: 1.1239773
+        time: 0.66142774
+        value: 0.7401139
+        inSlope: 1.5636715
+        outSlope: 1.5779675
         tangentMode: 69
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.17533617
       - serializedVersion: 3
-        time: 0.75498766
-        value: 0.96650124
-        inSlope: 1.1239773
-        outSlope: 0.26786265
-        tangentMode: 69
+        time: 0.79030496
+        value: 0.943478
+        inSlope: 1.1038971
+        outSlope: 1.1038971
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.62349516
       - serializedVersion: 3
         time: 0.88004714
         value: 1
-        inSlope: 0.26786265
-        outSlope: -0.8716322
-        tangentMode: 69
+        inSlope: -0.12090284
+        outSlope: -0.12090284
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.5495205
@@ -1931,9 +1954,9 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     forcedInduction:
-      useForcedInduction: 0
-      spoolUpTime: 1
-      maxPowerGainMultiplier: 0.4
+      useForcedInduction: 1
+      spoolUpTime: 1.5
+      maxPowerGainMultiplier: 0.6
       flutterSoundFlag: 0
   transmission:
     transmissionType: 2
@@ -1952,7 +1975,7 @@ MonoBehaviour:
     targetShiftDownRPM: 3600
     dynamicShiftPoint: 0
     shiftPointRandomness: 0
-    shiftDuration: 0.5231339
+    shiftDuration: 0.5
     shiftDurationRandomness: 0.2
     postShiftBan: 1.5
     automaticClutch: 1
@@ -1997,7 +2020,7 @@ MonoBehaviour:
       camberAtTop: 0
       camberAtBottom: 0
       isSolid: 0
-      antiRollBarForce: 12000
+      antiRollBarForce: 14000
     powerCoefficient: 0
     brakeCoefficient: 0.7
     handbrakeCoefficient: 0
@@ -2017,7 +2040,7 @@ MonoBehaviour:
       camberAtTop: 0
       camberAtBottom: 0
       isSolid: 0
-      antiRollBarForce: 9500
+      antiRollBarForce: 14000
     powerCoefficient: 1
     brakeCoefficient: 0.3
     handbrakeCoefficient: 1
@@ -2143,10 +2166,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   downforcePoints:
   - position: {x: 0, y: 0.4, z: 1.64}
-    maxForce: 10895.5
+    maxForce: 9000
   - position: {x: 0, y: 0.4, z: -1.44}
-    maxForce: 10895.5
-  maxDownforceSpeed: 88.888885
+    maxForce: 7000
+  maxDownforceSpeed: 100
 --- !u!114 &1858342590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2231,10 +2254,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08189782b40999042a212f0f2d0ddbc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brakeDeceleration: -10
-  brakeAgressive: 0.75
+  brakeDeceleration: -15
+  brakeAgressive: 0.3
   useNewCalc: 1
-  dificuldade: 2
+  dificuldade: 1
   AlookUp:
     serializedVersion: 2
     m_Curve:
@@ -2284,9 +2307,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   step: 0.06
-  useRubberbanding: 1
-  limitInputSpeed: 1
-  maxInput: 0.4
+  useRubberbanding: 0
+  limitInputSpeed: 0
+  maxInput: 1
 --- !u!114 &1858342594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2317,7 +2340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f884f32613550c419424383d46dedc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialValue: -1
+  initialValue: 8
 --- !u!1 &6033564348923903715
 GameObject:
   m_ObjectHideFlags: 0
@@ -2342,12 +2365,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6033564348923903715}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.9216, y: -0.0744, z: 1.483}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6033564348777486596}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6033564348923903713
 MonoBehaviour:
@@ -2362,14 +2386,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wheel:
-    mass: 55
+    mass: 70
     rimOffset: 0
     tireRadius: 0.303
     width: 0.26
-    dragForce: 80
+    dragForce: 100
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 146.67764, y: 21.35916, z: 127.58485}
+    worldPosition: {x: -59.63122, y: 11.259159, z: 133.9214}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -2409,8 +2433,8 @@ MonoBehaviour:
     rimCollider: {fileID: 0}
     up: {x: 0, y: 1, z: 0}
     inside: {x: 0, y: 0, z: 0}
-    forward: {x: -0.999309, y: 0, z: -0.037166834}
-    right: {x: -0.037166834, y: 0, z: 0.999309}
+    forward: {x: 0.45476773, y: 0, z: 0.8906101}
+    right: {x: 0.8906101, y: 0, z: -0.45476773}
     velocity: {x: 0, y: 0, z: 0}
     prevVelocity: {x: 0, y: 0, z: 0}
     acceleration: {x: 0, y: 0, z: 0}
@@ -2487,15 +2511,15 @@ MonoBehaviour:
     force: 0
     maxForce: 0
   fFriction:
-    forceCoefficient: 1.3
-    slipCoefficient: 1.2
+    forceCoefficient: 1
+    slipCoefficient: 1
     maxForce: 0
     slip: 0
     speed: 0
     force: 0
   sFriction:
-    forceCoefficient: 1.1
-    slipCoefficient: 1.05
+    forceCoefficient: 1
+    slipCoefficient: 1
     maxForce: 0
     slip: 0
     speed: 0
@@ -3117,12 +3141,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6033564349309757000}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.9216, y: -0.0744, z: 1.483}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6033564348777486596}
-  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6033564349309757006
 MonoBehaviour:
@@ -3137,14 +3162,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wheel:
-    mass: 55
+    mass: 70
     rimOffset: 0
     tireRadius: 0.303
     width: 0.26
-    dragForce: 80
+    dragForce: 100
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 146.60954, y: 21.35916, z: 129.41614}
+    worldPosition: {x: -57.99913, y: 11.259159, z: 133.08801}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -3184,8 +3209,8 @@ MonoBehaviour:
     rimCollider: {fileID: 0}
     up: {x: 0, y: 1, z: 0}
     inside: {x: 0, y: 0, z: 0}
-    forward: {x: -0.999309, y: 0, z: -0.037166834}
-    right: {x: -0.037166834, y: 0, z: 0.999309}
+    forward: {x: 0.45476773, y: 0, z: 0.8906101}
+    right: {x: 0.8906101, y: 0, z: -0.45476773}
     velocity: {x: 0, y: 0, z: 0}
     prevVelocity: {x: 0, y: 0, z: 0}
     acceleration: {x: 0, y: 0, z: 0}
@@ -3262,15 +3287,15 @@ MonoBehaviour:
     force: 0
     maxForce: 0
   fFriction:
-    forceCoefficient: 1.3
-    slipCoefficient: 1.2
+    forceCoefficient: 1
+    slipCoefficient: 1
     maxForce: 0
     slip: 0
     speed: 0
     force: 0
   sFriction:
-    forceCoefficient: 1.1
-    slipCoefficient: 1.05
+    forceCoefficient: 1
+    slipCoefficient: 1
     maxForce: 0
     slip: 0
     speed: 0
@@ -3873,6 +3898,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 6033564348777486596}
     m_Modifications:
     - target: {fileID: 100000, guid: 1c9eccfe8d85249439c4fbcbf45a6743, type: 3}
@@ -3956,6 +3982,10 @@ PrefabInstance:
       value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1c9eccfe8d85249439c4fbcbf45a6743, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 1c9eccfe8d85249439c4fbcbf45a6743, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -3963,7 +3993,7 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 1c9eccfe8d85249439c4fbcbf45a6743, type: 3}
+    - target: {fileID: 400002, guid: 1c9eccfe8d85249439c4fbcbf45a6743, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
@@ -3975,7 +4005,7 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 400002, guid: 1c9eccfe8d85249439c4fbcbf45a6743, type: 3}
+    - target: {fileID: 400004, guid: 1c9eccfe8d85249439c4fbcbf45a6743, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
@@ -3987,7 +4017,7 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 400004, guid: 1c9eccfe8d85249439c4fbcbf45a6743, type: 3}
+    - target: {fileID: 400006, guid: 1c9eccfe8d85249439c4fbcbf45a6743, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
@@ -3999,7 +4029,7 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 400006, guid: 1c9eccfe8d85249439c4fbcbf45a6743, type: 3}
+    - target: {fileID: 400008, guid: 1c9eccfe8d85249439c4fbcbf45a6743, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
@@ -4011,7 +4041,7 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 400008, guid: 1c9eccfe8d85249439c4fbcbf45a6743, type: 3}
+    - target: {fileID: 400010, guid: 1c9eccfe8d85249439c4fbcbf45a6743, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
@@ -4023,7 +4053,7 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 400010, guid: 1c9eccfe8d85249439c4fbcbf45a6743, type: 3}
+    - target: {fileID: 400012, guid: 1c9eccfe8d85249439c4fbcbf45a6743, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
@@ -4035,7 +4065,7 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 400012, guid: 1c9eccfe8d85249439c4fbcbf45a6743, type: 3}
+    - target: {fileID: 400014, guid: 1c9eccfe8d85249439c4fbcbf45a6743, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
@@ -4047,9 +4077,21 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 400014, guid: 1c9eccfe8d85249439c4fbcbf45a6743, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
+    - target: {fileID: 400036, guid: 1c9eccfe8d85249439c4fbcbf45a6743, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400036, guid: 1c9eccfe8d85249439c4fbcbf45a6743, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 400036, guid: 1c9eccfe8d85249439c4fbcbf45a6743, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 400036, guid: 1c9eccfe8d85249439c4fbcbf45a6743, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.47
       objectReference: {fileID: 0}
     - target: {fileID: 400036, guid: 1c9eccfe8d85249439c4fbcbf45a6743, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4064,6 +4106,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400036, guid: 1c9eccfe8d85249439c4fbcbf45a6743, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400036, guid: 1c9eccfe8d85249439c4fbcbf45a6743, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
@@ -4076,14 +4122,6 @@ PrefabInstance:
       value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 400036, guid: 1c9eccfe8d85249439c4fbcbf45a6743, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400036, guid: 1c9eccfe8d85249439c4fbcbf45a6743, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400036, guid: 1c9eccfe8d85249439c4fbcbf45a6743, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
@@ -4094,18 +4132,6 @@ PrefabInstance:
     - target: {fileID: 400036, guid: 1c9eccfe8d85249439c4fbcbf45a6743, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400036, guid: 1c9eccfe8d85249439c4fbcbf45a6743, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.47
-      objectReference: {fileID: 0}
-    - target: {fileID: 400036, guid: 1c9eccfe8d85249439c4fbcbf45a6743, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.47
-      objectReference: {fileID: 0}
-    - target: {fileID: 400036, guid: 1c9eccfe8d85249439c4fbcbf45a6743, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.47
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 1c9eccfe8d85249439c4fbcbf45a6743, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -4180,22 +4206,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: ec2f1ea740e038647ba0d3bded820dee, type: 2}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c9eccfe8d85249439c4fbcbf45a6743, type: 3}
---- !u!1 &6033564349161763201 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100004, guid: 1c9eccfe8d85249439c4fbcbf45a6743,
-    type: 3}
-  m_PrefabInstance: {fileID: 6033564349161731877}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6033564349161763207 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100002, guid: 1c9eccfe8d85249439c4fbcbf45a6743,
-    type: 3}
-  m_PrefabInstance: {fileID: 6033564349161731877}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6033564349161763205 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100000, guid: 1c9eccfe8d85249439c4fbcbf45a6743,
+--- !u!23 &6033564349159567189 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2300016, guid: 1c9eccfe8d85249439c4fbcbf45a6743,
     type: 3}
   m_PrefabInstance: {fileID: 6033564349161731877}
   m_PrefabAsset: {fileID: 0}
@@ -4205,15 +4222,27 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6033564349161731877}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6033564349161763201 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100004, guid: 1c9eccfe8d85249439c4fbcbf45a6743,
+    type: 3}
+  m_PrefabInstance: {fileID: 6033564349161731877}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6033564349161763203 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100006, guid: 1c9eccfe8d85249439c4fbcbf45a6743,
     type: 3}
   m_PrefabInstance: {fileID: 6033564349161731877}
   m_PrefabAsset: {fileID: 0}
---- !u!23 &6033564349159567189 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2300016, guid: 1c9eccfe8d85249439c4fbcbf45a6743,
+--- !u!1 &6033564349161763205 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 1c9eccfe8d85249439c4fbcbf45a6743,
+    type: 3}
+  m_PrefabInstance: {fileID: 6033564349161731877}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6033564349161763207 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100002, guid: 1c9eccfe8d85249439c4fbcbf45a6743,
     type: 3}
   m_PrefabInstance: {fileID: 6033564349161731877}
   m_PrefabAsset: {fileID: 0}

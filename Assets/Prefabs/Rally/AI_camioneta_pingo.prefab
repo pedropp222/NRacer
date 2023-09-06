@@ -51,7 +51,7 @@ MonoBehaviour:
     dragForce: 50
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 165.69315, y: 21.235115, z: 124.151085}
+    worldPosition: {x: 78.75776, y: 22.680428, z: -1078.8131}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -870,7 +870,7 @@ MonoBehaviour:
     dragForce: 50
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 168.19649, y: 21.235115, z: 123.79741}
+    worldPosition: {x: 81.2611, y: 22.680428, z: -1079.1669}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -1645,7 +1645,7 @@ MonoBehaviour:
     dragForce: 50
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 165.91707, y: 21.235115, z: 125.674805}
+    worldPosition: {x: 78.981674, y: 22.680428, z: -1077.2894}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -2420,7 +2420,7 @@ MonoBehaviour:
     dragForce: 50
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 168.41632, y: 21.235115, z: 125.29333}
+    worldPosition: {x: 81.48093, y: 22.680428, z: -1077.6709}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -3696,8 +3696,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c14b4aeea09042459ede4a44ae7e8a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meshes: []
-  materiais: []
+  meshes:
+  - {fileID: 8372199231617042555}
+  materiais:
+  - {fileID: 2100000, guid: 2a51ca974e2622645b1743ad0ec87525, type: 2}
+  - {fileID: 2100000, guid: 2739b3d983a036045a591537cd563c3e, type: 2}
+  - {fileID: 2100000, guid: e9fde9d8b5dc89542a0c2ab3dbfb14fd, type: 2}
 --- !u!114 &8372199231414280925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3906,12 +3910,6 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 2a51ca974e2622645b1743ad0ec87525, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc5357a3a04ca7147a1f5bfd10aaba4f, type: 3}
---- !u!4 &8372199231618812571 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400000, guid: fc5357a3a04ca7147a1f5bfd10aaba4f,
-    type: 3}
-  m_PrefabInstance: {fileID: 8372199231619207195}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8372199231619307187 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100008, guid: fc5357a3a04ca7147a1f5bfd10aaba4f,
@@ -3927,6 +3925,18 @@ GameObject:
 --- !u!1 &8372199231619307199 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100004, guid: fc5357a3a04ca7147a1f5bfd10aaba4f,
+    type: 3}
+  m_PrefabInstance: {fileID: 8372199231619207195}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &8372199231617042555 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2300000, guid: fc5357a3a04ca7147a1f5bfd10aaba4f,
+    type: 3}
+  m_PrefabInstance: {fileID: 8372199231619207195}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8372199231618812571 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: fc5357a3a04ca7147a1f5bfd10aaba4f,
     type: 3}
   m_PrefabInstance: {fileID: 8372199231619207195}
   m_PrefabAsset: {fileID: 0}

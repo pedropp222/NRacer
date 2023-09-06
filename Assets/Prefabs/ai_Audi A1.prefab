@@ -51,7 +51,7 @@ MonoBehaviour:
     dragForce: 50
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 286.42697, y: 0.74541044, z: 23.74445}
+    worldPosition: {x: -3.6169763, y: 1.3054104, z: -12.06445}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -91,8 +91,8 @@ MonoBehaviour:
     rimCollider: {fileID: 0}
     up: {x: 0, y: 1, z: 0}
     inside: {x: 0, y: 0, z: 0}
-    forward: {x: 0, y: 0, z: -1}
-    right: {x: -1, y: 0, z: 0}
+    forward: {x: 0, y: 0, z: 1}
+    right: {x: 1, y: 0, z: 0}
     velocity: {x: 0, y: 0, z: 0}
     prevVelocity: {x: 0, y: 0, z: 0}
     acceleration: {x: 0, y: 0, z: 0}
@@ -879,7 +879,7 @@ MonoBehaviour:
     dragForce: 50
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 284.9323, y: 0.74541044, z: 23.74445}
+    worldPosition: {x: -2.1223223, y: 1.3054104, z: -12.06445}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -919,8 +919,8 @@ MonoBehaviour:
     rimCollider: {fileID: 0}
     up: {x: 0, y: 1, z: 0}
     inside: {x: 0, y: 0, z: 0}
-    forward: {x: 0, y: 0, z: -1}
-    right: {x: -1, y: 0, z: 0}
+    forward: {x: 0, y: 0, z: 1}
+    right: {x: 1, y: 0, z: 0}
     velocity: {x: 0, y: 0, z: 0}
     prevVelocity: {x: 0, y: 0, z: 0}
     acceleration: {x: 0, y: 0, z: 0}
@@ -1654,7 +1654,7 @@ MonoBehaviour:
     dragForce: 50
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 286.42697, y: 0.74541044, z: 21.20213}
+    worldPosition: {x: -3.6169763, y: 1.3054104, z: -9.52213}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -1694,8 +1694,8 @@ MonoBehaviour:
     rimCollider: {fileID: 0}
     up: {x: 0, y: 1, z: 0}
     inside: {x: 0, y: 0, z: 0}
-    forward: {x: 0, y: 0, z: -1}
-    right: {x: -1, y: 0, z: 0}
+    forward: {x: 0, y: 0, z: 1}
+    right: {x: 1, y: 0, z: 0}
     velocity: {x: 0, y: 0, z: 0}
     prevVelocity: {x: 0, y: 0, z: 0}
     acceleration: {x: 0, y: 0, z: 0}
@@ -2390,9 +2390,8 @@ GameObject:
   - component: {fileID: 1820549201366176609}
   - component: {fileID: 1820549201366176608}
   - component: {fileID: 1820549201366176615}
-  - component: {fileID: 1820549201366176614}
-  - component: {fileID: 1820549201366176613}
-  - component: {fileID: 864472190}
+  - component: {fileID: 1361662824611073531}
+  - component: {fileID: 7429347187854915962}
   m_Layer: 23
   m_Name: ai_Audi A1
   m_TagString: Untagged
@@ -2465,6 +2464,7 @@ MonoBehaviour:
   active: 1
   input:
     settable: 1
+    blocked: 0
     leftBlinker: 0
     rightBlinker: 0
     lowBeamLights: 0
@@ -2485,6 +2485,8 @@ MonoBehaviour:
       pitchRange: 1.5
       smoothing: 0.1
       maxDistortion: 0.4
+      minDistance: 0
+      maxDistance: 0
     engineStartStopComponent:
       volume: 0.4
       pitch: 1
@@ -2890,7 +2892,7 @@ MonoBehaviour:
   freezeWhenInactive: 1
   switchToSingleRayWhenInactive: 1
   vehicleRigidbody: {fileID: 0}
---- !u!114 &1820549201366176614
+--- !u!114 &1361662824611073531
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2899,97 +2901,42 @@ MonoBehaviour:
   m_GameObject: {fileID: 1820549201366176634}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adfc555437481ea459be08bb254bcea6, type: 3}
+  m_Script: {fileID: 11500000, guid: 08189782b40999042a212f0f2d0ddbc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  voltas: 0
---- !u!114 &1820549201366176613
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1820549201366176634}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67b78678fa48cf84da41e5c368d3e66b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agulhaRPM: {fileID: 0}
-  veloKMH: {fileID: 0}
-  posicao: {fileID: 0}
-  volta: {fileID: 0}
-  gear: {fileID: 0}
-  numVoltas: 0
-  pos: 0
---- !u!114 &864472190
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1820549201366176634}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7cd798ba26cdcc4db48075e56014b40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  brakeDeceleration: -10
-  debugObj: {fileID: 0}
-  debugObj2: {fileID: 0}
-  debugObj3: {fileID: 0}
-  brakeAgressive: 0.83
-  useNewCalc: 1
-  dificuldade: 1.6
+  brakeDeceleration: 0
+  brakeAgressive: -1
+  useNewCalc: 0
+  dificuldade: 0
   AlookUp:
     serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
+    m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   BlookUp:
     serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
+    m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  step: 0.06
+  step: 0
+  useRubberbanding: 1
+  limitInputSpeed: 0
+  maxInput: 0
+--- !u!114 &7429347187854915962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820549201366176634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f884f32613550c419424383d46dedc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialValue: -1
 --- !u!1 &1820549201957466078
 GameObject:
   m_ObjectHideFlags: 0
@@ -3041,7 +2988,7 @@ MonoBehaviour:
     dragForce: 50
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 284.9323, y: 0.74541044, z: 21.20213}
+    worldPosition: {x: -2.1223223, y: 1.3054104, z: -9.52213}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -3081,8 +3028,8 @@ MonoBehaviour:
     rimCollider: {fileID: 0}
     up: {x: 0, y: 1, z: 0}
     inside: {x: 0, y: 0, z: 0}
-    forward: {x: 0, y: 0, z: -1}
-    right: {x: -1, y: 0, z: 0}
+    forward: {x: 0, y: 0, z: 1}
+    right: {x: 1, y: 0, z: 0}
     velocity: {x: 0, y: 0, z: 0}
     prevVelocity: {x: 0, y: 0, z: 0}
     acceleration: {x: 0, y: 0, z: 0}
