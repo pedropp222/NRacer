@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Assets.Scripts.NRacer.Vehicle
 {
-    public class CarroCronometro : MonoBehaviour
+    public class CarroCronometro : MonoBehaviour, IObjetoPausa
     {
         private List<float> temposVoltas;
 
@@ -90,6 +90,16 @@ namespace Assets.Scripts.NRacer.Vehicle
         private void RefreshUI()
         {
             cronometroText.text = FormatarCronometro(tempoAtual);
+        }
+
+        public void OnPausa()
+        {
+            Parar();
+        }
+
+        public void OnResume()
+        {
+            Iniciar();
         }
     }
 }

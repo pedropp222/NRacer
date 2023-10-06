@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Assets.Scripts.NRacer.Controllers;
 
 /// <summary>
 /// Classe debug para fazer dump da informaçao de uma corrida de um campeonato e toda a informaçao possivel como
@@ -27,7 +28,7 @@ public class DebugUI_DumpCampeonato : MonoBehaviour
 
         finalString += "Campeonato " + campeonato.nomeCampeonato+"\n";
 
-        List<Controlador.CarroData> carros = new List<Controlador.CarroData>();
+        List<CarroData> carros = new List<CarroData>();
 
         for (int i = 0; i < campeonato.corridasLista.Length; i++)
         {
@@ -55,12 +56,12 @@ public class DebugUI_DumpCampeonato : MonoBehaviour
 
         int numCarros = 6;
 
-        List<Controlador.CarroData> simularGrid = new List<Controlador.CarroData>();
+        List<CarroData> simularGrid = new List<CarroData>();
 
-        simularGrid.AddRange(cnt.FiltrarPorRaridade2(carros.ToArray(), numCarros));
+        simularGrid.AddRange(cnt.FiltrarPorRaridade(carros.ToArray(), numCarros));
 
 
-        foreach(Controlador.CarroData l in simularGrid)
+        foreach(CarroData l in simularGrid)
         {
             finalString += cnt.carros[l.id].GetComponent<CarroStats>().NomeResumido(false) + "(NA)\n";
         }

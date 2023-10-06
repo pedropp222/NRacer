@@ -6,6 +6,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using Assets.Scripts.NRacer.Controllers;
 
 [System.Serializable]
 public class GameSaveData : SaveData, ISaveGame
@@ -13,7 +14,7 @@ public class GameSaveData : SaveData, ISaveGame
     public CampeonatosController corridas;
     public int dinheiro = 0;   
 
-    public List<Controlador.CarroData> carros = new List<Controlador.CarroData>();
+    public List<CarroData> carros = new List<CarroData>();
 
     public override void LoadGame(string name)
     {

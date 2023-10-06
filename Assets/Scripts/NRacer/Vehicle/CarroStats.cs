@@ -5,6 +5,8 @@ using NWH.VehiclePhysics;
 using DG.Tweening.Plugins;
 using System.Collections.Generic;
 using Assets.Scripts.NRacer.Vehicle;
+using NWH.WheelController3D;
+using System.Linq;
 
 /// <summary>
 /// Classe que contem as stats básicas dos carros, num local facil de acessar
@@ -41,24 +43,40 @@ public class CarroStats : MonoBehaviour
     public CarroModelo modelo;
     public Dificuldade dificuldadeAI;
     public Tracao tracao;
-    //TODO: O preco do carro vai depender do trim, nao pode ser global
-    public int preco;
+    
     public MetodoAquisicao metodoAquisicao;
 
-    //TODO: Ver o melhor local para isto, porque isto depende do trim, e tambem no futuro irao existir upgrades
-    public float quilometros;
-    public float zeroAos100;
-    public int velocidadeMaxima;
-
-    public int potencia;
+    [HideInInspector] public float quilometros;
+    
     public Sprite carroSprite;
+
+    //Usado para calculo teorico da velocidade maxima
+    public int tireHeightRatio;
+
+    private float rodaCircumferencia;
 
     public int trimDefault;
 
     public CarroTrim trimAtual;
     public int trimAtualId;
 
+    //valores default nivel 1 do carro
     private int pesoDefault;
+    private float potenciaDefault;
+    private float gearMultipierDefault;
+
+
+    //valores atuais do nivel do carro
+    private int pesoAtual;
+    private float potenciaAtual;
+
+    private float veloMaxima;
+
+    public int carroNivel = 1;
+
+    private VehicleController veiculo;
+    private Rigidbody rigid;
+    private float desempenhoAtual;
 
     private void Awake()
     {
@@ -68,11 +86,14 @@ public class CarroStats : MonoBehaviour
 
         trimAtualId = -1;
 
+        veiculo = GetComponent<VehicleController>();
+        rigid = GetComponent<Rigidbody>();
+
+
         if (SceneManager.GetActiveScene().buildIndex == 0 || SceneManager.GetActiveScene().buildIndex == 1)
         {
-            NWH.VehiclePhysics.VehicleController car = GetComponent<NWH.VehiclePhysics.VehicleController>();
-            car.Active = false;
-            car.enabled = false;
+            veiculo.Active = false;
+            veiculo.enabled = false;
             if (GetComponent<VehicleAI>() != null)
             {
                 GetComponent<VehicleAI>().enabled = false;
@@ -87,18 +108,38 @@ public class CarroStats : MonoBehaviour
             {
                 GetComponent<CarroCronometro>().enabled = false;
             }
-
-            //Estes 2 valores sao provisoriamente carregados a partir destes componentes.
-            //Caso o trim contenha valores entao estes serao atualizados conforme
-            if (trimAtual == null)
-            {
-                pesoDefault = (int)GetComponent<Rigidbody>().mass;
-                potencia = Mathf.RoundToInt(GetComponent<VehicleController>().engine.maxPower * 1.3f);
-
-                CarregarTrim(trimDefault);
-            }
-            return;
+           
         }
+
+
+
+        //Pista de testes
+        //Estes 2 valores sao provisoriamente carregados a partir destes componentes.
+        //Caso o trim contenha valores entao estes serao atualizados conforme
+        if (trimAtual == null)
+        {
+            pesoDefault = (int)rigid.mass;
+            potenciaDefault = veiculo.engine.maxPower * 1.3f;
+
+            CarregarTrim(trimDefault);
+        }
+    }
+
+    private void CalcularVelocidadeMaxima()
+    {
+        WheelController roda = transform.GetComponentInChildren<WheelController>();
+
+        float rodaInch = roda.tireRadius * 100f * 2f / 3f;
+        rodaCircumferencia = Mathf.PI * (rodaInch * 25.4f + (((roda.tireWidth * 1000f) * tireHeightRatio) / 100f) * 2f);
+
+        veloMaxima = (((veiculo.engine.maxRPM / veiculo.transmission.ForwardGears.Last() / veiculo.transmission.gearMultiplier) * rodaCircumferencia) / 1000000f) * 60f;
+
+        Debug.Log("Velocidade maxima teorica para este carro: " + veloMaxima);
+    }
+
+    public float GetPontosDesempenho()
+    {
+        return (potenciaAtual * (7500f - pesoAtual) + (veloMaxima * 14f)) / (trimAtual.zeroAos100 / 5f) / 10000f;
     }
 
     //TODO: Os trims vao ter que ter toda a informacao necessaria para aquele trim
@@ -106,7 +147,7 @@ public class CarroStats : MonoBehaviour
     //de forma a que facilmente possamos visualizar a informacao total do veiculo em cada scriptable object, senao fica confuso ter defaults
     public void CarregarTrim(int trimId)
     {
-        Debug.Log("Tentar carregar trimId: " + trimId);
+        //Debug.Log("Tentar carregar trimId: " + trimId);
 
         if (trimId == trimAtualId || trimId == -1)
         {
@@ -139,59 +180,123 @@ public class CarroStats : MonoBehaviour
 
         trimAtual = modelo.trimsDisponiveis[trimId];
 
-        if (trimAtual.GetNovoPeso() != -1)
+        if (trimAtual.peso > 0)
         {
-            pesoDefault = trimAtual.GetNovoPeso();
-            GetComponent<Rigidbody>().mass = pesoDefault;
+            rigid.mass = trimAtual.peso;
+            pesoDefault = trimAtual.peso;
+            pesoAtual = pesoDefault;
         }
 
-        if (trimAtual.GetNovaPotencia() != -1f) 
+        if (trimAtual.potenciaKW > 0)
         {
-            potencia = Mathf.RoundToInt(trimAtual.GetNovaPotencia() * 1.3f);
-            GetComponent<VehicleController>().engine.maxPower = trimAtual.GetNovaPotencia();
+            AtualizarPotenciaHP();
+            potenciaDefault = potenciaAtual;
+            veiculo.engine.maxPower = trimAtual.potenciaKW;
         }
 
         trimAtualId = trimId;
 
+        gearMultipierDefault = veiculo.transmission.gearMultiplier;
+
         Debug.Log("Carregou o carro: " + NomeCompleto());
+        //Debug.Log("PESO ATUAL: " + GetComponent<Rigidbody>().mass);
+        CalcularVelocidadeMaxima();
+        desempenhoAtual = GetPontosDesempenho();
+        Debug.Log("PONTUACAO: " + desempenhoAtual + " - " + trimAtual.GetDesempenhoTexto(desempenhoAtual));
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            SubirNivel();
+        }
+    }
+
+    public void SubirNivel()
+    {
+        if (carroNivel == 10)
+        {
+            //Ja esta no nivel maximo
+            return;
+        }
+
+        if (carroNivel == 1) 
+        {
+            Debug.Log("Stats original de nivel " + carroNivel + " - Potencia Atual: " + potenciaAtual + " - Peso Atual: " + pesoAtual);
+            Debug.Log("PONTUACAO NIVEL 1: " + desempenhoAtual + " - " + trimAtual.GetDesempenhoTexto(desempenhoAtual));
+        }
+
+        carroNivel++;
+
+        switch (carroNivel)
+        {
+            case 2:
+                veiculo.engine.maxPower = trimAtual.potenciaKW * (1f + trimAtual.upgradeIncrementarPotencia * 1f);
+                AtualizarPotenciaHP();
+                break;
+            case 3:
+                rigid.mass = trimAtual.peso / (1f + trimAtual.upgradeDecrementarPeso * 1f);
+                pesoAtual = (int)rigid.mass;
+                break;
+            case 4:
+                veiculo.transmission.gearMultiplier = gearMultipierDefault / (1f + trimAtual.upgradeIncrementarVeloMaxima * 1f);
+                CalcularVelocidadeMaxima();
+                break;
+            case 5:
+                veiculo.engine.maxPower = trimAtual.potenciaKW * (1f + trimAtual.upgradeIncrementarPotencia * 2f);
+                AtualizarPotenciaHP();
+                break;
+            case 6:
+                rigid.mass = trimAtual.peso / (1f + trimAtual.upgradeDecrementarPeso * 2f);
+                pesoAtual = (int)rigid.mass;
+                break;
+            case 7:
+                veiculo.transmission.gearMultiplier = gearMultipierDefault / (1f + trimAtual.upgradeIncrementarVeloMaxima * 2f);
+                CalcularVelocidadeMaxima();
+                break;
+            case 8:
+                veiculo.engine.maxPower = trimAtual.potenciaKW * (1f + trimAtual.upgradeIncrementarPotencia * 3f);
+                AtualizarPotenciaHP();
+                break;
+            case 9:
+                rigid.mass = trimAtual.peso / (1f + trimAtual.upgradeDecrementarPeso * 3f);
+                pesoAtual = (int)rigid.mass;
+                break;
+            case 10:
+                veiculo.transmission.gearMultiplier = gearMultipierDefault / (1f + trimAtual.upgradeIncrementarVeloMaxima * 3f);
+                CalcularVelocidadeMaxima();
+                break;
+        }
+
+        Debug.Log("Veiculo upgraded para nivel " + carroNivel + " - Potencia Atual: " + veiculo.engine.maxPower * 1.3f + " - Peso Atual: " + rigid.mass + " - Velo Max: "+ veloMaxima);
+        desempenhoAtual = GetPontosDesempenho();
+        Debug.Log("PONTUACAO: " + desempenhoAtual + " - " + trimAtual.GetDesempenhoTexto(desempenhoAtual));
+    }
+
+    private void AtualizarPotenciaHP()
+    {
+        potenciaAtual = veiculo.engine.maxPower * (veiculo.engine.forcedInduction.useForcedInduction ? 1.0f+veiculo.engine.forcedInduction.maxPowerGainMultiplier : 1.0f) * 1.3f;
     }
 
     public int GetPeso()
     {
-        if (pesoDefault == 0) 
-        {
-            pesoDefault = (int)GetComponent<Rigidbody>().mass;
-        }
-        return pesoDefault;
+        return pesoAtual;
     }
 
     public int GetPesoTrim(int trimId = -1)
     {
-        if (trimId == -1 || modelo.trimsDisponiveis[trimId].GetNovoPeso() < 0)
-        {
-            return GetPeso();
-        }
-
-        return modelo.trimsDisponiveis[trimId].GetNovoPeso();
+        return modelo.trimsDisponiveis[trimId].peso;
     }
 
-    public int GetPotencia()
+    public float GetPotencia()
     {
-        if(potencia == 0) 
-        {
-            potencia = Mathf.RoundToInt(GetComponent<VehicleController>().engine.maxPower);
-        }
-        return potencia;
+        return potenciaAtual;
     }
 
     public float GetPotenciaTrim(int trimId = -1)
     {
-        if (trimId == -1 || modelo.trimsDisponiveis[trimId].GetNovaPotencia() < 0f)
-        {
-            return GetPotencia();
-        }
-
-        return modelo.trimsDisponiveis[trimId].GetNovaPotencia();
+        return modelo.trimsDisponiveis[trimId].potenciaKW*1.3f;
     }
 
     public int GetAno()
@@ -201,7 +306,7 @@ public class CarroStats : MonoBehaviour
 
     public string NomeCompleto()
     {
-        return marca.nome + " " + modelo.nome + " " + trimAtual.nomeEspecial + " " + modelo.ano;
+        return GetNomeTrim(trimAtualId);
     }
 
     public string NomeResumido(bool ai)
@@ -213,16 +318,10 @@ public class CarroStats : MonoBehaviour
         return marca.nome + " " + modelo.nome;
     }
 
-    public int GetPontos()
-    {
-        ///TODO - CRIAR UM ALGORITMO PARA DEFINIR PONTUAÇAO GERAL DA CAPACIDADE DOS CARROS
-        return Mathf.RoundToInt(zeroAos100 + velocidadeMaxima - (pesoDefault / 70));
-    }
-
     public int GetPreco()
     {
         //return Mathf.RoundToInt(((getPontos()*velocidadeMaxima)/zeroAos100+((3500f-peso)/1.2f))*2.15f);
-        return preco;
+        return trimAtual.preco;
     }
 
     /// <summary>

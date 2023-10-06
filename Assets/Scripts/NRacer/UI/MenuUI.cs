@@ -23,7 +23,7 @@ public class MenuUI : MonoBehaviour
     {
         if (c.NumeroJogadores()==0)
         {
-            contrato.SetActive(true);
+            contrato.GetComponent<UIMenuPainel>().AtivarPainel();
         }
         else
         {

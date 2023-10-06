@@ -39,7 +39,7 @@ public class CorridaRules
             maxPeso = 99999,
             maxOponentes = 5,
             filtrarTracao = false,
-            voltas = 3,
+            voltas = 2,
             nivel = nivelId
         };
 

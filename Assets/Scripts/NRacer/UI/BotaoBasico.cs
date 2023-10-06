@@ -18,6 +18,6 @@ public class BotaoBasico : MonoBehaviour
 
     public void SairJogo()
     {
-        FindObjectOfType<Controlador>().SairJogo();
+        Controlador.instancia.SairJogo();
     }
 }

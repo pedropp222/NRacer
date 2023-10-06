@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Android.Types;
 using UnityEngine;
 
 [System.Serializable]
@@ -11,32 +10,64 @@ public class CarroTrim : ScriptableObject
 
     public Raridade trimRaridade;
 
-    //TODO: Nos trims retirar o 'override' e colocar mais informacoes de forma a reunir e poder carregar informacao total de um trim
-    //e de um veiculo aqui
+    public int preco;
+    public float zeroAos100;
 
-    [SerializeField] private bool overridePeso;
-    [SerializeField] private int novoPeso;
+    public int peso;
+    public float potenciaKW;
 
-    [SerializeField] private bool overridePotencia;
-    [SerializeField] private float novaPotenciaKW;
+    public float upgradeIncrementarPotencia;
+    public float upgradeDecrementarPeso;
+    public float upgradeIncrementarVeloMaxima;
 
-    public int GetNovoPeso()
+    public Desempenho GetDesempenhoTexto(float pontos)
     {
-        return overridePeso ? novoPeso : -1;
+        if(pontos <= 15f)
+        {
+            return Desempenho.SUCATA;
+        }
+        else if (pontos <= 25f)
+        {
+            return Desempenho.MAU;
+        }
+        else if (pontos <= 45f)
+        {
+            return Desempenho.MEDIANO;
+        }
+        else if(pontos <= 70f)
+        {
+            return Desempenho.BOM;
+        }
+        else if (pontos <= 140f)
+        {
+            return Desempenho.MUITO_BOM;
+        }
+        else if (pontos <= 250f)
+        {
+            return Desempenho.INCRIVEL;
+        }
+        return Desempenho.DIVINAL;
     }
 
-    public float GetNovaPotencia()
+    public enum Desempenho
     {
-        return overridePotencia ? novaPotenciaKW: -1f;
+        SUCATA,//F
+        MAU,//E
+        MEDIANO,//D
+        BOM,//C
+        MUITO_BOM,//B
+        INCRIVEL,//A
+        DIVINAL//S
     }
 
-    //TODO: Possivelmente adicionar mais algumas raridades
     public enum Raridade
     {
-        COMUM,
-        INCOMUM,
-        RARO,
-        ESPECIAL,
-        LENDARIO
+        MUITO_COMUM,//F
+        COMUM,//E
+        MEDIANO,//D
+        RARO,//C
+        MUITO_RARO,//B
+        ESPECIAL,//A
+        UNICO//S
     }
 }

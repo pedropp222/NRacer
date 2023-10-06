@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// O HUD de um veiculo qualquer, mas na maioria dos carros do player
+/// </summary>
 public class Carro_HUD : MonoBehaviour
 {
     NWH.VehiclePhysics.VehicleController carro;
@@ -50,6 +53,9 @@ public class Carro_HUD : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Atualizar a posicao atual no UI
+    /// </summary>
     public void ReceberPosicao(int pos)
     {
         this.pos = pos;
@@ -57,6 +63,9 @@ public class Carro_HUD : MonoBehaviour
         posicao.text = pos + "º";      
     }
 
+    /// <summary>
+    /// Fazer o setup do HUD para este veiculo, fornecendo os objetos necessarios
+    /// </summary>
     public void ReceberHUD(RectTransform rect, Text velo, Text pos, Text volta, Text gear, int numVoltas)
     {
         agulhaRPM = rect;

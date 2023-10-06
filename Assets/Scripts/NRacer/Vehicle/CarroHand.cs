@@ -8,9 +8,9 @@ public class CarroHand : MonoBehaviour
     public float originalAngular;
     VehicleController vehicle;
 
-    private Transmission.TransmissionType originalTransmission;
-
     Rigidbody rb;
+
+    //TODO: Verificar se vale a pena existir esta classe e esta funcionalidade aqui, quando se poderia passar para o desktop input manager possivelmente
 
     private void Start()
     {
@@ -18,8 +18,6 @@ public class CarroHand : MonoBehaviour
 
         originalAngular = rb.angularDrag;
         vehicle = GetComponent<VehicleController>();
-
-        originalTransmission = vehicle.transmission.transmissionType;
     }
 
     void Update()
@@ -28,13 +26,14 @@ public class CarroHand : MonoBehaviour
         {
             if (vehicle.SpeedKPH < 10f)
             {
-                //vehicle.transmission.transmissionType = Transmission.TransmissionType.Manual;
                 vehicle.transmission.Gear = 0;
+                vehicle.input.Handbrake = 1f;
             }
             rb.angularDrag = 0f;
         }
         else
         {
+            vehicle.input.Handbrake = 0f;
             if (vehicle.SpeedKPH < 25f)
             {
                 rb.angularDrag = 0f;
@@ -42,7 +41,6 @@ public class CarroHand : MonoBehaviour
             else
             {
                 rb.angularDrag = originalAngular;
-                //vehicle.transmission.transmissionType = Transmission.TransmissionType.AutomaticSequential;
             }
         }
     }

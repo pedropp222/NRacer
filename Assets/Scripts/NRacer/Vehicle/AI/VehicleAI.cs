@@ -4,6 +4,7 @@ using UnityEngine;
 using NWH.VehiclePhysics;
 using System;
 using JetBrains.Annotations;
+using Assets.Scripts.NRacer.Controllers;
 
 /// <summary>
 /// Versao FINAL E VERDADEIRA (so demorou 5 anos) do AI do carro. Criaçao automatica de um AI super
@@ -50,6 +51,11 @@ public class VehicleAI : MonoBehaviour
     public bool limitInputSpeed;
     public float maxInput;
 
+    private float aiDesempenho;
+    private float playerDesempenho;
+
+    bool playerMaisFraco;
+
     private void Start()
     {
         //Provisorio: vai buscar a lista de waypoints do layout 1 por defeito
@@ -62,19 +68,30 @@ public class VehicleAI : MonoBehaviour
         wayps = new List<Transform>();
 
         initialPower = vehicle.engine.maxPower;
-        
-        //TODO: Mudar isto, o vehicle ai tem que receber o objeto dos waypoints a partir do novo TrackManager
 
-        GameObject go = GameObject.FindGameObjectWithTag("Waypoint_Layout0");
+        TrackManager tm = FindAnyObjectByType<TrackManager>();
+
+        GameObject go = tm.GetAiWaypoints();
 
         for (int i = 0; i < go.transform.childCount; i++)
         {
             wayps.Add(go.transform.GetChild(i));
         }
 
-        //TODO: Ver isto secalhar, nao sei bem porque e que temos que fazer isto para obter a posicao do player
+        aiDesempenho = GetComponent<CarroStats>().GetPontosDesempenho();
 
-        playerCar = GameObject.FindGameObjectWithTag("Vehicle").GetComponent<Carro_HUD>();
+        if (tm.playerCarro != null)
+        {
+            playerCar = tm.playerCarro.GetComponent<Carro_HUD>();
+            playerDesempenho = playerCar.GetComponent<CarroStats>().GetPontosDesempenho();
+            if (playerDesempenho <= aiDesempenho)
+            {
+                Debug.Log("Desempenho e mais fraco do que este veiculo, rubberbanding mais intenso");
+                playerMaisFraco = true;
+            }
+        }
+
+
     }
 
     private void FixedUpdate()
@@ -158,6 +175,11 @@ public class VehicleAI : MonoBehaviour
         A = Mathf.Clamp01(A);
         A = AlookUp.Evaluate(A);
 
+        if (useRubberbanding)
+        {
+            Rubberbanding();
+        }
+
         if (vehicle.SpeedKPH < 3f && Physics.Raycast(transform.position, transform.forward, 5f))
         {
             StartCoroutine(BackUp());
@@ -167,20 +189,21 @@ public class VehicleAI : MonoBehaviour
             if (vehicle.SpeedKPH > 20f)
             {
                 //final input
-                if (vehicle.SpeedKPH < 100f && limitInputSpeed)
+                if (vehicle.SpeedKPH < 60f && limitInputSpeed)
                 {
                     vehicle.input.Vertical = (A - B) * maxInput;
                 }
                 else
                 {
-                    if (useRubberbanding)
+                    /*if (useRubberbanding)
                     {
                         vehicle.input.Vertical = (A - B) * Rubberbanding();
                     }
                     else
                     {
                         vehicle.input.Vertical = (A - B);
-                    }
+                    }*/
+                    vehicle.input.Vertical = (A - B);
                 }
             }
         }
@@ -205,7 +228,7 @@ public class VehicleAI : MonoBehaviour
         }
     }
 
-    public float Rubberbanding()
+    public void Rubberbanding()
     {
 
 
@@ -216,7 +239,7 @@ public class VehicleAI : MonoBehaviour
 
         if (playerCar == null)
         {
-            return 1f;
+            return;
         }
 
         //quanto maior a diferença entre este e o player, menos acelera
@@ -231,32 +254,37 @@ public class VehicleAI : MonoBehaviour
             {
                 if (quant >= 1.0f)
                 {
-                    currentQuant += 0.0015f;
+                    currentQuant += 0.0006f;
                 }
                 else
                 {
-                    currentQuant -= 0.0006f;
+                    currentQuant -= 0.0009f;
                 }
 
-                currentQuant = Mathf.Clamp(currentQuant, -0.15f, 0.2f);
+                currentQuant = Mathf.Clamp(currentQuant, v.UltimaVolta() && playerMaisFraco ? -0.4f : -0.24f, v.UltimaVolta()?0f:0.2f);
                 quant *= 1 + currentQuant;
 
-                if (quant > 1f)
+                if (v.UltimaVolta() && quant >= 0.95f)
+                {
+                    quant = 0.95f - (playerMaisFraco ? 0.12f : 0f);
+                }
+
+                vehicle.engine.maxPower = initialPower * quant;
+
+                /*if (quant > 1f)
                 {
                     //se este carro tiver atras do player, aumentar o HP do carro
                     vehicle.engine.maxPower = initialPower * quant;
                 }
                 else
                 {
-                    vehicle.engine.maxPower = initialPower;
-                }
+                    vehicle.engine.maxPower = initialPower * quant;
+                }*/
             }
 
-            Debug.Log("Rubberbanding multiplier: " + quant+" . "+currentQuant);
+            //Debug.Log("Rubberbanding multiplier: " + quant+" --- "+currentQuant);
             dbugI = 0;
         }
-
-        return Mathf.Clamp(quant, 0.5f, 1f);
     }
 
     private float PreverPosicaoFuturo()

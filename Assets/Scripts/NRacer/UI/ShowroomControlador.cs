@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.UI;
+using Assets.Scripts.NRacer.Controllers;
+using DG.Tweening;
 
 /// <summary>
 /// Classe que vai ser usada para controlar o showroom de carros. Controla a lista de carros
@@ -13,7 +15,7 @@ public class ShowroomControlador : MonoBehaviour
     bool ativo = false;
 
     public List<GameObject> carrosAtuais = new List<GameObject>();
-    public List<Controlador.CarroData> carrosData = new List<Controlador.CarroData>();
+    public List<CarroData> carrosData = new List<CarroData>();
 
     public Transform posicaoCarroSpawn;
 
@@ -22,6 +24,8 @@ public class ShowroomControlador : MonoBehaviour
     public GameObject carPanel;
 
     public GameObject obterCarroButton;
+    public Image fadeImg;
+
 
     public GameObject bolaPrefab;
     public Transform gridBolas;
@@ -56,6 +60,10 @@ public class ShowroomControlador : MonoBehaviour
         carrosAtuais.Clear();
         carrosData.Clear();
         int index = 0;
+        carroAtual = 0;
+
+        FindAnyObjectByType<MenuUI>().SetMenuBackground(false);
+        objetoUiVinculo.GetComponent<UIPainelEventos>().DesativarPainel();
 
         //Instanciar e registar os carros que estao visiveis;
         foreach (GameObject x in listaCarros)
@@ -64,7 +72,7 @@ public class ShowroomControlador : MonoBehaviour
             CarroStats carro = go.GetComponent<CarroStats>();        
 
             carrosAtuais.Add(go);
-            carrosData.Add(new Controlador.CarroData(index, 0));
+            carrosData.Add(new CarroData(index, 0));
             go.SetActive(false);
             bolas.Add(Instantiate(bolaPrefab,gridBolas).GetComponent<Image>());
 
@@ -77,7 +85,7 @@ public class ShowroomControlador : MonoBehaviour
                     CarroStats carro2 = go2.GetComponent<CarroStats>();
                     carro2.CarregarTrim(i);
                     carrosAtuais.Add(go2);
-                    carrosData.Add(new Controlador.CarroData(index, i));
+                    carrosData.Add(new CarroData(index, i));
                     go2.SetActive(false);
                     bolas.Add(Instantiate(bolaPrefab, gridBolas).GetComponent<Image>());
                 }
@@ -123,55 +131,71 @@ public class ShowroomControlador : MonoBehaviour
     /// </summary>
     public void IniciarCarro()
     {
-        carroAtual = 0;
+        carroAtual = 1;
 
-        carrosAtuais[carroAtual].SetActive(true);
+        //carrosAtuais[carroAtual].SetActive(true);
         bolas[carroAtual].color = bolaSelectedCores[1];
 
-        carPanel.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => SelectCarro(false));
-        carPanel.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() => SelectCarro(true));
+        carPanel.transform.GetChild(6).GetComponent<Button>().onClick.RemoveAllListeners();
+        carPanel.transform.GetChild(7).GetComponent<Button>().onClick.RemoveAllListeners();
+
+        carPanel.transform.GetChild(6).GetComponent<Button>().onClick.AddListener(() => StartCoroutine(SelectCarro(false)));
+        carPanel.transform.GetChild(7).GetComponent<Button>().onClick.AddListener(() => StartCoroutine(SelectCarro(true)));
+
+        obterCarroButton.GetComponent<Button>().Select();
 
         AtualizarUI();
+        StartCoroutine(SelectCarro(false));
     }
 
+
+    bool aCorrer = false;
     /// <summary>
     /// Selecionar o proximo carro ou anterior, se possivel
     /// </summary>
     /// <param name="proximo">selecionar o proximo ou o anterior</param>
-    public void SelectCarro(bool proximo)
+    public IEnumerator SelectCarro(bool proximo)
     {
-        if (proximo)
+        if (!aCorrer)
         {
-            if (carroAtual+1!=carrosAtuais.Count)
+            aCorrer = true;
+            if (proximo)
             {
-                carrosAtuais[carroAtual].SetActive(false);
-                bolas[carroAtual].color = bolaSelectedCores[0];
-                carroAtual++;
-                carrosAtuais[carroAtual].SetActive(true);
-                bolas[carroAtual].color = bolaSelectedCores[1];
-                AtualizarUI();
-                return;
+                if (carroAtual + 1 != carrosAtuais.Count)
+                {
+                    fadeImg.DOColor(Color.black, 0.25f);
+                    yield return new WaitForSeconds(0.3f);
+                    carrosAtuais[carroAtual].SetActive(false);
+                    bolas[carroAtual].color = bolaSelectedCores[0];
+                    carroAtual++;
+                    carrosAtuais[carroAtual].SetActive(true);
+                    bolas[carroAtual].color = bolaSelectedCores[1];
+                    fadeImg.DOColor(new Color(0f, 0f, 0f, 0f), 0.25f);
+                    AtualizarUI();
+                }
             }
-        }
-        else
-        {
-            if (carroAtual - 1 >= 0)
+            else
             {
-                carrosAtuais[carroAtual].SetActive(false);
-                bolas[carroAtual].color = bolaSelectedCores[0];
-                carroAtual--;
-                carrosAtuais[carroAtual].SetActive(true);
-                bolas[carroAtual].color = bolaSelectedCores[1];
-                AtualizarUI();
-                return;
+                if (carroAtual - 1 >= 0)
+                {
+                    fadeImg.DOColor(Color.black, 0.25f);
+                    yield return new WaitForSeconds(0.3f);
+                    carrosAtuais[carroAtual].SetActive(false);
+                    bolas[carroAtual].color = bolaSelectedCores[0];
+                    carroAtual--;
+                    carrosAtuais[carroAtual].SetActive(true);
+                    bolas[carroAtual].color = bolaSelectedCores[1];
+                    fadeImg.DOColor(new Color(0f, 0f, 0f, 0f), 0.25f);
+                    AtualizarUI();
+                }
             }
+            aCorrer = false;
         }
     }
 
     public void AtualizarUI()
     {
-        ///TODO aparecer o texto da informaçao do carro
-        ///e aparecer os botoes com base no "modo" do showroom
+        ///TODO: aparecer os botoes com base no "modo" do showroom
         ///portanto no concessionario apresentar o botao "comprar", se for garagem, apresentar o botao "escolher",
         ///"vender", etc.
         ///
@@ -182,42 +206,49 @@ public class ShowroomControlador : MonoBehaviour
 
         //nome completo do carro
 
-        carPanel.transform.GetChild(0).GetComponent<Text>().text = stats.NomeCompleto();
+        //carPanel.transform.GetChild(0).GetComponent<Text>().text = stats.NomeCompleto();
+        //carPanel.transform.GetChild(0).GetComponent<Text>().DOText(stats.NomeCompleto(),0.65f);
+        carPanel.transform.GetChild(1).GetComponent<Text>().text = "";
+        carPanel.transform.GetChild(1).GetComponent<Text>().DOText(stats.NomeCompleto(),0.25f);
 
         //105 HP | 1280 KG | TRAÇAO
 
-        carPanel.transform.GetChild(1).GetComponent<Text>().text = stats.potencia + " HP | " + stats.GetPeso() + " KG | " + stats.tracao.ToString();
+        carPanel.transform.GetChild(2).GetComponent<Text>().text = "";
+        carPanel.transform.GetChild(2).GetComponent<Text>().DOText(stats.GetPotencia() + " HP | " + stats.GetPeso() + " KG | " + stats.tracao.ToString(),0.25f);
 
         //0-100
 
-        carPanel.transform.GetChild(2).GetComponent<Text>().text = "0-100: " + stats.zeroAos100 + "s";
+        carPanel.transform.GetChild(3).GetComponent<Text>().DOText(stats.trimAtual.zeroAos100 > 0f ? "0-100: " + stats.trimAtual.zeroAos100 + "s" : "0-100: Nao consegue :)",0.65f);
 
 
         //odometer, se aplicavel
 
         if (tipoAtual== TipoShowroom.garagem)
         {
-            carPanel.transform.GetChild(3).GetComponent<Text>().text = Mathf.Round(stats.quilometros/1000f)+"KM";
+            carPanel.transform.GetChild(4).GetComponent<Text>().DOText(Mathf.Round(stats.quilometros / 1000f) + "KM", 0.65f);
         }
         else
         {
-            carPanel.transform.GetChild(3).GetComponent<Text>().text = "";
+            carPanel.transform.GetChild(4).GetComponent<Text>().DOText("", 0.65f);
         }
 
         //raridade
-        carPanel.transform.GetChild(4).GetComponent<Text>().text = stats.trimAtual.trimRaridade.ToString();
-        carPanel.transform.GetChild(4).GetComponent<Text>().color = raridadeCores[(int)stats.trimAtual.trimRaridade];
+        carPanel.transform.GetChild(5).GetComponent<Text>().DOText(stats.trimAtual.trimRaridade.ToString(), 0.65f);
+        carPanel.transform.GetChild(5).GetComponent<Text>().color = raridadeCores[(int)stats.trimAtual.trimRaridade];
 
         //obter carro button
+
+        //TODO: o botao de 'obter carro' tem que ser generificado se quisermos que isto seja o visualizador default dos veiculos em qualquer circunstancia
 
         obterCarroButton.GetComponent<Button>().onClick.RemoveAllListeners();
         obterCarroButton.GetComponent<Button>().onClick.AddListener(() =>
         {
             Debug.Log("Tentar dar o carro selecionado, id: " + carrosData[carroAtual].id + "trim: " + stats.trimAtualId);
-            Controlador.instancia.DarCarro(carrosData[carroAtual].id, stats.trimAtualId, CarroStats.MetodoAquisicao.ARCADE);
+            //Controlador.instancia.DarCarro(carrosData[carroAtual].id, stats.trimAtualId, CarroStats.MetodoAquisicao.ARCADE);
             Controlador.instancia.SetCarroSelected(carrosData[carroAtual].id, stats.trimAtualId);
             FindAnyObjectByType<MenuUI>().SetMenuBackground(true);
-            objetoUiVinculo.SetActive(true);
+            //objetoUiVinculo.SetActive(true);
+            objetoUiVinculo.GetComponent<UIPainelEventos>().AtivarPainel();
             LimparShowroom();
         });
     }

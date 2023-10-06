@@ -10,7 +10,7 @@ public class CarWinAnimation : MonoBehaviour
 
     public Light[] luzes;
     public Text texto;
-    public SimpleSlide slideBTN;
+    public UIAnimacaoSlide slideBTN;
 
     VehicleController vehicleController;
 

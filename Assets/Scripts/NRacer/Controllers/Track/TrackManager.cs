@@ -3,7 +3,7 @@ using NWH.VehiclePhysics;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.InputManagerEntry;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.NRacer.Controllers
 {
@@ -17,6 +17,8 @@ namespace Assets.Scripts.NRacer.Controllers
         private int carrosCarregados = 0;
         private List<GameObject> carrosAtuais;
 
+        private List<IObjetoPausa> objetoPausas;
+
         private int currentLayout;
 
         private Controlador contr;
@@ -29,11 +31,23 @@ namespace Assets.Scripts.NRacer.Controllers
 
         public int maximoVoltas { get; private set; }
 
+        private GestorInputsJogo inputs;
+
         private void Awake()
         {
             instancia = this;
-            contr = FindAnyObjectByType<Controlador>();
+            contr = Controlador.instancia;
             carrosAtuais = new List<GameObject>();
+            objetoPausas = new List<IObjetoPausa>();
+            inputs = FindAnyObjectByType<GestorInputsJogo>();
+
+            if (inputs != null)
+            {
+                Debug.Log("Vai usar o novo sistema de inputs");
+
+                inputs.AtivarConduzir();
+                inputs.PausaEvent += Inputs_PausaEvent;
+            }
 
             if (manager == null)
             {
@@ -64,31 +78,87 @@ namespace Assets.Scripts.NRacer.Controllers
                 Debug.Log("Iniciar pista com o controlador");
                 maximoVoltas = contr.corridaAtual.voltas;
 
-                FindAnyObjectByType<GrelhaPartidaUI>().botaoIniciar.onClick.AddListener(delegate { LancarCarros(); });
+                //O que o botao da grelha de partida tem que fazer quando clicado
+                Button btn = FindAnyObjectByType<GrelhaPartidaUI>().botaoIniciar;
+                if (btn != null)
+                {
+                    btn.onClick.AddListener(delegate { IniciarCountdown(); });
+                    btn.Select();
+                }
+
+                for (int i = 0; i < contr.corridaAtual.startingGrid.Count; i++)
+                {
+                    Debug.Log("Colocar um carro: " + contr.corridaAtual.startingGrid[i]);
+
+                    //teu carro
+                    if (contr.corridaAtual.startingGrid[i].id == -1)
+                    {
+                        SpawnVeiculo(contr.carros[contr.carroSelecionado.id], contr.carroSelecionado);
+                        playerCarro = carrosAtuais[carrosAtuais.Count - 1];
+                    }
+                    else
+                    {
+                        SpawnVeiculo(contr.aiCarros[contr.corridaAtual.startingGrid[i].id], contr.corridaAtual.startingGrid[i]);
+
+                    }
+
+                }
+
+                RefreshGrelhaPartida();
             }
         }
 
+        private void PlayerCarroSetup()
+        {
+            VehicleController vc = playerCarro.GetComponent<VehicleController>();
+
+            FindAnyObjectByType<VehicleChanger>().vehicles.Add(vc);
+            manager.vehicleController = vc;
+        }
+
+        /// <summary>
+        /// Iniciar o controlador de countdown e so no fim e que comeca a corrida
+        /// </summary>
+        public void IniciarCountdown()
+        {
+            PlayerCarroSetup();
+
+            for (int i = 0; i < carrosAtuais.Count; i++)
+            {
+                carrosAtuais[i].GetComponent<VehicleController>().Active = true;
+            }
+
+            FindAnyObjectByType<CountdownUI>().IniciarCountdown(this);
+        }
+
+        /// <summary>
+        /// Desprender os carros e comecar a corrida
+        /// </summary>
         public void LancarCarros()
-        {          
+        {
             foreach (VehicleController x in FindObjectsOfType<VehicleController>())
             {
+                x.AtivarRodas();
+
                 if (x.CompareTag("Vehicle"))
                 {
                     if (playerCarro == null)
                     {
                         playerCarro = x.gameObject;
+                        PlayerCarroSetup();
                     }
                     x.GetComponent<CarroInputDisable>().LancarCarro();
-                    FindAnyObjectByType<VehicleChanger>().vehicles.Add(x);
-                    manager.vehicleController = x;
                 }
                 else
                 {
-                    if (x.GetComponent<VehicleAI>()!=null)
+                    if (x.GetComponent<VehicleAI>() != null)
                     {
                         x.GetComponent<VehicleAI>().LancarCarro();
-                    }                  
+                    }
                 }
+
+                objetoPausas.AddRange(x.GetComponents<IObjetoPausa>());
+                x.Active = true;
             }
         }
 
@@ -96,7 +166,7 @@ namespace Assets.Scripts.NRacer.Controllers
         {
             if (id < 0 || id >= trackLayouts.Length)
             {
-                Debug.LogError("ATENCAO. TENTOU CARREGAR UM LAYOUT DE ID "+id+", MAS SO EXISTEM "+trackLayouts.Length +" layouts!");
+                Debug.LogError("ATENCAO. TENTOU CARREGAR UM LAYOUT DE ID " + id + ", MAS SO EXISTEM " + trackLayouts.Length + " layouts!");
                 return;
             }
 
@@ -125,15 +195,15 @@ namespace Assets.Scripts.NRacer.Controllers
                 return;
             }
 
-            foreach(GameObject go in carrosAtuais)
+            foreach (GameObject go in carrosAtuais)
             {
                 grelhaPartida.AdicionarVeiculo(go.GetComponent<CarroStats>());
             }
         }
 
-        public void SpawnVeiculo(GameObject veiculo, bool jogador, Controlador.CarroData carroData)
+        public void SpawnVeiculo(GameObject veiculo, CarroData carroData)
         {
-            if(carrosCarregados >= trackLayouts[currentLayout].spawnpointsParent.transform.childCount)
+            if (carrosCarregados >= trackLayouts[currentLayout].spawnpointsParent.transform.childCount)
             {
                 Debug.LogError("ERRO: Nao consegue instanciar um veiculo porque a pista nao tem spawns suficientes!");
                 return;
@@ -144,11 +214,10 @@ namespace Assets.Scripts.NRacer.Controllers
             o.transform.eulerAngles = trackLayouts[currentLayout].spawnpointsParent.transform.GetChild(carrosCarregados).localEulerAngles;
             o.GetComponent<CarroStats>().CarregarTrim(carroData.trimId);
 
-            if (jogador)
-            {
-                playerCarro = o;
-            }
-            else
+            //desligar os veiculos
+            o.GetComponent<VehicleController>().Active = false;
+
+            if (!o.CompareTag("Vehicle"))
             {
                 int min = Controlador.instancia.filtroAtual.baseDificuldade - 3;
                 if (min < 0) min = 0;
@@ -161,9 +230,38 @@ namespace Assets.Scripts.NRacer.Controllers
             carrosCarregados++;
             carrosAtuais.Add(o);
         }
+
+        bool isPausa = false;
+
+        private void ProcessarPausa()
+        {
+            if (objetoPausas.Count > 0)
+            {
+                isPausa = !isPausa;
+                foreach (IObjetoPausa p in objetoPausas)
+                {
+                    if (isPausa)
+                    {
+                        p.OnPausa();
+                    }
+                    else
+                    {
+                        p.OnResume();
+                    }
+                }
+            }
+        }
+
+        private void Inputs_PausaEvent(UnityEngine.InputSystem.InputActionPhase obj)
+        {
+            if (obj == UnityEngine.InputSystem.InputActionPhase.Performed)
+            {
+                ProcessarPausa();
+            }
+        }
     }
 
-    public enum RaceType
+    public enum TipoCorrida
     {
         Free,
         Race

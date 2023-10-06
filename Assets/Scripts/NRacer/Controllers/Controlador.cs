@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Linq;
 using Assets.Scripts.NRacer.Controllers;
-using UnityEngine.Android;
 
 /// <summary>
 /// Controlador massivo de tudo o que se passa no projeto, objeto que nunca é apagado e
@@ -19,7 +17,6 @@ public class Controlador : MonoBehaviour
     [SerializeField]
     public CorridaInfo corridaAtual;
     public CorridaRules filtroAtual;
-    public List<GameObject> currentCarros;
 
     public GameObject[] carros;
     public GameObject[] aiCarros;
@@ -36,6 +33,8 @@ public class Controlador : MonoBehaviour
     public GameSaveData saveDataPlayerAtual = null;
 
     public static Controlador instancia;
+
+    public bool mudancasManuais;
     
     void Awake()
     {
@@ -44,8 +43,6 @@ public class Controlador : MonoBehaviour
         {          
             iniciar = false;
             instancia = this;
-
-            currentCarros = new List<GameObject>();
 
             corridaAtual = new CorridaInfo(-1,-1,-1,-1);
 
@@ -162,46 +159,23 @@ public class Controlador : MonoBehaviour
                 }
                 else
                 {
-                    //TODO: Aqui tem que ter a tal funcionalidade nova de comunicar isto ao GameMode e ele e que decide o que ha de acontecer
-
-                    //dar o dinheiro relativo ao premio e a nossa posiçao
-                    if (corridaAtual.resultado.posicaoFinal != 0)
+                    if (modoAtual != null)
                     {
-                        //dinheiro += corridaAtual.premio / corridaAtual.resultado.posicaoFinal;
-                        Debug.Log("Dar " + corridaAtual.premio / corridaAtual.resultado.posicaoFinal);
-                    }            
-
-                    //se ficamos em 1º lugar!
-                    if (corridaAtual.resultado.posicaoFinal == 1)
-                    {
-                        //adicionar novo e guardar tudo
-                        if (filtroAtual.premioCarro != -1)
-                        {
-                            //ganhar um carro novo
-                            DarCarro(filtroAtual.premioCarro,filtroAtual.premioCarroTrim,CarroStats.MetodoAquisicao.ARCADE);
-                        }
-                        //campeonatos.campeonatos[corridaAtual.campeonatoID].ganhos[corridaAtual.corridaID]=true;
-                        //saveDataPlayerAtual.corridas = campeonatos;
-                        //saveDataPlayerAtual.dinheiro = dinheiro;
+                        modoAtual.ReceberResultadoCorrida(corridaAtual);
                         saveDataPlayerAtual.SaveGame(saveDataPlayerAtual.PlayerName);
                     }
                 }
-                currentCarros.Clear();
 
             }
 
             MenuUI();
-        }
-        else if (arg0.buildIndex != 1)
-        {
-            //se carregou uma pista
-            SetupSpawn();
         }
     }
 
     /// <summary>
     /// Refresh dos elementos atuais do ui
     /// </summary>
+    //TODO: Isto secalhar nao vai ser preciso existir aqui!
     public void MenuUI()
     {
         MenuUI x = FindObjectOfType<MenuUI>();
@@ -209,58 +183,6 @@ public class Controlador : MonoBehaviour
         {
             x.RefreshUI(this);
         }
-        
-        //CheckProgressoJogo();
-    }
-
-    /// <summary>
-    /// Atualiza a % de jogo completado
-    /// </summary>
-    /*public void CheckProgressoJogo()
-    {
-        int totalEventos = 0;
-        int eventosGanhos = 0;
-
-        foreach (CampSave x in campeonatos.campeonatos)
-        {
-            totalEventos += x.ganhos.Count;
-            eventosGanhos += x.GetGanhos();
-        }
-
-        percentagemJogoGanho = totalEventos == 0 ? 0 : ((eventosGanhos * 100) / totalEventos);
-    }*/
-
-    /// <summary>
-    /// Quando abrimos um nivel que nao o menu, este metodo instancia os veiculo de acordo com o 
-    /// corridaAtual, que foi populado ao gerar a corrida no menu
-    /// </summary>
-    /// 
-    //TODO: Isto aqui tem que ir praticamente tudo para o lixo, isto tem que ser tratado pelo TrackManager
-    public void SetupSpawn()
-    {
-        Debug.LogWarning("SETUP SPAWN - "+corridaAtual.startingGrid.Count+" carros");
-
-        TrackManager tm = FindAnyObjectByType<TrackManager>();
-
-
-        for (int i = 0; i < corridaAtual.startingGrid.Count; i++)
-        {
-            Debug.Log("Colocar um carro: " + corridaAtual.startingGrid[i]);
-
-            //teu carro
-            if (corridaAtual.startingGrid[i].id == -1)
-            {
-                tm.SpawnVeiculo(carros[carroSelecionado.id], true,carroSelecionado);
-            }
-            else
-            {
-                tm.SpawnVeiculo(aiCarros[corridaAtual.startingGrid[i].id], false, corridaAtual.startingGrid[i]);
-                
-            }
-            
-        }
-
-        tm.RefreshGrelhaPartida();
     }
 
     /// <summary>
@@ -279,7 +201,7 @@ public class Controlador : MonoBehaviour
 
         if (numCarros > 0)
         {
-            corridaAtual.startingGrid.AddRange(FiltrarPorRaridade2(gridPossivel, numCarros));
+            corridaAtual.startingGrid.AddRange(FiltrarPorRaridade(gridPossivel, numCarros));
 
             if (corridaAtual.startingGrid.Count == 0)
             {
@@ -290,14 +212,16 @@ public class Controlador : MonoBehaviour
             //Jogador começa em ultimo e tem o ID -1
             corridaAtual.startingGrid.Add(CarroData.Vazio);
         }
-        SceneManager.LoadScene(filtros.nivel);
+
+        Debug.Log("Corrida gerada, pronto a carregar");
+        //SceneManager.LoadScene(filtros.nivel);
     }
 
     /// <summary>
     /// Gerar uma simples corrida numa pista aleatoria, com oponentes aleatorios
     /// Usa o carro que tens selecionado
     /// </summary>
-    public void GerarCorridaLivre()
+    public void GerarCorridaLivre(int pistaId)
     {
         if (carroSelecionado == CarroData.Vazio)
         {
@@ -305,7 +229,7 @@ public class Controlador : MonoBehaviour
             return;
         }
 
-        GerarCorrida(CorridaRules.CorridaLivre(2), new CorridaInfo(0, 3, 0, 0));
+        GerarCorrida(CorridaRules.CorridaLivre(pistaId), new CorridaInfo(0, 2, 0, 0));
     }
 
     /// <summary>
@@ -365,7 +289,7 @@ public class Controlador : MonoBehaviour
     /// <param name="possiveis">Lista pre gerada dos ids dos carros possiveis</param>
     /// <param name="numCarros">Numero de carros no grid</param>
     /// <returns></returns>
-    public CarroData[] FiltrarPorRaridade2(CarroData[] possiveis, int numCarros)
+    public CarroData[] FiltrarPorRaridade(CarroData[] possiveis, int numCarros)
     {
         List<CarroData> final = new List<CarroData>();
 
@@ -384,7 +308,7 @@ public class Controlador : MonoBehaviour
 
                 CarroTrim.Raridade raridade = aiCarros[rc.id].GetComponent<CarroStats>().modelo.trimsDisponiveis[rc.trimId].trimRaridade;
 
-                if (raridade == CarroTrim.Raridade.LENDARIO)
+                /*if (raridade == CarroTrim.Raridade.LENDARIO)
                 {
                     if (Random.Range(0, 40) == 24)
                     {
@@ -415,7 +339,9 @@ public class Controlador : MonoBehaviour
                 else
                 {
                     carroEscolhido = rc;
-                }
+                }*/
+
+                carroEscolhido = rc;
             }
 
             final.Add(carroEscolhido);
@@ -424,50 +350,9 @@ public class Controlador : MonoBehaviour
         return final.ToArray();
     }
 
-    /// <summary>
-    /// Dar um carro para o jogador ficar com ele
-    /// </summary>
-    /// <param name="id">id do carro</param>
-    /// <param name="metodo">metodo de aquisiçao</param>
-    /// 
-    //TODO: isto nao tem que dar carro nenhum, esse conceito nao existe pelo menos ao nivel do controlador, apenas ao nivel do gamemode
-    public void DarCarro(int id, int trimId, CarroStats.MetodoAquisicao metodo)
-    {
-        /* if (metodo == CarroStats.MetodoAquisicao.ARCADE)
-         {
-             if (teusCarros.Contains(new Carro(id,trimId)))
-             {
-                 Debug.Log("Ja tens este carro, no modo arcade so podes ter 1 carro de cada");
-             }
-             else
-             {
-                 teusCarros.Add(new Carro(id,trimId));
-                 Debug.Log("Parabens, possuis agora carro id "+id+" com trim "+trimId);
-             }
-         }
-         else if (metodo == CarroStats.MetodoAquisicao.CONCESSIONARIO)
-         {
-             //aqui tens que pagar pelo carro :(
-
-             if (dinheiro >= carros[id].GetComponent<CarroStats>().preco)
-             {
-                 dinheiro -= carros[id].GetComponent<CarroStats>().preco;
-                 teusCarros.Add(new Carro(id, trimId));
-                 Debug.Log("Parabens, possuis agora carro X");
-             }
-         }*/
-
-        Debug.LogWarning("DarCarro NOT IMPLEMENTED");
-    }
-
     public void SetCarroSelected(int id, int trim)
     {
-        //carroSelecionado = carros.Find((c)=>c.id == id && c.trimId == trim); 
-
         carroSelecionado = new CarroData(id, trim);
-
-        //Debug.Log("Selecionou veiculo "+carroSelecionado);
-        //Debug.LogWarning("SetCarroSelected NOT IMPLEMENTED COMPLETELY");
     }
 
     /// <summary>
@@ -597,56 +482,8 @@ public class Controlador : MonoBehaviour
         return carros[carro.id].GetComponent<CarroStats>().GetNomeTrim(carro.trimId);
     }
 
-
-    /// <summary>
-    /// Sair do jogo
-    /// </summary>
     public void SairJogo()
     {
         Application.Quit();
     }
-
-    [System.Serializable]
-    public struct CarroData
-    {
-        public int id;
-        public int trimId;
-
-        public CarroData(int id, int trimId)
-        {
-            this.id = id;
-            this.trimId = trimId;
-        }
-
-        public static CarroData Vazio
-        {
-            get { return new CarroData(-1, -1); }           
-        }
-
-        public static bool operator ==(CarroData a, CarroData b)
-        {
-            return a.id == b.id && a.trimId == b.trimId;
-        }
-
-        public static bool operator !=(CarroData a, CarroData b)
-        {
-            return a.id != b.id || a.trimId != b.trimId;
-        }
-
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
-
-        public override bool Equals(object obj)
-        {
-            return base.Equals(obj);
-        }
-
-        public override string ToString()
-        {
-            return "CarroData: ID>" + id + " |Trim> " + trimId;
-        }
-    }
-
 }

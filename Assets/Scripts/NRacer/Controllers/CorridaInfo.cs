@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.NRacer.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ using UnityEngine;
 [System.Serializable]
 public class CorridaInfo
 {
-    public List<Controlador.CarroData> startingGrid;
+    public List<CarroData> startingGrid;
     public int premio;
     public int voltas;
 
@@ -29,7 +30,7 @@ public class CorridaInfo
         campeonatoID = campID;
         corridaID = cID;
 
-        startingGrid = new List<Controlador.CarroData>();
+        startingGrid = new List<CarroData>();
         resultado = new CorridaResults();
     }
 }

@@ -12,7 +12,7 @@ public class ButtonsAnimator : MonoBehaviour
         float dl = 0.20f;
         foreach(GameObject go in buttons)
         {
-            go.GetComponent<SimpleSlide>().Animate(dl);
+            go.GetComponent<UIAnimacaoSlide>().Animate(dl);
             dl+=0.20f;
         }
     }
