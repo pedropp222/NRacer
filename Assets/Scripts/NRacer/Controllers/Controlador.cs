@@ -5,6 +5,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Linq;
 using Assets.Scripts.NRacer.Controllers;
+using Assets.Scripts.NRacer.GameMode.Career;
+using System.Data;
+using Assets.Scripts.NRacer.Dados;
 
 /// <summary>
 /// Controlador massivo de tudo o que se passa no projeto, objeto que nunca é apagado e
@@ -18,19 +21,23 @@ public class Controlador : MonoBehaviour
     public CorridaInfo corridaAtual;
     public CorridaRules filtroAtual;
 
+    public CorridaData corridaData = CorridaData.VAZIO;
+
     public GameObject[] carros;
     public GameObject[] aiCarros;
 
+    public PistaData[] pistas;
+
     public GameObject carNameBox;
 
-    public CarroData carroSelecionado = CarroData.Vazio;
+    public CarroPlayerData carroSelecionado = CarroPlayerData.Vazio;
 
     public GameMode modoAtual;
 
     //public static CampeonatosController campeonatos;
 
     public string nomePlayerAtual="";
-    public GameSaveData saveDataPlayerAtual = null;
+    public SaveData saveDataPlayerAtual = null;
 
     public static Controlador instancia;
 
@@ -44,37 +51,13 @@ public class Controlador : MonoBehaviour
             iniciar = false;
             instancia = this;
 
-            corridaAtual = new CorridaInfo(-1,-1,-1,-1);
+            corridaAtual = new CorridaInfo(CorridaPremio.PremioDefault,-1,-1,-1);
 
             //abriu o jogo pela primeira vez!
             if (!Directory.Exists("savedata")|| NumeroJogadores() == 0)
             {
                 Directory.CreateDirectory("savedata");
             }
-
-            //encontrar todos os campeonatos do jogo e ordenalos por ID nesta variavel estatica
-            /*campeonatos = new CampeonatosController
-            {
-                campeonatos = new List<CampSave>()
-            };*/
-
-            int campNum = 0;int corrNum = 0;
-
-            foreach(Campeonato x in FindObjectsOfType<Campeonato>())
-            {
-                CampSave cs = new CampSave();
-                cs.id = x.id;
-                for(int i = 0; i < x.corridasLista.Length; i++)
-                {
-                    cs.ganhos.Add(x.corridasLista[i].ganhou);
-                    corrNum++;
-                }
-                //campeonatos.campeonatos.Add(cs);
-                campNum++;
-            }
-            //campeonatos.campeonatos = campeonatos.campeonatos.OrderBy(o => o.id).ToList();
-
-            Debug.Log("Registou " + campNum + " campeonatos. Registou " + corrNum + " corridas.");
 
             SceneManager.sceneLoaded += SceneManager_sceneLoaded;
             DontDestroyOnLoad(gameObject);
@@ -104,35 +87,6 @@ public class Controlador : MonoBehaviour
                 //campeonatos = saveDataPlayerAtual.corridas;
                 nomePlayerAtual = saveDataPlayerAtual.PlayerName;
                 Debug.Log("Carregou o player " + saveDataPlayerAtual.PlayerName);
-
-                int g = 0;
-
-                //TODO: Muito trabalho aqui para ter os saves a funcionar corretamente
-
-                /*var cmp = saveDataPlayerAtual.corridas.campeonatos;
-
-                for(int i = 0; i < cmp.Count; i++)
-                {
-                    var ganhos = cmp[i].ganhos;
-                    for(int k = 0; k < ganhos.Count; k++)
-                    {
-                        if (ganhos[k]) g++;
-                    }
-                }*/
-
-                //primeira vez que vai jogar, dar um carro!
-                /*if (teusCarros == null || teusCarros.Count == 0)
-                {
-                    teusCarros = new List<int>();
-                    DarCarro(0,0,CarroStats.MetodoAquisicao.ARCADE);
-                    saveDataPlayerAtual.carros = teusCarros;
-                    saveDataPlayerAtual.SaveGame(nomePlayerAtual);
-                }
-
-                SetCarroSelected(0);*/
-
-                Debug.Log("Jogador tem "+saveDataPlayerAtual.carros.Count+" carros.");
-                Debug.Log("Jogador tem " + g + " corridas ganhas");
                 MenuUI();
             }
         }
@@ -142,9 +96,22 @@ public class Controlador : MonoBehaviour
         }
     }
 
+    public void CarregarJogoGameMode(GameMode modoJogo)
+    {
+        //Debug.Log("Modo atual: " + modoAtual.GetType()+", mudar para "+modoJogo.GetType());
+
+        /*if (modoAtual.GetType() == modoJogo.GetType())
+        {
+            Debug.Log("Ja estamos neste modo de jogo");
+            return;
+        }*/
+
+        saveDataPlayerAtual = GetPlayer(nomePlayerAtual, modoJogo);
+    }
+
     private void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
-        if (arg0.buildIndex == 0)
+        if (arg0.buildIndex == 0 || arg0.buildIndex == 1)
         {
             //ao carregar o menu
 
@@ -162,7 +129,7 @@ public class Controlador : MonoBehaviour
                     if (modoAtual != null)
                     {
                         modoAtual.ReceberResultadoCorrida(corridaAtual);
-                        saveDataPlayerAtual.SaveGame(saveDataPlayerAtual.PlayerName);
+                        saveDataPlayerAtual.SaveGame();
                     }
                 }
 
@@ -217,19 +184,42 @@ public class Controlador : MonoBehaviour
         //SceneManager.LoadScene(filtros.nivel);
     }
 
+    public void GerarCorridaCarreira()
+    {
+        if (corridaData == CorridaData.VAZIO)
+        {
+            Debug.LogError("Nao pode entrar numa corrida, porque nao existe contexto de corrida definida");
+            return;
+        }
+
+        corridaAtual = new CorridaInfo(CorridaPremio.PremioDefault, corridaData.corridaRef.voltas, corridaData.campeonatoRef.id, corridaData.eventoIndex);
+        filtroAtual = corridaData.corridaRef;
+
+        GerarCorrida(filtroAtual, corridaAtual);
+
+        SceneManager.LoadScene(filtroAtual.nivel.nivelId);
+    }
+
     /// <summary>
     /// Gerar uma simples corrida numa pista aleatoria, com oponentes aleatorios
     /// Usa o carro que tens selecionado
     /// </summary>
     public void GerarCorridaLivre(int pistaId)
     {
-        if (carroSelecionado == CarroData.Vazio)
+        if (carroSelecionado == CarroPlayerData.Vazio)
         {
             Debug.LogError("Erro a gerar corrida livre. Nao tens carro selecionado");
             return;
         }
 
-        GerarCorrida(CorridaRules.CorridaLivre(pistaId), new CorridaInfo(0, 2, 0, 0));
+        GerarCorrida(CorridaRules.CorridaLivre(PistaAleatoria()), new CorridaInfo(CorridaPremio.PremioDefault, 2, 0, 0));
+    }
+
+    public PistaInfo PistaAleatoria()
+    {
+        PistaData pd = pistas[Random.Range(0, pistas.Length)];
+
+        return new PistaInfo(pd.nivelId, Random.Range(0, pd.layouts.Length));
     }
 
     /// <summary>
@@ -241,9 +231,9 @@ public class Controlador : MonoBehaviour
     {
         List<CarroData> carrosLista = new List<CarroData>();
 
-        for (int i = 0; i < aiCarros.Length; i++)
+        for (int i = 0; i < carros.Length; i++)
         {
-            CarroStats stats = aiCarros[i].GetComponent<CarroStats>();
+            CarroStats stats = carros[i].GetComponent<CarroStats>();
 
             if (rules.forceAICar != -1)
             {
@@ -262,15 +252,15 @@ public class Controlador : MonoBehaviour
 
                 for (int k = 0; k < stats.modelo.trimsDisponiveis.Length; k++)
                 {
-                    if (rules.maxPeso != -1 && stats.GetPesoTrim(k) > rules.maxPeso)
+                    if (!rules.filtroVeiculos.AvaliarPeso(stats.GetPesoTrim(k)))
                     {
                         continue;
                     }
-                    if (rules.maxHP != -1 && stats.GetPotenciaTrim(k) > rules.maxHP)
+                    if (!rules.filtroVeiculos.AvaliarPotencia((int)stats.GetPotenciaTrim(k)))
                     {
                         continue;
                     }
-                    if (rules.filtrarTracao && stats.tracao != rules.tracao)
+                    if (!rules.filtroVeiculos.AvaliarDesempenho((int)stats.GetPontosDesempenhoTrim(k)))
                     {
                         continue;
                     }
@@ -306,32 +296,54 @@ public class Controlador : MonoBehaviour
             {
                 CarroData rc = possiveis[Random.Range(0, possiveis.Length)];             
 
-                CarroTrim.Raridade raridade = aiCarros[rc.id].GetComponent<CarroStats>().modelo.trimsDisponiveis[rc.trimId].trimRaridade;
+                CarroTrim.Raridade raridade = carros[rc.id].GetComponent<CarroStats>().modelo.trimsDisponiveis[rc.trimId].trimRaridade;
 
-                /*if (raridade == CarroTrim.Raridade.LENDARIO)
+                /*MUITO_COMUM,//F
+                COMUM,//E
+                MEDIANO,//D
+                RARO,//C
+                MUITO_RARO,//B
+                ESPECIAL,//A
+                UNICO//S*/
+
+                if (raridade == CarroTrim.Raridade.UNICO)
                 {
-                    if (Random.Range(0, 40) == 24)
+                    if (Random.Range(0, 55) == 32)
                     {
                         carroEscolhido = rc;
                     }
                 }
                 else if (raridade == CarroTrim.Raridade.ESPECIAL)
                 {
-                    if (Random.Range(0, 30) == 24)
+                    if (Random.Range(0, 30) == 8)
+                    {
+                        carroEscolhido = rc;
+                    }
+                }
+                else if (raridade == CarroTrim.Raridade.MUITO_RARO)
+                {
+                    if (Random.Range(0, 20) == 11)
                     {
                         carroEscolhido = rc;
                     }
                 }
                 else if (raridade == CarroTrim.Raridade.RARO)
                 {
-                    if (Random.Range(0, 15) == 12)
+                    if (Random.Range(0,14) == 6)
                     {
                         carroEscolhido = rc;
                     }
                 }
-                else if (raridade == CarroTrim.Raridade.INCOMUM)
+                else if (raridade == CarroTrim.Raridade.MEDIANO)
                 {
-                    if (Random.Range(0, 7) == 5)
+                    if (Random.Range(0, 8) == 4)
+                    {
+                        carroEscolhido = rc;
+                    }
+                }
+                else if (raridade == CarroTrim.Raridade.COMUM)
+                {
+                    if (Random.Range(0, 3) == 2)
                     {
                         carroEscolhido = rc;
                     }
@@ -339,9 +351,7 @@ public class Controlador : MonoBehaviour
                 else
                 {
                     carroEscolhido = rc;
-                }*/
-
-                carroEscolhido = rc;
+                }
             }
 
             final.Add(carroEscolhido);
@@ -350,9 +360,75 @@ public class Controlador : MonoBehaviour
         return final.ToArray();
     }
 
-    public void SetCarroSelected(int id, int trim)
+    public CarroData ObterCarroFiltro(CarroFiltro filtro)
     {
-        carroSelecionado = new CarroData(id, trim);
+        List<CarroData> carrosLista = new List<CarroData>();
+
+        for(int i = 0; i < carros.Length; i++)
+        {
+            CarroStats stats = carros[i].GetComponent<CarroStats>();
+
+            for (int k = 0; k < stats.modelo.trimsDisponiveis.Length; k++)
+            {
+                int peso = stats.GetPesoTrim(k);
+                float potencia = stats.GetPotenciaTrim(k);
+                float desempenho = stats.GetPontosDesempenhoTrim(k);
+
+                if (filtro.usarPeso && (peso > filtro.maxPeso || peso < filtro.minPeso))
+                {
+                    continue;
+                }
+                if (filtro.usarPotencia && (potencia > filtro.maxPotencia || potencia < filtro.minPotencia))
+                {
+                    continue;
+                }
+                if (filtro.usarDesempenho && (desempenho > filtro.maxDesempenho || desempenho < filtro.minDesempenho))
+                {
+                    continue;
+                }
+
+                carrosLista.Add(new CarroData(i, k));
+            }
+        }
+
+        return FiltrarPorRaridade(carrosLista.ToArray(), 1)[0];
+    }
+
+    public GameObject InstanciarCarro(CarroData carro)
+    {
+        GameObject go = Instantiate(carros[carro.id]);
+        go.transform.position = Vector3.zero - new Vector3(0f,go.GetComponent<Rigidbody>().centerOfMass.y > 0f ? go.GetComponent<Rigidbody>().centerOfMass.y : 0f,0f);
+
+        return go;
+    }
+
+    public void SetCarroSelected(CarroPlayerData carro)
+    {
+        carroSelecionado = carro;
+    }
+
+    public void SetCarroSelected(CarroData carro)
+    {
+        carroSelecionado = new CarroPlayerData(carro.id,carro.trimId);
+    }
+
+    public void ObterCarro(CarroPlayerData carro)
+    {
+        modoAtual.ObterCarro(carro);
+        SetCarroSelected(carro);
+    }
+
+    public PistaData GetPistaByNivelId(int nivelId)
+    {
+        foreach(PistaData p in pistas)
+        {
+            if (p.nivelId == nivelId)
+            {
+                return p;
+            }
+        }
+
+        return null;
     }
 
     /// <summary>
@@ -362,6 +438,14 @@ public class Controlador : MonoBehaviour
     public int NumeroJogadores()
     {
         return Directory.GetDirectories("savedata").Length;
+    }
+
+    public void GravarJogo()
+    {
+        if (saveDataPlayerAtual != null)
+        {
+            saveDataPlayerAtual.SaveGame();
+        }
     }
 
     public SaveData GetPlayer(string name)
@@ -374,16 +458,17 @@ public class Controlador : MonoBehaviour
 
             if (f == name)
             {
-                sd.LoadGame(f);
+                sd.PlayerName = f;
+                sd.LoadGame();
             }
         }
 
         return sd;
     }
 
-    public GameSaveData GetPlayer(int id)
+    public SaveData GetPlayer(int id)
     {
-        GameSaveData sd = new GameSaveData();
+        SaveData sd = new SaveData();
 
         if (NumeroJogadores() < id || NumeroJogadores()==0)
         {
@@ -391,14 +476,25 @@ public class Controlador : MonoBehaviour
             return null;
         }
 
-        sd.LoadGame(Directory.GetDirectories("savedata")[id]);
+        sd.PlayerName = Directory.GetDirectories("savedata")[id].Replace("savedata\\","");
+
+        sd.LoadGame();
 
         return sd;
     }
 
-    public GameSaveData GetPlayer(string name, GameMode gameMode)
+    public SaveData GetPlayer(string name, GameMode gameMode)
     {
-        GameSaveData sd =  new GameSaveData();
+        SaveData sd = null;
+
+        if (gameMode == null)
+        {
+            sd = new SaveData();
+        }
+        else if (gameMode is ModoCarreira)
+        {
+            sd = new CarreiraSaveData();
+        }
 
         foreach (string x in Directory.GetDirectories("savedata"))
         {
@@ -406,11 +502,22 @@ public class Controlador : MonoBehaviour
 
             if (f == name)
             {
-                sd.LoadGame(f);
+                sd.PlayerName = f;
+                sd.LoadGame();
             }
         }
 
-        modoAtual = gameMode;
+        if (gameMode is ModoCarreira)
+        {
+            modoAtual = new ModoCarreira();
+            ((ModoCarreira)modoAtual).InicializarFromSave((CarreiraSaveData)sd);
+        }
+        else
+        {
+            modoAtual = gameMode;
+        }
+
+        Debug.Log("Carregou o modo de jogo : " + sd.GetType().Name);
 
         return sd;
     }
@@ -457,19 +564,19 @@ public class Controlador : MonoBehaviour
         }
 
         Directory.CreateDirectory("savedata\\" + name);
-        Directory.CreateDirectory("savedata\\" + name + "\\game");
 
-        GameSaveData game = new GameSaveData();
+        SaveData game = new SaveData();
 
-        //game.dinheiro = dinheiro;
+        game.PlayerName = name;
 
-        //game.corridas = campeonatos;
+        game.SaveGame();
 
-        game.SaveGame(name);
-
-        CarregarJogo();
+        saveDataPlayerAtual = game;
+        nomePlayerAtual = game.PlayerName;
 
         Debug.Log("player criado!");
+
+        MenuUI();
     }
 
     public string GetCarroNome(CarroData carro)
@@ -480,6 +587,21 @@ public class Controlador : MonoBehaviour
         }
 
         return carros[carro.id].GetComponent<CarroStats>().GetNomeTrim(carro.trimId);
+    }
+
+    public string GetCarroNome(CarroPlayerData playerCarro)
+    {
+        if (playerCarro == CarroPlayerData.Vazio)
+        {
+            return "NENHUM";
+        }
+
+        return carros[playerCarro.id].GetComponent<CarroStats>().GetNomeTrim(playerCarro.trimId);
+    }
+
+    public T EncontrarObjeto<T>() where T:MonoBehaviour
+    {
+        return FindAnyObjectByType<T>();
     }
 
     public void SairJogo()

@@ -7,7 +7,7 @@ using System.Collections;
 /// regras distintas
 /// </summary>
 [System.Serializable]
-public class Campeonato : MonoBehaviour
+public class Campeonato
 {
     public int id = -1;
     public string nomeCampeonato;
@@ -20,6 +20,11 @@ public class Campeonato : MonoBehaviour
         corridasLista[i].ganhou = true;
     }
 
+    public void SetParticipado(int i)
+    {
+        corridasLista[i].participou = true;
+    }
+
     public int GetCorridasGanhas()
     {
         int final = 0;
@@ -30,5 +35,10 @@ public class Campeonato : MonoBehaviour
         }
 
         return final;
+    }
+
+    public bool TudoGanho()
+    {
+        return GetCorridasGanhas() == corridasLista.Length;
     }
 }

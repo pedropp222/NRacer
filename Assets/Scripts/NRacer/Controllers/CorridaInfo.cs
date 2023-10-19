@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEditorInternal;
 using UnityEngine;
 
 /// <summary>
@@ -15,7 +16,7 @@ using UnityEngine;
 public class CorridaInfo
 {
     public List<CarroData> startingGrid;
-    public int premio;
+    public CorridaPremio premio;
     public int voltas;
 
     public int campeonatoID;
@@ -23,7 +24,7 @@ public class CorridaInfo
 
     public CorridaResults resultado;
 
-    public CorridaInfo(int premio, int voltas, int campID, int cID)
+    public CorridaInfo(CorridaPremio premio, int voltas, int campID, int cID)
     {
         this.premio = premio;
         this.voltas = voltas;
@@ -38,4 +39,41 @@ public class CorridaInfo
 public class CorridaResults
 {
     public int posicaoFinal;
+}
+
+public class CorridaPremio
+{
+    public TipoPremio tipo;
+    public int valor;
+    public CarroData carroPremio;
+
+    public static CorridaPremio PremioDinheiro(int valor)
+    {
+        return new CorridaPremio(TipoPremio.DINHEIRO, valor);
+    }
+
+    public static CorridaPremio PremioCarro(CarroData carro)
+    {
+        return new CorridaPremio(TipoPremio.VEICULO, carro);
+    }
+
+    private CorridaPremio(TipoPremio tipo, int valor)
+    {
+        this.tipo = tipo;
+        this.valor = valor;
+    }
+
+    private CorridaPremio(TipoPremio tipo, CarroData valor)
+    {
+        this.tipo = tipo;
+        this.carroPremio = valor;
+    }
+
+    public static CorridaPremio PremioDefault { get { return new CorridaPremio(TipoPremio.DINHEIRO, 0); } }
+}
+
+public enum TipoPremio
+{
+    DINHEIRO,
+    VEICULO
 }

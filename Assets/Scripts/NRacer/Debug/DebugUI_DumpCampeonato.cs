@@ -32,9 +32,9 @@ public class DebugUI_DumpCampeonato : MonoBehaviour
 
         for (int i = 0; i < campeonato.corridasLista.Length; i++)
         {
-            finalString += "Pista: "+SceneManager.GetSceneByBuildIndex(campeonato.corridasLista[i].nivel).path+"\n" +
+            finalString += "Pista: "+SceneManager.GetSceneByBuildIndex(campeonato.corridasLista[i].nivel.nivelId).path+"\n" +
                 "Voltas: "+ campeonato.corridasLista[i].voltas+"\n"+
-                "Max potencia: "+ campeonato.corridasLista[i].maxHP;
+                "Max potencia: "+ campeonato.corridasLista[i].filtroVeiculos.maxPotencia;
 
             carros.AddRange(cnt.GetCarrosPossiveis(campeonato.corridasLista[i]));
 

@@ -14,6 +14,7 @@ using System.Linq;
 /// </summary>
 public class CarroStats : MonoBehaviour
 {
+    [System.Serializable]
     public enum Tracao
     {
         FRENTE,
@@ -58,7 +59,7 @@ public class CarroStats : MonoBehaviour
     public int trimDefault;
 
     public CarroTrim trimAtual;
-    public int trimAtualId;
+    public int trimAtualId = -1;
 
     //valores default nivel 1 do carro
     private int pesoDefault;
@@ -84,13 +85,11 @@ public class CarroStats : MonoBehaviour
         //desativar tudo, para ainda assim instanciar o veiculo e ele nao começar a andar
         //nem ter fisica nem nada disso.
 
-        trimAtualId = -1;
-
         veiculo = GetComponent<VehicleController>();
         rigid = GetComponent<Rigidbody>();
 
 
-        if (SceneManager.GetActiveScene().buildIndex == 0 || SceneManager.GetActiveScene().buildIndex == 1)
+        if (SceneManager.GetActiveScene().buildIndex <= 2)
         {
             veiculo.Active = false;
             veiculo.enabled = false;
@@ -108,7 +107,11 @@ public class CarroStats : MonoBehaviour
             {
                 GetComponent<CarroCronometro>().enabled = false;
             }
-           
+
+            rigid.isKinematic = true;
+            rigid.useGravity = false;
+
+            gameObject.AddComponent<RodarObjeto>().velocidade = 35f;
         }
 
 
@@ -137,9 +140,29 @@ public class CarroStats : MonoBehaviour
         Debug.Log("Velocidade maxima teorica para este carro: " + veloMaxima);
     }
 
+    private float CalcularVelocidadeMaximaCheck()
+    {
+        WheelController roda = transform.GetComponentInChildren<WheelController>();
+
+        VehicleController vc = GetComponent<VehicleController>();
+
+        float rodaInch = roda.tireRadius * 100f * 2f / 3f;
+        rodaCircumferencia = Mathf.PI * (rodaInch * 25.4f + (((roda.tireWidth * 1000f) * tireHeightRatio) / 100f) * 2f);
+
+        return (((vc.engine.maxRPM / vc.transmission.ForwardGears.Last() / vc.transmission.gearMultiplier) * rodaCircumferencia) / 1000000f) * 60f;
+
+    }
+
     public float GetPontosDesempenho()
     {
-        return (potenciaAtual * (7500f - pesoAtual) + (veloMaxima * 14f)) / (trimAtual.zeroAos100 / 5f) / 10000f;
+        //return (potenciaAtual * (7500f - pesoAtual) + (veloMaxima * 14f)) / (trimAtual.zeroAos100 / 5f) / 10000f;
+        return Mathf.Ceil((((potenciaAtual*1000f)/pesoAtual)*veloMaxima)/trimAtual.zeroAos100/80f);
+    }
+
+    public float GetPontosDesempenhoTrim(int trim)
+    {
+        //return (potenciaAtual * (7500f - pesoAtual) + (veloMaxima * 14f)) / (trimAtual.zeroAos100 / 5f) / 10000f;
+        return Mathf.Ceil(((((modelo.trimsDisponiveis[trim].potenciaKW*1.3f) * 1000f) / modelo.trimsDisponiveis[trim].peso) * CalcularVelocidadeMaximaCheck()) / modelo.trimsDisponiveis[trim].zeroAos100 / 80f);
     }
 
     //TODO: Os trims vao ter que ter toda a informacao necessaria para aquele trim
@@ -313,9 +336,9 @@ public class CarroStats : MonoBehaviour
     {
         if (ai)
         {
-            return marca.nome + " " + modelo.nome + " (" + dificuldadeAI + ")";
+            return marca.nome + " " + modelo.nome + " " + modelo.ano + " (" + dificuldadeAI + ")";
         }
-        return marca.nome + " " + modelo.nome;
+        return marca.nome + " " + modelo.nome + " " + modelo.ano;
     }
 
     public int GetPreco()

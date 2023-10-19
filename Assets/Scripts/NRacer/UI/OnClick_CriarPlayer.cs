@@ -31,7 +31,7 @@ public class OnClick_CriarPlayer : MonoBehaviour, IButton
     {
         if (texto.text.Length > 0)
         {
-            FindObjectOfType<Controlador>().CriarPlayer(texto.text);
+            Controlador.instancia.CriarPlayer(texto.text);
         }
     }
 

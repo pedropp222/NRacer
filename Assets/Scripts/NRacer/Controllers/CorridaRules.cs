@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.Scripts.NRacer.GameMode.Career;
+using Assets.Scripts.NRacer.Dados;
+using Assets.Scripts.NRacer.Controllers;
 
 /// <summary>
 /// Classe que guarda as regras da corrida, basicamente os filtros e alguma informaçao basica 
@@ -10,16 +13,17 @@ using System.Collections;
 public class CorridaRules
 {
     public bool ganhou;
+    public bool participou;
 
     public int voltas;
-    public int nivel;
+    public PistaInfo nivel;
+    public Calendario.CalendarioData data;
 
     public int premioDinheiro;
     public int premioCarro;
     public int premioCarroTrim;
 
-    public int maxHP;
-    public int maxPeso;
+    public CarroFiltro filtroVeiculos;
 
     public int maxOponentes = 3;
 
@@ -28,19 +32,15 @@ public class CorridaRules
     //selecionar sempre o carro AI com este id, se for -1 ignorar
     public int forceAICar = -1;
 
-    public bool filtrarTracao;
-    public CarroStats.Tracao tracao;
-
-    public static CorridaRules CorridaLivre(int nivelId)
+    public static CorridaRules CorridaLivre(PistaInfo pista)
     {
         CorridaRules r = new CorridaRules
         {
-            maxHP = 9999,
-            maxPeso = 99999,
+            filtroVeiculos = CarroFiltro.VAZIO(),
+            data = Calendario.CalendarioData.CriarFromDia(1),
             maxOponentes = 5,
-            filtrarTracao = false,
             voltas = 2,
-            nivel = nivelId
+            nivel = pista
         };
 
         return r;

@@ -12,8 +12,6 @@ using DG.Tweening;
 /// </summary>
 public class ShowroomControlador : MonoBehaviour
 {
-    bool ativo = false;
-
     public List<GameObject> carrosAtuais = new List<GameObject>();
     public List<CarroData> carrosData = new List<CarroData>();
 
@@ -96,8 +94,6 @@ public class ShowroomControlador : MonoBehaviour
         tipoAtual = tipoShowroom;
 
         IniciarCarro();
-
-        ativo = true;
     }
 
     public void IniciarShowroomLivre()
@@ -119,7 +115,6 @@ public class ShowroomControlador : MonoBehaviour
             Destroy(gridBolas.GetChild(i).gameObject);
         }
 
-        ativo = false;
         carPanel.SetActive(false);
         carrosAtuais.Clear();
         carrosData.Clear();
@@ -245,7 +240,7 @@ public class ShowroomControlador : MonoBehaviour
         {
             Debug.Log("Tentar dar o carro selecionado, id: " + carrosData[carroAtual].id + "trim: " + stats.trimAtualId);
             //Controlador.instancia.DarCarro(carrosData[carroAtual].id, stats.trimAtualId, CarroStats.MetodoAquisicao.ARCADE);
-            Controlador.instancia.SetCarroSelected(carrosData[carroAtual].id, stats.trimAtualId);
+            Controlador.instancia.SetCarroSelected(carrosData[carroAtual]);
             FindAnyObjectByType<MenuUI>().SetMenuBackground(true);
             //objetoUiVinculo.SetActive(true);
             objetoUiVinculo.GetComponent<UIPainelEventos>().AtivarPainel();

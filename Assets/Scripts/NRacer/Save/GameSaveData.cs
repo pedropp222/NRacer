@@ -9,24 +9,23 @@ using UnityEngine;
 using Assets.Scripts.NRacer.Controllers;
 
 [System.Serializable]
-public class GameSaveData : SaveData, ISaveGame
+[Obsolete("Isto nao e mais pra usar, refere-se a um game mode arcaico qualquer")]
+public class GameSaveData : SaveData
 {
     public CampeonatosController corridas;
     public int dinheiro = 0;   
 
     public List<CarroData> carros = new List<CarroData>();
 
-    public override void LoadGame(string name)
+    public override void LoadGame()
     {
         GameSaveData data = new GameSaveData();
 
-        //limpeza do string, ficar apenas com o nome
-        name = name.Replace("savedata\\", null);
 
-        if (File.Exists("savedata\\" + name + "\\game\\mainData.dat"))
+        if (File.Exists("savedata\\" + PlayerName + "\\game\\mainData.dat"))
         {
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open("savedata\\" + name + "\\game\\mainData.dat", FileMode.Open);
+            FileStream file = File.Open("savedata\\" + PlayerName + "\\game\\mainData.dat", FileMode.Open);
 
             try
             {
@@ -50,18 +49,18 @@ public class GameSaveData : SaveData, ISaveGame
         }
         else
         {
-            Debug.Log("Nao existe jogador " + name);
+            Debug.Log("Nao existe jogador " + PlayerName);
         }
     }
 
-    public override void SaveGame(string name)
+    public override void SaveGame()
     {
         BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create("savedata\\" + name + "\\game\\mainData.dat");
+        FileStream file = File.Create("savedata\\" + PlayerName + "\\game\\mainData.dat");
 
         GameSaveData data = new GameSaveData
         {
-            PlayerName = name,
+            PlayerName = this.PlayerName,
 
             dinheiro = dinheiro,
             corridas = corridas,

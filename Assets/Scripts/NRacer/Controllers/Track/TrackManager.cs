@@ -93,13 +93,12 @@ namespace Assets.Scripts.NRacer.Controllers
                     //teu carro
                     if (contr.corridaAtual.startingGrid[i].id == -1)
                     {
-                        SpawnVeiculo(contr.carros[contr.carroSelecionado.id], contr.carroSelecionado);
+                        SpawnVeiculoPlayer(contr.carros[contr.carroSelecionado.id], contr.carroSelecionado);
                         playerCarro = carrosAtuais[carrosAtuais.Count - 1];
                     }
                     else
                     {
                         SpawnVeiculo(contr.aiCarros[contr.corridaAtual.startingGrid[i].id], contr.corridaAtual.startingGrid[i]);
-
                     }
 
                 }
@@ -201,13 +200,20 @@ namespace Assets.Scripts.NRacer.Controllers
             }
         }
 
-        public void SpawnVeiculo(GameObject veiculo, CarroData carroData)
+        private bool VerificarEspacos()
         {
             if (carrosCarregados >= trackLayouts[currentLayout].spawnpointsParent.transform.childCount)
             {
                 Debug.LogError("ERRO: Nao consegue instanciar um veiculo porque a pista nao tem spawns suficientes!");
-                return;
+                return false;
             }
+
+            return true;
+        }
+
+        public void SpawnVeiculoPlayer(GameObject veiculo, CarroPlayerData carroData)
+        {
+            if (!VerificarEspacos()) return;
 
             GameObject o = Instantiate(veiculo);
             o.transform.position = trackLayouts[currentLayout].spawnpointsParent.transform.GetChild(carrosCarregados).position;
@@ -217,14 +223,27 @@ namespace Assets.Scripts.NRacer.Controllers
             //desligar os veiculos
             o.GetComponent<VehicleController>().Active = false;
 
-            if (!o.CompareTag("Vehicle"))
+            carrosCarregados++;
+            carrosAtuais.Add(o);
+        }
+
+        public void SpawnVeiculo(GameObject veiculo, CarroData carroData)
+        {
+            if (!VerificarEspacos()) return;
+
+            GameObject o = Instantiate(veiculo);
+            o.transform.position = trackLayouts[currentLayout].spawnpointsParent.transform.GetChild(carrosCarregados).position;
+            o.transform.eulerAngles = trackLayouts[currentLayout].spawnpointsParent.transform.GetChild(carrosCarregados).localEulerAngles;
+            o.GetComponent<CarroStats>().CarregarTrim(carroData.trimId);
+
+            //desligar os veiculos
+            o.GetComponent<VehicleController>().Active = false;
+
+            int min = Controlador.instancia.filtroAtual.baseDificuldade - 3;
+            if (min < 0) min = 0;
+            if (Controlador.instancia.filtroAtual.baseDificuldade != -1)
             {
-                int min = Controlador.instancia.filtroAtual.baseDificuldade - 3;
-                if (min < 0) min = 0;
-                if (Controlador.instancia.filtroAtual.baseDificuldade != -1)
-                {
-                    o.GetComponent<VehicleAIDifficulty>().SetupDificuldade(UnityEngine.Random.Range(min, Controlador.instancia.filtroAtual.baseDificuldade));
-                }
+                o.GetComponent<VehicleAIDifficulty>().SetupDificuldade(UnityEngine.Random.Range(min, Controlador.instancia.filtroAtual.baseDificuldade));
             }
 
             carrosCarregados++;

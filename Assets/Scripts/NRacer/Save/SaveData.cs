@@ -1,27 +1,29 @@
 ﻿using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Xml.Linq;
 using UnityEngine;
 
 [System.Serializable]
-public class SaveData : ISaveGame
+public class SaveData
 {
     public string PlayerName;
 
-    public virtual void LoadGame(string n)
+    public virtual void LoadGame()
     {
         //O save data base apenas pode carregar no minimo o nome do jogador, tudo o resto é
         //de responsabilidade de cada classe filho
-
-
-        //limpeza do string, ficar apenas com o nome
-        n = n.Replace("savedata\\", null);
+        if (PlayerName== null)
+        {
+            Debug.LogError("Impossivel carregar, pois o player name e nulo");
+            return;
+        }
 
         SaveData data = new SaveData();
 
-        if (File.Exists("savedata\\" + n + "\\arcade\\mainData.dat"))
+        if (File.Exists("savedata\\" + PlayerName + "\\mainData.dat"))
         {
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open("savedata\\" + n + "\\arcade\\mainData.dat", FileMode.Open);
+            FileStream file = File.Open("savedata\\" + PlayerName + "\\mainData.dat", FileMode.Open);
 
             try
             {
@@ -40,11 +42,24 @@ public class SaveData : ISaveGame
         }
         else
         {
-            Debug.LogError("Nao existe jogador "+n);
+            Debug.LogError("Nao existe jogador "+ PlayerName);
         }
     }
-    public virtual void SaveGame(string n)
+    public virtual void SaveGame()
     {
-        Debug.LogError("Nao se pode chamar este metodo de gravar pois nao tem info de nenhum gamemode");
+        if (PlayerName == null)
+        {
+            Debug.LogError("Impossivel gravar, pois o player name e nulo");
+            return;
+        }
+
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create("savedata\\" + PlayerName + "\\mainData.dat");
+
+        bf.Serialize(file, this);
+
+        file.Close();
+
+        Debug.Log("Guardou o jogador " + this.PlayerName + " no modo base.");
     }
 }

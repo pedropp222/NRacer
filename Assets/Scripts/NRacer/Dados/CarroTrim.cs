@@ -22,7 +22,7 @@ public class CarroTrim : ScriptableObject
 
     public Desempenho GetDesempenhoTexto(float pontos)
     {
-        if(pontos <= 15f)
+        if(pontos <= 13f)
         {
             return Desempenho.SUCATA;
         }
@@ -38,11 +38,11 @@ public class CarroTrim : ScriptableObject
         {
             return Desempenho.BOM;
         }
-        else if (pontos <= 140f)
+        else if (pontos <= 150f)
         {
             return Desempenho.MUITO_BOM;
         }
-        else if (pontos <= 250f)
+        else if (pontos <= 300f)
         {
             return Desempenho.INCRIVEL;
         }
